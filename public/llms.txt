@@ -1,0 +1,52 @@
+# The Automation Agency
+
+> AI automation consultancy based in Derbyshire, UK. We build AI agents and automation systems that eliminate manual work for businesses.
+
+## About
+
+The Automation Agency is a UK-based technical consultancy specialising in AI agent development, process automation, and data pipeline engineering. Founded by a developer with 10+ years of experience building production automation systems across multiple industries.
+
+We are based in Derbyshire and work with businesses across the United Kingdom.
+
+Contact: hello@automation-agency.co.uk
+Website: https://automation-agency.co.uk
+
+## Services
+
+- **AI Agent Development**: Custom autonomous AI agents integrated into existing business workflows
+- **Process Automation**: End-to-end elimination of manual, repetitive business processes
+- **Data Pipeline Engineering**: Automated data collection, transformation, and delivery from any source
+- **Custom Integrations**: Connecting CRMs, ERPs, communication platforms, and payment systems
+- **Communication Automation**: Automated email sequences, notifications, and multi-channel messaging
+- **Free AI Audit**: 30-minute scoping session to identify automation opportunities at no cost
+
+## Pricing
+
+- Starter (single workflow): from £3,000 fixed price
+- Full automation build (multiple workflows + agents): from £8,000 fixed price
+- Monthly retainer (ongoing automation partner): from £1,500/month
+
+## Case Studies
+
+### WhatsApp Job Dispatch Platform
+Automated field worker coordination for a service business. Eliminated manual dispatching, implemented race-safe payment claiming, built multi-tenant architecture. Stack: Next.js, Supabase, Twilio, Telegram Bot API, PostgreSQL.
+
+### End-to-End Predictive Data Pipeline
+Automated 6 daily data sources, 7 ML prediction models, 21 reconciliation jobs, and multi-channel subscriber distribution. Stack: Python, scikit-learn, Supabase, Selenium, APScheduler.
+
+### UK Planning Application Monitor
+Scraped and normalised planning application data across 97% of London boroughs with live dashboard. Replaced a full day of daily manual monitoring. Stack: Python, Playwright, Next.js, Supabase.
+
+## Technical Capabilities
+
+Python, Next.js, React, Supabase, PostgreSQL, Playwright, Selenium, OpenAI API, Anthropic Claude API, Twilio, Telegram Bot API, scikit-learn, Vercel, Docker, n8n, APScheduler, Resend
+
+## Location
+
+Derbyshire, United Kingdom. Serving clients nationally across the UK.
+
+## Legal
+
+- Privacy Policy: https://automation-agency.co.uk/privacy
+- Terms & Conditions: https://automation-agency.co.uk/terms
+- Cookie Policy: https://automation-agency.co.uk/cookies

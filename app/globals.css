@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light only;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background: #faf9f7;
+  }
+
+  body {
+    background: #faf9f7 !important;
+  }
+}
+
+@layer utilities {
+  .font-serif {
+    font-family: var(--font-instrument-serif), Georgia, serif;
+  }
+
+  .font-sans {
+    font-family: var(--font-instrument-sans), system-ui, sans-serif;
+  }
+
+  /* Eyebrow label with leading line */
+  .eyebrow {
+    @apply text-xs font-semibold tracking-[0.12em] uppercase text-accent flex items-center gap-2.5;
+  }
+
+  .eyebrow::before {
+    content: '';
+    @apply block w-5 h-px bg-accent flex-shrink-0;
+  }
+
+  .eyebrow-light {
+    @apply text-white/35;
+  }
+
+  .eyebrow-light::before {
+    @apply bg-white/20;
+  }
+}
+
+/* Reveal animation */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
