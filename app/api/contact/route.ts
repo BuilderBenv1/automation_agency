@@ -2,12 +2,21 @@ import { NextRequest, NextResponse } from 'next/server'
 import Anthropic from '@anthropic-ai/sdk'
 import { Resend } from 'resend'
 
-const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY! })
-const resend = new Resend(process.env.RESEND_API_KEY!)
-const OWNER_EMAIL = process.env.CONTACT_EMAIL!
+export const runtime = 'nodejs'
+export const dynamic = 'force-dynamic'
 
 export async function POST(req: NextRequest) {
   try {
+    const apiKey = process.env.ANTHROPIC_API_KEY
+    const resendKey = process.env.RESEND_API_KEY
+    const OWNER_EMAIL = process.env.CONTACT_EMAIL
+    if (!apiKey || !resendKey || !OWNER_EMAIL) {
+      console.error('Contact route: missing env vars')
+      return NextResponse.json({ error: 'Server not configured' }, { status: 500 })
+    }
+    const anthropic = new Anthropic({ apiKey })
+    const resend = new Resend(resendKey)
+
     const { name, email, company, message, intent } = await req.json()
 
     if (!name || !email || !message) {
