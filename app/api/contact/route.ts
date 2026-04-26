@@ -84,7 +84,7 @@ Message: ${message}`,
     await resend.emails.send({
       from: 'hello@automation-agency.co.uk',
       to: email,
-      replyTo: OWNER_EMAIL,
+      reply_to: OWNER_EMAIL,
       subject: `We've received your enquiry — The Automation Agency`,
       html: `
         <div style="font-family:sans-serif;max-width:600px;margin:0 auto;color:#141210;line-height:1.7;">

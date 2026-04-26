@@ -312,15 +312,6 @@ export default function AuditPage() {
       </section>
 
       <Footer />
-
-      <style jsx global>{`
-        .btn-primary { display:inline-flex;align-items:center;background:#0f1b2d;color:#fff;border-radius:3px;font-family:var(--font-instrument-sans),system-ui,sans-serif;font-weight:600;text-decoration:none;transition:background 0.18s;border:none;cursor:pointer; }
-        .btn-primary:hover { background:#1e2f47; }
-        .btn-outline { display:inline-flex;align-items:center;background:transparent;color:#3d4045;border:1.5px solid #c8c2bb;border-radius:3px;font-family:var(--font-instrument-sans),system-ui,sans-serif;font-weight:600;text-decoration:none;transition:all 0.18s;cursor:pointer; }
-        .btn-outline:hover { border-color:#3d4045;color:#141210; }
-        .btn-white { display:inline-flex;align-items:center;background:#fff;color:#0f1b2d;border-radius:3px;font-family:var(--font-instrument-sans),system-ui,sans-serif;font-weight:600;text-decoration:none;transition:background 0.18s;border:none;cursor:pointer; }
-        .btn-white:hover { background:#f0efec; }
-      `}</style>
     </>
   )
 }

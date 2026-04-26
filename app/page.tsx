@@ -690,7 +690,7 @@ export default function HomePage() {
                   {[
                     ['10+', 'Years shipping production automation'],
                     ['<10%', 'of UK businesses run agentic workflows today'],
-                    ['£0', 'Cost to find out what we'd automate for you'],
+                    ['£0', "Cost to find out what we'd automate for you"],
                     ['2–4wk', 'Typical audit-to-live timeline'],
                   ].map(([stat, label]) => (
                     <div key={stat}>
@@ -708,69 +708,6 @@ export default function HomePage() {
       </section>
 
       <Footer />
-
-      <style jsx global>{`
-        @keyframes fadeUp {
-          from { opacity: 0; transform: translateY(18px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        .btn-primary {
-          display: inline-flex;
-          align-items: center;
-          background: #0f1b2d;
-          color: #fff;
-          border-radius: 3px;
-          font-family: var(--font-instrument-sans), system-ui, sans-serif;
-          font-weight: 600;
-          text-decoration: none;
-          transition: background 0.18s;
-          border: none;
-          cursor: pointer;
-        }
-        .btn-primary:hover { background: #1e2f47; }
-        .btn-outline {
-          display: inline-flex;
-          align-items: center;
-          background: transparent;
-          color: #3d4045;
-          border: 1.5px solid #c8c2bb;
-          border-radius: 3px;
-          font-family: var(--font-instrument-sans), system-ui, sans-serif;
-          font-weight: 600;
-          text-decoration: none;
-          transition: all 0.18s;
-          cursor: pointer;
-        }
-        .btn-outline:hover { border-color: #3d4045; color: #141210; }
-        .btn-accent {
-          display: inline-flex;
-          align-items: center;
-          background: #1a4fa0;
-          color: #fff;
-          border-radius: 3px;
-          font-family: var(--font-instrument-sans), system-ui, sans-serif;
-          font-weight: 600;
-          text-decoration: none;
-          transition: background 0.18s;
-          border: none;
-          cursor: pointer;
-        }
-        .btn-accent:hover { background: #153f80; }
-        .btn-white {
-          display: inline-flex;
-          align-items: center;
-          background: #fff;
-          color: #0f1b2d;
-          border-radius: 3px;
-          font-family: var(--font-instrument-sans), system-ui, sans-serif;
-          font-weight: 600;
-          text-decoration: none;
-          transition: background 0.18s;
-          border: none;
-          cursor: pointer;
-        }
-        .btn-white:hover { background: #f0efec; }
-      `}</style>
     </>
   )
 }
