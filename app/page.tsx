@@ -597,10 +597,36 @@ export default function HomePage() {
                 Find out what your business could{' '}
                 <em className="not-italic text-accent">stop doing manually.</em>
               </h2>
-              <p className="text-[0.95rem] text-brand-mid leading-[1.75] mb-8">
+              <p className="text-[0.95rem] text-brand-mid leading-[1.75] mb-6">
                 Start with a free discovery call — 30 minutes, no commitment. If there&apos;s a clear
                 opportunity we&apos;ll recommend a Process Audit as the logical next step.
               </p>
+              <div className="flex flex-col sm:flex-row gap-6 mb-8 pb-8 border-b border-brand-border">
+                <div>
+                  <p className="text-[0.7rem] font-semibold tracking-[0.1em] uppercase text-brand-muted mb-1.5">
+                    Call us
+                  </p>
+                  <a
+                    href="tel:+441246923041"
+                    className="font-serif text-[1.4rem] text-brand-text hover:text-accent transition-colors no-underline"
+                  >
+                    01246 923041
+                  </a>
+                  <p className="text-[0.78rem] text-brand-muted mt-1">Chesterfield · weekdays 9–5</p>
+                </div>
+                <div>
+                  <p className="text-[0.7rem] font-semibold tracking-[0.1em] uppercase text-brand-muted mb-1.5">
+                    Email
+                  </p>
+                  <a
+                    href="mailto:hello@automation-agency.co.uk"
+                    className="font-serif text-[1.05rem] text-brand-text hover:text-accent transition-colors no-underline break-all"
+                  >
+                    hello@automation-agency.co.uk
+                  </a>
+                  <p className="text-[0.78rem] text-brand-muted mt-1">Reply within 24 hours</p>
+                </div>
+              </div>
               <div className="flex flex-col gap-3.5">
                 {[
                   {

@@ -77,6 +77,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 'AI automation consultancy eliminating manual work for UK businesses. Based in Derbyshire.',
               url: 'https://automation-agency.co.uk',
               email: 'hello@automation-agency.co.uk',
+              telephone: '+441246923041',
               address: {
                 '@type': 'PostalAddress',
                 addressLocality: 'Chesterfield',
