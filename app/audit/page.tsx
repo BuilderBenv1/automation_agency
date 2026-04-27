@@ -3,6 +3,7 @@ import Link from 'next/link'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import RevealWrapper from '@/components/RevealWrapper'
+import CalendlyEmbed from '@/components/CalendlyEmbed'
 
 export const metadata: Metadata = {
   title: 'Process Audit',
@@ -286,28 +287,31 @@ export default function AuditPage() {
       {/* CTA */}
       <section className="py-20 bg-bg-2 border-t border-brand-border">
         <div className="max-w-[1280px] mx-auto px-14">
-          <div className="bg-navy rounded-[6px] p-16 grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-12 items-center">
-            <div>
-              <h2 className="font-serif font-normal text-[clamp(1.8rem,3vw,2.4rem)] text-white tracking-[-0.02em] leading-[1.1] mb-3">
-                Start with a free call.
-                <br />
-                <em className="not-italic text-white/45">No commitment, no pitch.</em>
-              </h2>
-              <p className="text-[0.9rem] text-white/45 leading-[1.7]">
-                Book a 30-minute discovery call. We&apos;ll talk through your business, identify where
-                there&apos;s an automation opportunity, and tell you honestly whether the Process Audit makes
-                sense for you.
-              </p>
-            </div>
-            <div className="flex flex-col gap-2.5 min-w-[220px]">
-              <Link href="/#contact" className="btn-white px-6 py-3 text-sm font-semibold justify-center">
-                Book Free Discovery Call
-              </Link>
-              <Link href="/" className="px-6 py-3 text-sm font-semibold justify-center flex items-center rounded-brand transition-colors" style={{ background: 'transparent', color: 'rgba(255,255,255,0.4)', border: '1px solid rgba(255,255,255,0.15)' }}>
-                Back to Home
-              </Link>
-            </div>
+          <div className="max-w-[680px] mb-10">
+            <div className="eyebrow mb-4">Book a Discovery Call</div>
+            <h2 className="font-serif font-normal text-display-md text-brand-text mb-4">
+              Start with a free call.{' '}
+              <em className="not-italic text-accent">No commitment, no pitch.</em>
+            </h2>
+            <p className="text-[0.95rem] text-brand-mid leading-[1.75]">
+              Pick a 30-minute slot below. We&apos;ll talk through your business, identify where
+              there&apos;s an automation opportunity, and tell you honestly whether the Process Audit
+              is the right next step.
+            </p>
           </div>
+          <RevealWrapper>
+            <CalendlyEmbed />
+          </RevealWrapper>
+          <p className="text-[0.85rem] text-brand-muted mt-8 text-center">
+            Prefer email or phone?{' '}
+            <a href="mailto:hello@automation-agency.co.uk" className="text-accent hover:underline">
+              hello@automation-agency.co.uk
+            </a>{' '}
+            ·{' '}
+            <a href="tel:+441246923041" className="text-accent hover:underline">
+              01246 923041
+            </a>
+          </p>
         </div>
       </section>
 

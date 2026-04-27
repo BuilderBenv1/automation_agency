@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import ContactForm from '@/components/ContactForm'
+import CalendlyEmbed from '@/components/CalendlyEmbed'
 import RevealWrapper from '@/components/RevealWrapper'
 
 export const metadata: Metadata = {
@@ -635,18 +636,18 @@ export default function HomePage() {
       {/* CONTACT */}
       <section id="contact" className="py-28 bg-bg">
         <div className="max-w-[1280px] mx-auto px-14">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
-            <RevealWrapper>
+          <RevealWrapper>
+            <div className="max-w-[760px] mb-14">
               <div className="eyebrow mb-4">Get In Touch</div>
               <h2 className="font-serif font-normal text-display-lg text-brand-text mb-5">
                 Find out what your business could{' '}
                 <em className="not-italic text-accent">stop doing manually.</em>
               </h2>
-              <p className="text-[0.95rem] text-brand-mid leading-[1.75] mb-6">
-                Start with a free discovery call — 30 minutes, no commitment. If there&apos;s a clear
-                opportunity we&apos;ll recommend a Process Audit as the logical next step.
+              <p className="text-[0.95rem] text-brand-mid leading-[1.75] mb-7">
+                Pick a slot below — 30 minutes, free, no commitment. We&apos;ll talk through your business
+                and tell you honestly what&apos;s automatable. Prefer email? Use the form.
               </p>
-              <div className="flex flex-col sm:flex-row gap-6 mb-8 pb-8 border-b border-brand-border">
+              <div className="flex flex-col sm:flex-row gap-8 pb-8 border-b border-brand-border">
                 <div>
                   <p className="text-[0.7rem] font-semibold tracking-[0.1em] uppercase text-brand-muted mb-1.5">
                     Call us
@@ -672,36 +673,21 @@ export default function HomePage() {
                   <p className="text-[0.78rem] text-brand-muted mt-1">Reply within 24 hours</p>
                 </div>
               </div>
-              <div className="flex flex-col gap-3.5">
-                {[
-                  {
-                    title: 'Free Discovery Call',
-                    desc: "30 minutes. Walk us through your business and biggest time drains. We'll tell you honestly what's automatable and what it would cost.",
-                    price: 'Free',
-                  },
-                  {
-                    title: 'Process Audit',
-                    desc: '1–2 weeks. Full workflow mapping, ROI estimates, written report, and fixed-price build quote. Credited against your project if you proceed.',
-                    price: '£1,500',
-                  },
-                ].map(({ title, desc, price }) => (
-                  <div
-                    key={title}
-                    className="bg-white border border-brand-border rounded-brand p-6 flex justify-between items-center gap-6 hover:shadow-[0_4px_16px_rgba(0,0,0,0.06)] transition-shadow"
-                  >
-                    <div>
-                      <h4 className="font-serif font-normal text-[1.1rem] mb-1.5">{title}</h4>
-                      <p className="text-[0.83rem] text-brand-muted leading-[1.6]">{desc}</p>
-                    </div>
-                    <span className="font-serif font-normal text-[1.4rem] text-navy whitespace-nowrap flex-shrink-0">
-                      {price}
-                    </span>
-                  </div>
-                ))}
-              </div>
+            </div>
+          </RevealWrapper>
+
+          <div className="grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-10 items-start">
+            <RevealWrapper>
+              <p className="text-[0.7rem] font-semibold tracking-[0.12em] uppercase text-brand-muted mb-4">
+                Book a slot — instant
+              </p>
+              <CalendlyEmbed />
             </RevealWrapper>
 
             <RevealWrapper>
+              <p className="text-[0.7rem] font-semibold tracking-[0.12em] uppercase text-brand-muted mb-4">
+                Or send a message
+              </p>
               <ContactForm />
             </RevealWrapper>
           </div>
