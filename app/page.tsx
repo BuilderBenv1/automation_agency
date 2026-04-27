@@ -72,22 +72,24 @@ const processSteps = [
 const caseStudies = [
   {
     client: 'Marmadbir',
+    clientUrl: 'https://www.marmadbir.com/',
     sector: 'Field Services · Multi-Tenant SaaS',
     title: 'WhatsApp Job Dispatch Platform',
-    body: "Marmadbir was coordinating field workers manually across WhatsApp groups and phone calls — dispatchers chasing workers, payments handled by phone. We replaced the entire process with an automated multi-tenant dispatch platform. Jobs broadcast, workers apply, payments claimed race-safe, client confirmed. The coordinator's manual workload: zero.",
+    body: "Marmadbir was coordinating field workers manually across WhatsApp groups and phone calls — dispatchers chasing workers, payments handled by phone. We built the full stack: customer-facing front-end, multi-tenant Twilio-powered WhatsApp dispatch flow, and Tranzilla payment integration. Jobs broadcast, workers apply, payments claimed race-safe, client confirmed. The coordinator's manual workload: zero.",
     results: [
       ['Coordinator manual time', 'Eliminated'],
       ['Payment race conditions', 'Zero'],
       ['New tenant onboarding', '< 5 minutes'],
       ['Messaging cost reduction', '~65%'],
     ],
-    tags: ['Next.js', 'Supabase', 'Twilio', 'Telegram Bot', 'PostgreSQL'],
+    tags: ['Next.js', 'Supabase', 'Twilio', 'Tranzilla', 'PostgreSQL'],
   },
   {
     client: 'Punthub',
-    sector: 'Data Intelligence · Predictive Analytics',
-    title: 'End-to-End Predictive Data Pipeline',
-    body: 'Punthub needed 6 live sources scraped daily, run through 7 ML prediction models, results reconciled nightly, and insights surfaced through a live front-end. Python scripts feed Google Sheets each evening; Supabase syncs overnight; the Next.js site renders custom prediction cards from there. Runs unattended every night.',
+    clientUrl: 'https://punthub.co.uk/',
+    sector: 'Horse Racing · Predictive Analytics',
+    title: 'End-to-End Predictive Racing Pipeline',
+    body: 'Punthub needed daily horse-racing data from 6 live sources, run through 7 ML prediction models, results reconciled overnight, and insights surfaced through a custom-plugin front-end. Python scripts feed Google Sheets each evening; Supabase syncs overnight; the Next.js site renders prediction cards via bespoke plugins. Runs unattended every night.',
     results: [
       ['Data sources automated', '6 daily'],
       ['Live prediction models', '7'],
@@ -513,14 +515,25 @@ export default function HomePage() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            {caseStudies.map(({ client, sector, title, body, results, tags, note }) => (
+            {caseStudies.map(({ client, clientUrl, sector, title, body, results, tags, note }) => (
               <RevealWrapper key={title}>
                 <div className="bg-white border border-brand-border rounded-brand p-10 flex flex-col h-full hover:shadow-[0_8px_32px_rgba(0,0,0,0.06)] transition-shadow">
                   <div
                     className="flex items-baseline justify-between gap-3 mb-4 pb-4"
                     style={{ borderBottom: '1px solid #e2ddd8' }}
                   >
-                    <p className="font-serif text-[1.05rem] text-navy tracking-[-0.01em]">{client}</p>
+                    {clientUrl ? (
+                      <a
+                        href={clientUrl}
+                        target="_blank"
+                        rel="noopener"
+                        className="font-serif text-[1.05rem] text-navy tracking-[-0.01em] hover:text-accent transition-colors no-underline"
+                      >
+                        {client} <span aria-hidden="true">→</span>
+                      </a>
+                    ) : (
+                      <p className="font-serif text-[1.05rem] text-navy tracking-[-0.01em]">{client}</p>
+                    )}
                     <p className="text-[0.65rem] font-semibold tracking-[0.1em] uppercase text-brand-muted text-right">
                       {sector}
                     </p>
