@@ -1,6 +1,9 @@
 import type { Metadata } from 'next'
 import { Instrument_Sans, Instrument_Serif } from 'next/font/google'
+import Script from 'next/script'
 import './globals.css'
+
+const GOOGLE_ADS_ID = 'AW-18121615285'
 
 const instrumentSans = Instrument_Sans({
   subsets: ['latin'],
@@ -127,6 +130,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className="bg-bg text-brand-text font-sans antialiased overflow-x-hidden">
         {children}
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ADS_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="gtag-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GOOGLE_ADS_ID}');
+          `}
+        </Script>
       </body>
     </html>
   )
