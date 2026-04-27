@@ -72,8 +72,8 @@ const caseStudies = [
   {
     client: 'Marmadbir',
     sector: 'Field Services · Multi-Tenant SaaS',
-    title: 'Dor — WhatsApp Job Dispatch Platform',
-    body: "Marmadbir was coordinating field workers manually across WhatsApp groups and phone calls — dispatchers chasing workers, payments handled by phone. We built Dor: an automated multi-tenant dispatch platform. Jobs broadcast, workers apply, payments claimed race-safe, client confirmed. The coordinator's manual workload: zero.",
+    title: 'WhatsApp Job Dispatch Platform',
+    body: "Marmadbir was coordinating field workers manually across WhatsApp groups and phone calls — dispatchers chasing workers, payments handled by phone. We replaced the entire process with an automated multi-tenant dispatch platform. Jobs broadcast, workers apply, payments claimed race-safe, client confirmed. The coordinator's manual workload: zero.",
     results: [
       ['Coordinator manual time', 'Eliminated'],
       ['Payment race conditions', 'Zero'],
@@ -249,6 +249,38 @@ export default function HomePage() {
           )}
         </div>
       </div>
+
+      {/* TESTIMONIAL */}
+      <section className="py-20 border-b border-brand-border bg-bg">
+        <div className="max-w-[1280px] mx-auto px-14">
+          <RevealWrapper>
+            <div className="max-w-[880px] mx-auto text-center">
+              <div
+                className="flex justify-center gap-1 mb-7 text-[1.1rem]"
+                style={{ color: '#fbbc04' }}
+                aria-label="5 out of 5 stars"
+              >
+                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+              </div>
+              <blockquote className="font-serif font-normal text-[clamp(1.35rem,2.4vw,2rem)] text-brand-text leading-[1.4] tracking-[-0.01em] mb-9">
+                &ldquo;I work with them for a while now, they are nothing less than hard working,
+                fast responding, and very dedicated agency. Highly recommend.&rdquo;
+              </blockquote>
+              <div className="flex items-center justify-center gap-4 pt-6 border-t border-brand-border max-w-[440px] mx-auto">
+                <div className="w-12 h-12 rounded-full bg-navy text-white flex items-center justify-center font-serif text-[1.05rem] flex-shrink-0">
+                  DI
+                </div>
+                <div className="text-left">
+                  <p className="text-[0.95rem] font-semibold text-brand-text">Dor Iluz</p>
+                  <p className="text-[0.78rem] text-brand-muted">
+                    Marmadbir · Verified Google review · Local Guide, 27 reviews
+                  </p>
+                </div>
+              </div>
+            </div>
+          </RevealWrapper>
+        </div>
+      </section>
 
       {/* THE PROBLEM */}
       <section className="py-20 border-b border-brand-border bg-bg">
@@ -738,7 +770,7 @@ export default function HomePage() {
                   <ul className="list-none">
                     {[
                       ['PlusRooms', 'London planning intelligence platform'],
-                      ['Marmadbir', 'Dor — WhatsApp dispatch platform'],
+                      ['Marmadbir', 'WhatsApp dispatch platform'],
                       ['Punthub', 'Predictive data product (founder)'],
                     ].map(([name, role]) => (
                       <li

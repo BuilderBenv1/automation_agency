@@ -101,6 +101,26 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 image: 'https://automation-agency.co.uk/founder.jpg',
                 worksFor: { '@type': 'Organization', name: 'The Automation Agency' },
               },
+              review: [
+                {
+                  '@type': 'Review',
+                  reviewRating: {
+                    '@type': 'Rating',
+                    ratingValue: '5',
+                    bestRating: '5',
+                  },
+                  author: { '@type': 'Person', name: 'Dor Iluz' },
+                  reviewBody:
+                    'I work with them for a while now, they are nothing less than hard working, fast responding, and very dedicated agency. Highly recommend.',
+                  publisher: { '@type': 'Organization', name: 'Google' },
+                },
+              ],
+              aggregateRating: {
+                '@type': 'AggregateRating',
+                ratingValue: '5',
+                reviewCount: '1',
+                bestRating: '5',
+              },
             }),
           }}
         />
