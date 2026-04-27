@@ -674,17 +674,18 @@ export default function HomePage() {
                 <em className="not-italic text-accent">actually built it.</em>
               </h2>
               <p className="text-[0.925rem] text-brand-mid leading-[1.8] mb-[18px]">
-                The Automation Agency is a UK-based consultancy run by a developer with over a decade of
-                building real production systems — automation stacks, ML pipelines, multi-tenant SaaS
-                platforms, AI agents, and data infrastructure across multiple industries.
+                The Automation Agency is run by <strong className="text-brand-text font-semibold">Ben Horne</strong>,
+                a developer with over a decade of building real production systems — automation stacks, ML
+                pipelines, multi-tenant SaaS platforms, AI agents, and data infrastructure across multiple
+                industries.
               </p>
               <p className="text-[0.925rem] text-brand-mid leading-[1.8] mb-[18px]">
                 Not a consultant who reads about AI. Someone who writes the code, ships it to production,
-                and keeps it running. If you ask what stack we&apos;d use for your project, we&apos;ll tell you
-                exactly — and show you something we&apos;ve already built with it.
+                and keeps it running. Ask what stack we&apos;d use for your project and you&apos;ll get a direct
+                answer — usually with a system already built with it that you can look at.
               </p>
               <p className="text-[0.925rem] text-brand-mid leading-[1.8] mb-7">
-                Based in Derbyshire, working with clients across the UK.
+                Based in Chesterfield, Derbyshire, working with clients across the UK.
               </p>
               <div className="flex flex-wrap gap-1.5">
                 {['Python', 'Next.js', 'React', 'Supabase', 'PostgreSQL', 'Playwright', 'OpenAI API', 'Claude API', 'Twilio', 'Telegram Bots', 'scikit-learn', 'n8n', 'Vercel', 'Docker'].map(
@@ -702,12 +703,40 @@ export default function HomePage() {
 
             <div className="flex flex-col gap-5">
               <RevealWrapper>
-                <div className="bg-navy rounded-brand p-10">
-                  <p className="font-serif font-normal text-[1.2rem] text-white/88 leading-[1.55] tracking-[-0.01em] mb-4">
-                    &ldquo;In the future, every business — just like they have a website and a phone number —
-                    will also have their own AI.&rdquo;
+                <div className="bg-white border border-brand-border rounded-brand p-9">
+                  <div className="flex items-center gap-5 mb-5 pb-5 border-b border-brand-border">
+                    <img
+                      src="/founder.jpg"
+                      alt="Ben Horne, founder of The Automation Agency"
+                      width={92}
+                      height={92}
+                      className="rounded-full object-cover w-[92px] h-[92px] flex-shrink-0 bg-bg-2"
+                    />
+                    <div>
+                      <h3 className="font-serif font-normal text-[1.4rem] text-brand-text leading-tight tracking-[-0.01em]">
+                        Ben Horne
+                      </h3>
+                      <p className="text-[0.82rem] text-brand-muted mt-1.5">Founder · Senior Developer</p>
+                    </div>
+                  </div>
+                  <p className="text-[0.7rem] font-semibold tracking-[0.1em] uppercase text-brand-muted mb-3">
+                    Previously
                   </p>
-                  <p className="text-[0.78rem] text-white/32 font-medium">— Mark Zuckerberg, 2024</p>
+                  <ul className="list-none">
+                    {[
+                      ['PlusRooms', 'London planning intelligence platform'],
+                      ['Marmadbir', 'Dor — WhatsApp dispatch platform'],
+                      ['Punthub', 'Predictive data product (founder)'],
+                    ].map(([name, role]) => (
+                      <li
+                        key={name}
+                        className="flex items-baseline justify-between gap-3 py-2.5 border-b border-brand-border last:border-0"
+                      >
+                        <span className="font-serif text-[0.98rem] text-brand-text">{name}</span>
+                        <span className="text-[0.78rem] text-brand-muted text-right">{role}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </RevealWrapper>
 

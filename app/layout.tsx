@@ -94,6 +94,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 'Process Audit',
               ],
               priceRange: '£££',
+              founder: {
+                '@type': 'Person',
+                name: 'Ben Horne',
+                jobTitle: 'Founder & Senior Developer',
+                image: 'https://automation-agency.co.uk/founder.jpg',
+                worksFor: { '@type': 'Organization', name: 'The Automation Agency' },
+              },
             }),
           }}
         />
