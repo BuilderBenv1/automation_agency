@@ -6,7 +6,7 @@ import Footer from '@/components/Footer'
 export const metadata: Metadata = {
   title: 'Privacy Policy',
   robots: { index: false },
-  alternates: { canonical: 'https://automation-agency.co.uk/privacy' },
+  alternates: { canonical: 'https://www.automation-agency.co.uk/privacy' },
 }
 
 export default function PrivacyPage() {

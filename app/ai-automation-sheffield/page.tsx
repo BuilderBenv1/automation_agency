@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: 'AI Automation Consultant in Sheffield — The Automation Agency',
   description:
     'AI agents and process automation for Sheffield businesses across S1–S35. Based 30 minutes south in Chesterfield. Fixed prices, in-person kickoffs, free discovery call.',
-  alternates: { canonical: 'https://automation-agency.co.uk/ai-automation-sheffield' },
+  alternates: { canonical: 'https://www.automation-agency.co.uk/ai-automation-sheffield' },
 }
 
 const data: CityData = {

@@ -96,7 +96,7 @@ Message: ${message}`,
             ${autoReply.replace(/\n\n/g, '</p><p>').replace(/\n/g, '<br/>').replace(/^/, '<p>').replace(/$/, '</p>')}
           </div>
           <div style="margin-top:40px;padding-top:24px;border-top:1px solid #e2ddd8;font-size:12px;color:#767b82;">
-            <p>The Automation Agency · Derbyshire, UK · <a href="https://automation-agency.co.uk" style="color:#1a4fa0;">automation-agency.co.uk</a></p>
+            <p>The Automation Agency · Derbyshire, UK · <a href="https://www.automation-agency.co.uk" style="color:#1a4fa0;">automation-agency.co.uk</a></p>
             <p>This email was sent in response to your enquiry. To unsubscribe from future communications, reply with "unsubscribe".</p>
           </div>
         </div>

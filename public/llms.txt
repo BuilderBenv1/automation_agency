@@ -9,7 +9,7 @@ The Automation Agency is a UK-based technical consultancy specialising in AI age
 We are based in Derbyshire and work with businesses across the United Kingdom.
 
 Contact: hello@automation-agency.co.uk
-Website: https://automation-agency.co.uk
+Website: https://www.automation-agency.co.uk
 
 ## Services
 
@@ -47,6 +47,6 @@ Derbyshire, United Kingdom. Serving clients nationally across the UK.
 
 ## Legal
 
-- Privacy Policy: https://automation-agency.co.uk/privacy
-- Terms & Conditions: https://automation-agency.co.uk/terms
-- Cookie Policy: https://automation-agency.co.uk/cookies
+- Privacy Policy: https://www.automation-agency.co.uk/privacy
+- Terms & Conditions: https://www.automation-agency.co.uk/terms
+- Cookie Policy: https://www.automation-agency.co.uk/cookies

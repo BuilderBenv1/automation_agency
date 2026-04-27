@@ -7,7 +7,7 @@ import RevealWrapper from '@/components/RevealWrapper'
 
 export const metadata: Metadata = {
   title: 'The Automation Agency — AI & Process Automation for UK Businesses',
-  alternates: { canonical: 'https://automation-agency.co.uk' },
+  alternates: { canonical: 'https://www.automation-agency.co.uk' },
 }
 
 /* ─────────────────────────── DATA ─────────────────────────── */
@@ -101,9 +101,10 @@ const caseStudies = [
   },
   {
     client: 'PlusRooms',
+    clientUrl: 'https://plusrooms.co.uk/',
     sector: 'Property Intelligence · Data Pipeline',
-    title: 'UK Planning Application Monitor',
-    body: 'PlusRooms needed daily coverage of planning applications across England. Previously a full day of manual council website trawling. We automated scraping across 97% of London boroughs and built a live dashboard with alerts. Nobody has to check a council website anymore.',
+    title: 'Planscope — UK Planning Application Monitor',
+    body: 'PlusRooms needed daily coverage of planning applications across England — previously a full working day of manual council-website trawling. We built Planscope: an automated scraping pipeline covering 97% of London boroughs and a live dashboard with alerts. Nobody has to check a council website anymore.',
     results: [
       ['Borough coverage', '97%'],
       ['Daily manual hours replaced', 'Full working day'],

@@ -5,7 +5,7 @@ import Footer from '@/components/Footer'
 export const metadata: Metadata = {
   title: 'Cookie Policy',
   robots: { index: false },
-  alternates: { canonical: 'https://automation-agency.co.uk/cookies' },
+  alternates: { canonical: 'https://www.automation-agency.co.uk/cookies' },
 }
 
 export default function CookiesPage() {

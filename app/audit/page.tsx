@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: 'Process Audit',
   description:
     'A 1–2 week engagement that maps your workflows, identifies your highest-ROI automation opportunities, and delivers a written report with fixed-price quotes. £1,500, credited if you build.',
-  alternates: { canonical: 'https://automation-agency.co.uk/audit' },
+  alternates: { canonical: 'https://www.automation-agency.co.uk/audit' },
 }
 
 const deliverables = [

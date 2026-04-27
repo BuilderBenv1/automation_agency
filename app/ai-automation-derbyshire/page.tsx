@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: 'AI Automation Consultant in Derbyshire — The Automation Agency',
   description:
     'AI agents and process automation for Derbyshire businesses, run from Chesterfield. Fixed-price builds, in-person kickoffs across Derby, Buxton, Matlock, and the High Peak. Free discovery call.',
-  alternates: { canonical: 'https://automation-agency.co.uk/ai-automation-derbyshire' },
+  alternates: { canonical: 'https://www.automation-agency.co.uk/ai-automation-derbyshire' },
 }
 
 const data: CityData = {

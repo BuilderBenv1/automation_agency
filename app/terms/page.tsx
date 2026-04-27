@@ -5,7 +5,7 @@ import Footer from '@/components/Footer'
 export const metadata: Metadata = {
   title: 'Terms & Conditions',
   robots: { index: false },
-  alternates: { canonical: 'https://automation-agency.co.uk/terms' },
+  alternates: { canonical: 'https://www.automation-agency.co.uk/terms' },
 }
 
 export default function TermsPage() {

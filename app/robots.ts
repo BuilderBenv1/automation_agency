@@ -9,6 +9,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: '/api/',
       },
     ],
-    sitemap: 'https://automation-agency.co.uk/sitemap.xml',
+    sitemap: 'https://www.automation-agency.co.uk/sitemap.xml',
   }
 }

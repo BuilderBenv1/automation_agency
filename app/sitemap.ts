@@ -4,49 +4,49 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date()
   return [
     {
-      url: 'https://automation-agency.co.uk',
+      url: 'https://www.automation-agency.co.uk',
       lastModified: now,
       changeFrequency: 'monthly',
       priority: 1,
     },
     {
-      url: 'https://automation-agency.co.uk/audit',
+      url: 'https://www.automation-agency.co.uk/audit',
       lastModified: now,
       changeFrequency: 'monthly',
       priority: 0.8,
     },
     {
-      url: 'https://automation-agency.co.uk/ai-automation-derbyshire',
+      url: 'https://www.automation-agency.co.uk/ai-automation-derbyshire',
       lastModified: now,
       changeFrequency: 'monthly',
       priority: 0.7,
     },
     {
-      url: 'https://automation-agency.co.uk/ai-automation-chesterfield',
+      url: 'https://www.automation-agency.co.uk/ai-automation-chesterfield',
       lastModified: now,
       changeFrequency: 'monthly',
       priority: 0.7,
     },
     {
-      url: 'https://automation-agency.co.uk/ai-automation-sheffield',
+      url: 'https://www.automation-agency.co.uk/ai-automation-sheffield',
       lastModified: now,
       changeFrequency: 'monthly',
       priority: 0.7,
     },
     {
-      url: 'https://automation-agency.co.uk/ai-automation-nottingham',
+      url: 'https://www.automation-agency.co.uk/ai-automation-nottingham',
       lastModified: now,
       changeFrequency: 'monthly',
       priority: 0.7,
     },
     {
-      url: 'https://automation-agency.co.uk/privacy',
+      url: 'https://www.automation-agency.co.uk/privacy',
       lastModified: now,
       changeFrequency: 'yearly',
       priority: 0.2,
     },
     {
-      url: 'https://automation-agency.co.uk/terms',
+      url: 'https://www.automation-agency.co.uk/terms',
       lastModified: now,
       changeFrequency: 'yearly',
       priority: 0.2,

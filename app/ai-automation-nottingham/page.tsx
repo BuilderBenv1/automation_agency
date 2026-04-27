@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: 'AI Automation Consultant in Nottingham — The Automation Agency',
   description:
     'AI agents and process automation for Nottingham businesses across NG1–NG34. Based in Chesterfield, 45 minutes via the M1. Fixed prices, in-person kickoffs, free discovery call.',
-  alternates: { canonical: 'https://automation-agency.co.uk/ai-automation-nottingham' },
+  alternates: { canonical: 'https://www.automation-agency.co.uk/ai-automation-nottingham' },
 }
 
 const data: CityData = {

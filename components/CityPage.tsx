@@ -30,7 +30,7 @@ export type CityData = {
 }
 
 export default function CityPage({ data }: { data: CityData }) {
-  const canonical = `https://automation-agency.co.uk/${data.urlSlug}`
+  const canonical = `https://www.automation-agency.co.uk/${data.urlSlug}`
   const faqLd = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
@@ -47,7 +47,7 @@ export default function CityPage({ data }: { data: CityData }) {
     provider: {
       '@type': 'ProfessionalService',
       name: 'The Automation Agency',
-      url: 'https://automation-agency.co.uk',
+      url: 'https://www.automation-agency.co.uk',
       telephone: '+441246923041',
       address: {
         '@type': 'PostalAddress',

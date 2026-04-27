@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: 'AI Automation Consultant in Chesterfield — The Automation Agency',
   description:
     'AI agents and process automation built right here in Chesterfield. Same-day on-site visits across S40–S45. Fixed prices, free discovery call, Process Audits from £1,500.',
-  alternates: { canonical: 'https://automation-agency.co.uk/ai-automation-chesterfield' },
+  alternates: { canonical: 'https://www.automation-agency.co.uk/ai-automation-chesterfield' },
 }
 
 const data: CityData = {

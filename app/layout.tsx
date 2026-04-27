@@ -21,7 +21,7 @@ const instrumentSerif = Instrument_Serif({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://automation-agency.co.uk'),
+  metadataBase: new URL('https://www.automation-agency.co.uk'),
   title: {
     default: 'The Automation Agency — AI & Process Automation for UK Businesses',
     template: '%s — The Automation Agency',
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_GB',
-    url: 'https://automation-agency.co.uk',
+    url: 'https://www.automation-agency.co.uk',
     siteName: 'The Automation Agency',
     title: 'The Automation Agency — AI & Process Automation for UK Businesses',
     description:
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
     description: 'We eliminate repetitive manual work for UK businesses with custom AI agents and automation systems.',
   },
   robots: { index: true, follow: true },
-  alternates: { canonical: 'https://automation-agency.co.uk' },
+  alternates: { canonical: 'https://www.automation-agency.co.uk' },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -78,7 +78,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               name: 'The Automation Agency',
               description:
                 'AI automation consultancy eliminating manual work for UK businesses. Based in Derbyshire.',
-              url: 'https://automation-agency.co.uk',
+              url: 'https://www.automation-agency.co.uk',
               email: 'hello@automation-agency.co.uk',
               telephone: '+441246923041',
               address: {
@@ -101,7 +101,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 '@type': 'Person',
                 name: 'Ben Horne',
                 jobTitle: 'Founder & Senior Developer',
-                image: 'https://automation-agency.co.uk/founder.jpg',
+                image: 'https://www.automation-agency.co.uk/founder.jpg',
                 worksFor: { '@type': 'Organization', name: 'The Automation Agency' },
               },
               review: [
