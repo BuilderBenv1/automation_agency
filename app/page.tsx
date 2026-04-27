@@ -70,9 +70,10 @@ const processSteps = [
 
 const caseStudies = [
   {
+    client: 'Marmadbir',
     sector: 'Field Services · Multi-Tenant SaaS',
-    title: 'WhatsApp Job Dispatch Platform',
-    body: "A field service business coordinated workers manually across WhatsApp groups and phone calls — dispatchers chasing workers, payments handled by phone. We replaced the entire process with an automated multi-tenant dispatch platform. Jobs broadcast, workers apply, payments claimed race-safe, client confirmed. The coordinator's manual workload: zero.",
+    title: 'Dor — WhatsApp Job Dispatch Platform',
+    body: "Marmadbir was coordinating field workers manually across WhatsApp groups and phone calls — dispatchers chasing workers, payments handled by phone. We built Dor: an automated multi-tenant dispatch platform. Jobs broadcast, workers apply, payments claimed race-safe, client confirmed. The coordinator's manual workload: zero.",
     results: [
       ['Coordinator manual time', 'Eliminated'],
       ['Payment race conditions', 'Zero'],
@@ -82,21 +83,24 @@ const caseStudies = [
     tags: ['Next.js', 'Supabase', 'Twilio', 'Telegram Bot', 'PostgreSQL'],
   },
   {
+    client: 'Punthub',
     sector: 'Data Intelligence · Predictive Analytics',
     title: 'End-to-End Predictive Data Pipeline',
-    body: 'A data-intensive operation needed 6 live sources scraped daily, run through 7 ML prediction models, results reconciled nightly, and insights distributed automatically to subscriber lists. We built the entire stack. It runs at 2am every day without anyone touching it.',
+    body: 'Punthub needed 6 live sources scraped daily, run through 7 ML prediction models, results reconciled nightly, and insights surfaced through a live front-end. Python scripts feed Google Sheets each evening; Supabase syncs overnight; the Next.js site renders custom prediction cards from there. Runs unattended every night.',
     results: [
       ['Data sources automated', '6 daily'],
       ['Live prediction models', '7'],
       ['Reconciliation jobs', '21 automated'],
       ['Human touchpoints required', 'Zero'],
     ],
-    tags: ['Python', 'scikit-learn', 'Supabase', 'Selenium', 'APScheduler'],
+    tags: ['Python', 'scikit-learn', 'Next.js', 'Supabase', 'Playwright'],
+    note: 'Built and owned by The Automation Agency.',
   },
   {
+    client: 'PlusRooms',
     sector: 'Property Intelligence · Data Pipeline',
     title: 'UK Planning Application Monitor',
-    body: 'A property intelligence client needed daily coverage of planning applications across England. Previously a full day of manual council website trawling. We automated scraping across 97% of London boroughs and built a live dashboard with alerts. Nobody has to check a council website anymore.',
+    body: 'PlusRooms needed daily coverage of planning applications across England. Previously a full day of manual council website trawling. We automated scraping across 97% of London boroughs and built a live dashboard with alerts. Nobody has to check a council website anymore.',
     results: [
       ['Borough coverage', '97%'],
       ['Daily manual hours replaced', 'Full working day'],
@@ -476,19 +480,22 @@ export default function HomePage() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            {caseStudies.map(({ sector, title, body, results, tags }) => (
+            {caseStudies.map(({ client, sector, title, body, results, tags, note }) => (
               <RevealWrapper key={title}>
                 <div className="bg-white border border-brand-border rounded-brand p-10 flex flex-col h-full hover:shadow-[0_8px_32px_rgba(0,0,0,0.06)] transition-shadow">
-                  <p
-                    className="text-[0.7rem] font-semibold tracking-[0.1em] uppercase text-brand-muted mb-4 pb-4"
+                  <div
+                    className="flex items-baseline justify-between gap-3 mb-4 pb-4"
                     style={{ borderBottom: '1px solid #e2ddd8' }}
                   >
-                    {sector}
-                  </p>
+                    <p className="font-serif text-[1.05rem] text-navy tracking-[-0.01em]">{client}</p>
+                    <p className="text-[0.65rem] font-semibold tracking-[0.1em] uppercase text-brand-muted text-right">
+                      {sector}
+                    </p>
+                  </div>
                   <h3 className="font-serif font-normal text-[1.3rem] tracking-[-0.01em] mb-3.5 leading-[1.25]">
                     {title}
                   </h3>
-                  <p className="text-[0.875rem] text-brand-muted leading-[1.75] flex-1 mb-7">{body}</p>
+                  <p className="text-[0.875rem] text-brand-muted leading-[1.75] mb-7">{body}</p>
                   <div className="bg-bg-2 rounded-brand p-5 flex flex-col gap-2.5">
                     {results.map(([label, value]) => (
                       <div key={label} className="flex justify-between text-[0.82rem]">
@@ -507,6 +514,12 @@ export default function HomePage() {
                       </span>
                     ))}
                   </div>
+                  {note && (
+                    <p className="text-[0.75rem] text-brand-muted italic mt-4 pt-4 border-t border-brand-border">
+                      {note}
+                    </p>
+                  )}
+                  <div className="flex-1" />
                 </div>
               </RevealWrapper>
             ))}
