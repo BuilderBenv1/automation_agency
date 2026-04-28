@@ -29,7 +29,9 @@ export default function CalendlyEmbed({ height = 700 }: { height?: number }) {
     function handleMessage(e: MessageEvent) {
       if (!isCalendlyMessage(e.data)) return
       if (e.data.event === 'calendly.event_scheduled' && window.gtag) {
-        window.gtag('event', 'conversion', { send_to: 'AW-18121615285' })
+        window.gtag('event', 'conversion', {
+          send_to: 'AW-18121615285/JOEdCIa656McELXPh8FD',
+        })
         window.gtag('event', 'generate_lead', {
           method: 'calendly_booking',
         })

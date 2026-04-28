@@ -34,7 +34,9 @@ export default function ContactForm() {
       setStatus('success')
 
       if (typeof window !== 'undefined' && window.gtag) {
-        window.gtag('event', 'conversion', { send_to: 'AW-18121615285' })
+        window.gtag('event', 'conversion', {
+          send_to: 'AW-18121615285/JOEdCIa656McELXPh8FD',
+        })
         window.gtag('event', 'generate_lead', {
           method: 'contact_form',
           intent: form.intent || 'unspecified',
