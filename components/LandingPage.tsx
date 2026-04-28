@@ -2,6 +2,7 @@ import type { ReactNode } from 'react'
 import Link from 'next/link'
 import RevealWrapper from '@/components/RevealWrapper'
 import CalendlyEmbed from '@/components/CalendlyEmbed'
+import ContactForm from '@/components/ContactForm'
 
 export type LandingProof = {
   client: string
@@ -183,16 +184,32 @@ export default function LandingPage({ data }: { data: LandingData }) {
           <RevealWrapper>
             <CalendlyEmbed />
           </RevealWrapper>
-          <p className="text-[0.85rem] text-brand-muted mt-8 text-center">
-            Prefer phone or email?{' '}
-            <a href="tel:+441246923041" className="text-accent hover:underline">
-              01246 923041
-            </a>{' '}
-            ·{' '}
-            <a href="mailto:hello@automation-agency.co.uk" className="text-accent hover:underline">
-              hello@automation-agency.co.uk
-            </a>
-          </p>
+
+          <div className="mt-16 pt-16 border-t border-brand-border">
+            <div className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-12 items-start">
+              <div>
+                <p className="text-[0.7rem] font-semibold tracking-[0.12em] uppercase text-brand-muted mb-4">
+                  Or send a message
+                </p>
+                <h3 className="font-serif font-normal text-[1.6rem] text-brand-text mb-4 leading-tight">
+                  Prefer email?{' '}
+                  <em className="not-italic text-accent">Drop us a note instead.</em>
+                </h3>
+                <p className="text-[0.92rem] text-brand-mid leading-[1.75] mb-6">
+                  Walk us through what your team is doing manually. We&apos;ll reply within 24 hours
+                  with an honest read on whether it&apos;s a fit and what it would cost.
+                </p>
+                <p className="text-[0.85rem] text-brand-muted leading-[1.7]">
+                  Or call directly:{' '}
+                  <a href="tel:+441246923041" className="text-accent hover:underline">
+                    01246 923041
+                  </a>{' '}
+                  · weekdays 9–5
+                </p>
+              </div>
+              <ContactForm />
+            </div>
+          </div>
         </div>
       </section>
 
