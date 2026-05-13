@@ -16,6 +16,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
+      url: 'https://www.automation-agency.co.uk/quick-audit',
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
       url: 'https://www.automation-agency.co.uk/ai-automation-derbyshire',
       lastModified: now,
       changeFrequency: 'monthly',

@@ -6,6 +6,7 @@ const navLinks = [
   { href: '/#pricing', label: 'Pricing' },
   { href: '/#about', label: 'About' },
   { href: '/#contact', label: 'Contact' },
+  { href: '/quick-audit', label: 'Free Quick-Audit' },
   { href: '/audit', label: 'Process Audit' },
 ]
 

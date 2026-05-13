@@ -190,10 +190,16 @@ export default function HomePage() {
               Your team is doing work{' '}
               <em className="not-italic text-accent">a machine should do.</em>
             </h1>
-            <p className="text-[1.05rem] text-brand-mid leading-[1.75] mb-10 max-w-[480px]">
-              We identify the manual, repetitive processes inside your business and replace them with AI
-              agents and automation systems that run unattended — so your people can focus on work that
-              actually matters.
+            <p className="text-[1.05rem] text-brand-mid leading-[1.75] mb-4 max-w-[500px]">
+              We identify the manual work eating your team&apos;s hours. We build the AI agents and
+              automation systems that handle it. Fixed prices, scoped within 48 hours of your first call.
+            </p>
+            <p className="text-[0.9rem] text-brand-muted leading-[1.7] mb-9 max-w-[500px]">
+              Not ready to talk yet?{' '}
+              <a href="/quick-audit" className="text-accent hover:underline">
+                Get a free 24-hour Quick-Audit by email
+              </a>{' '}
+              — 7 questions, no commitment.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 flex-wrap">
               <a href="#contact" className="btn-primary px-6 py-3 text-[0.9rem] font-semibold text-center">
@@ -238,19 +244,36 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* TECH STRIP */}
-      <div className="bg-bg-2 border-t border-b border-brand-border py-[18px] px-14 flex items-center gap-12 overflow-hidden">
-        <span className="text-[0.7rem] font-semibold tracking-[0.1em] uppercase text-brand-muted whitespace-nowrap flex-shrink-0">
-          Built with
-        </span>
-        <div className="flex gap-10 overflow-hidden">
-          {['Python', 'Next.js', 'OpenAI', 'Claude API', 'Supabase', 'Playwright', 'Twilio', 'PostgreSQL', 'Telegram', 'scikit-learn', 'n8n', 'Vercel'].map(
-            (tech) => (
-              <span key={tech} className="text-[0.83rem] font-medium text-brand-border-dark whitespace-nowrap">
-                {tech}
-              </span>
-            )
-          )}
+      {/* TRUSTED BY STRIP */}
+      <div className="bg-bg-2 border-t border-b border-brand-border py-6 px-14">
+        <div className="max-w-[1280px] mx-auto flex flex-col md:flex-row md:items-center gap-5 md:gap-12">
+          <span className="text-[0.7rem] font-semibold tracking-[0.12em] uppercase text-brand-muted whitespace-nowrap flex-shrink-0">
+            Trusted by
+          </span>
+          <div className="flex flex-wrap gap-x-10 gap-y-3 items-center">
+            {[
+              { name: 'Marmadbir', url: 'https://www.marmadbir.com/' },
+              { name: 'Punthub', url: 'https://punthub.co.uk/' },
+              { name: 'PlusRooms', url: 'https://plusrooms.co.uk/' },
+            ].map(({ name, url }) => (
+              <a
+                key={name}
+                href={url}
+                target="_blank"
+                rel="noopener"
+                className="font-serif text-[1.15rem] text-brand-text hover:text-accent no-underline transition-colors"
+              >
+                {name}
+              </a>
+            ))}
+            <span className="text-[0.83rem] text-brand-muted italic">
+              and more across the UK
+            </span>
+          </div>
+          <div className="hidden lg:flex items-center gap-2 ml-auto text-[0.78rem] text-brand-muted">
+            <span className="font-semibold tracking-[0.12em] uppercase text-[0.7rem]">Built with</span>
+            <span>Python · Next.js · Claude · OpenAI · Supabase · Twilio</span>
+          </div>
         </div>
       </div>
 

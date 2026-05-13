@@ -4,11 +4,11 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 
 const links = [
-  { href: '#services', label: 'Services' },
-  { href: '#process', label: 'How It Works' },
-  { href: '#work', label: 'Our Work' },
-  { href: '#pricing', label: 'Pricing' },
-  { href: '#contact', label: 'Contact' },
+  { href: '/#services', label: 'Services' },
+  { href: '/#work', label: 'Work' },
+  { href: '/#pricing', label: 'Pricing' },
+  { href: '/quick-audit', label: 'Free Audit' },
+  { href: '/#contact', label: 'Contact' },
 ]
 
 export default function Nav() {
@@ -42,28 +42,32 @@ export default function Nav() {
       </Link>
 
       <ul className="hidden md:flex items-center gap-10 list-none">
-        {links.map(({ href, label }) => (
-          <li key={href}>
-            <a
-              href={href}
-              className={`text-sm font-medium transition-colors duration-150 no-underline ${
-                active === href.replace('#', '')
-                  ? 'text-brand-text'
-                  : 'text-brand-muted hover:text-brand-text'
-              }`}
-            >
-              {label}
-            </a>
-          </li>
-        ))}
+        {links.map(({ href, label }) => {
+          const hashId = href.includes('#') ? href.slice(href.indexOf('#') + 1) : ''
+          const isActive = hashId !== '' && active === hashId
+          return (
+            <li key={href}>
+              <Link
+                href={href}
+                className={`text-sm font-medium transition-colors duration-150 no-underline ${
+                  isActive
+                    ? 'text-brand-text'
+                    : 'text-brand-muted hover:text-brand-text'
+                }`}
+              >
+                {label}
+              </Link>
+            </li>
+          )
+        })}
       </ul>
 
-      <a
-        href="#contact"
+      <Link
+        href="/#contact"
         className="btn-primary text-sm font-semibold no-underline"
       >
         Book Discovery Call
-      </a>
+      </Link>
     </nav>
   )
 }
