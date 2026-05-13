@@ -3,6 +3,7 @@ import Link from 'next/link'
 import RevealWrapper from '@/components/RevealWrapper'
 import CalendlyEmbed from '@/components/CalendlyEmbed'
 import ContactForm from '@/components/ContactForm'
+import CallbackForm from '@/components/CallbackForm'
 
 export type LandingProof = {
   client: string
@@ -62,8 +63,8 @@ export default function LandingPage({ data }: { data: LandingData }) {
         </a>
       </nav>
 
-      {/* HERO */}
-      <div className="max-w-[1180px] mx-auto px-8 md:px-14 pt-32 md:pt-36 pb-12 md:pb-16 grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-12 lg:gap-16 items-start bg-bg">
+      {/* HERO — form is the primary CTA, above the fold */}
+      <div className="max-w-[1180px] mx-auto px-8 md:px-14 pt-32 md:pt-36 pb-12 md:pb-16 grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-12 lg:gap-14 items-start bg-bg">
         <div>
           <div className="eyebrow mb-4">{data.eyebrow}</div>
           <h1 className="font-serif font-normal text-display-xl text-brand-text mb-6">
@@ -72,10 +73,10 @@ export default function LandingPage({ data }: { data: LandingData }) {
           <p className="text-[1.1rem] text-brand-text leading-[1.55] font-medium mb-5 max-w-[560px]">
             {data.subhead}
           </p>
-          <p className="text-[1rem] text-brand-mid leading-[1.75] mb-8 max-w-[560px]">
+          <p className="text-[1rem] text-brand-mid leading-[1.75] mb-7 max-w-[560px]">
             {data.intro}
           </p>
-          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-y-2.5 gap-x-6 max-w-[560px] mb-9">
+          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-y-2.5 gap-x-6 max-w-[560px] mb-7">
             {data.bullets.map((b) => (
               <li
                 key={b}
@@ -86,63 +87,76 @@ export default function LandingPage({ data }: { data: LandingData }) {
               </li>
             ))}
           </ul>
-          <div className="flex flex-col sm:flex-row gap-3">
-            <a href="#book" className="btn-primary px-7 py-3.5 text-sm font-semibold">
-              Book Free Discovery Call
+          <p className="text-[0.85rem] text-brand-muted leading-relaxed">
+            Prefer to book a slot online?{' '}
+            <a href="#book" className="text-accent hover:underline">Pick a time below →</a>
+            <span className="mx-2 text-brand-muted/50">·</span>
+            Prefer to talk now? Call{' '}
+            <a href="tel:+441246923041" className="text-accent hover:underline">
+              01246 923041
             </a>
-            <a
-              href="tel:+441246923041"
-              className="btn-outline px-7 py-3.5 text-sm font-semibold no-underline"
-            >
-              Call 01246 923041
-            </a>
-          </div>
+          </p>
         </div>
 
         <RevealWrapper>
-          <div className="bg-white border border-brand-border rounded-brand p-8">
-            <div className="flex items-center gap-4 mb-6 pb-6 border-b border-brand-border">
+          <CallbackForm context={`lp/${data.urlSlug}`} />
+        </RevealWrapper>
+      </div>
+
+      {/* TRUST STRIP — founder + review + proof metrics */}
+      <section className="py-8 border-t border-b border-brand-border bg-bg-2">
+        <div className="max-w-[1180px] mx-auto px-8 md:px-14">
+          <div className="flex flex-col md:flex-row md:items-center gap-7 md:gap-10">
+            <div className="flex items-center gap-4 flex-shrink-0">
               <img
                 src="/founder.jpg"
                 alt="Ben Horne, founder of The Automation Agency"
-                width={72}
-                height={72}
-                className="rounded-full object-cover w-[72px] h-[72px] flex-shrink-0 bg-bg-2"
+                width={56}
+                height={56}
+                className="rounded-full object-cover w-14 h-14 bg-bg-2"
               />
               <div>
-                <p className="font-serif text-[1.15rem] text-brand-text leading-tight">Ben Horne</p>
-                <p className="text-[0.78rem] text-brand-muted mt-1">
+                <p className="font-serif text-[1rem] text-brand-text leading-tight">Ben Horne</p>
+                <p className="text-[0.72rem] text-brand-muted mt-1">
                   Founder · 10+ yrs production automation
                 </p>
               </div>
             </div>
-            <div className="flex gap-0.5 mb-3 text-[0.95rem]" style={{ color: '#fbbc04' }}>
-              <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+
+            <div className="hidden md:block w-px h-12 bg-brand-border" />
+
+            <div className="flex-1 min-w-0">
+              <div className="flex gap-0.5 mb-1 text-[0.85rem]" style={{ color: '#fbbc04' }}>
+                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+              </div>
+              <p className="font-serif text-[0.95rem] text-brand-text leading-snug">
+                &ldquo;Hard working, fast responding, and very dedicated agency. Highly recommend.&rdquo;
+              </p>
+              <p className="text-[0.7rem] text-brand-muted mt-1">
+                Dor Iluz · Marmadbir · Verified Google review
+              </p>
             </div>
-            <p className="font-serif font-normal text-[1.02rem] text-brand-text leading-[1.5] mb-3">
-              &ldquo;Hard working, fast responding, and very dedicated agency. Highly recommend.&rdquo;
-            </p>
-            <p className="text-[0.78rem] text-brand-muted">
-              Dor Iluz · Marmadbir · Verified Google review
-            </p>
-            <div className="mt-6 pt-6 border-t border-brand-border grid grid-cols-3 gap-3">
+
+            <div className="hidden md:block w-px h-12 bg-brand-border" />
+
+            <div className="grid grid-cols-3 gap-5 flex-shrink-0">
               {data.proofs.map(({ client, metric, metricLabel }) => (
                 <div key={client}>
-                  <p className="font-serif text-[1.5rem] text-accent leading-none tracking-[-0.03em]">
+                  <p className="font-serif text-[1.3rem] text-accent leading-none tracking-[-0.03em]">
                     {metric}
                   </p>
-                  <p className="text-[0.7rem] text-brand-muted mt-1.5 leading-tight">
+                  <p className="text-[0.65rem] text-brand-muted mt-1 leading-tight">
                     {metricLabel}
                   </p>
-                  <p className="text-[0.65rem] text-brand-muted/70 mt-0.5 font-medium tracking-[0.04em] uppercase">
+                  <p className="text-[0.6rem] text-brand-muted/70 mt-0.5 font-medium tracking-[0.04em] uppercase">
                     {client}
                   </p>
                 </div>
               ))}
             </div>
           </div>
-        </RevealWrapper>
-      </div>
+        </div>
+      </section>
 
       {/* PROCESS BAR */}
       <div className="bg-navy text-white py-8 px-8 md:px-14">
@@ -166,11 +180,11 @@ export default function LandingPage({ data }: { data: LandingData }) {
         </div>
       </div>
 
-      {/* CALENDAR */}
+      {/* CALENDAR — secondary conversion path */}
       <section id="book" className="py-20 bg-bg">
         <div className="max-w-[1180px] mx-auto px-8 md:px-14">
           <div className="max-w-[680px] mb-10">
-            <div className="eyebrow mb-4">Book Now</div>
+            <div className="eyebrow mb-4">Or book a slot directly</div>
             <h2 className="font-serif font-normal text-display-md text-brand-text mb-4">
               Free 30-minute discovery call.{' '}
               <em className="not-italic text-accent">No commitment, no pitch.</em>
