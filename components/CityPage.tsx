@@ -141,7 +141,7 @@ export default function CityPage({ data }: { data: CityData }) {
             <RevealWrapper>
               <div className="kicker-cream mb-5">Why local matters</div>
               <h2 className="font-display font-black text-h2-band uppercase text-ink mb-6 max-w-[18ch]">
-                Built locally, for <span className="text-lime">{data.city} businesses.</span>
+                Built locally, for <span className="text-ink underline decoration-lime decoration-2 underline-offset-4">{data.city} businesses.</span>
               </h2>
               <p className="text-[0.95rem] text-muted-cream leading-[1.8]">{data.localContext}</p>
             </RevealWrapper>
@@ -225,7 +225,7 @@ export default function CityPage({ data }: { data: CityData }) {
                   <li key={name} className="py-4 border-b border-[rgba(19,18,16,0.12)]">
                     <Link
                       href={slug}
-                      className="inline-flex items-center gap-2 font-display font-bold text-[1.05rem] text-ink hover:text-lime no-underline transition-colors"
+                      className="inline-flex items-center gap-2 font-display font-bold text-[1.05rem] text-ink hover:decoration-lime hover:underline no-underline transition-colors"
                     >
                       {name} <span aria-hidden="true">→</span>
                     </Link>

@@ -135,7 +135,7 @@ export default function ServicePage({ data }: { data: ServiceData }) {
               <ol className="list-none flex flex-col gap-5 mb-8">
                 {data.workflows.map((workflow, i) => (
                   <li key={workflow} className="flex gap-4 items-start">
-                    <span className="font-display font-black text-lime text-lg leading-none flex-shrink-0 mt-0.5">
+                    <span className="font-display font-black text-ink text-lg leading-none flex-shrink-0 mt-0.5">
                       {String(i + 1).padStart(2, '0')}
                     </span>
                     <p className="text-ink leading-[1.6] text-[0.92rem]">{workflow}</p>

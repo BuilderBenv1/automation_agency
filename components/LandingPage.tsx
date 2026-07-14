@@ -160,7 +160,7 @@ export default function LandingPage({ data }: { data: LandingData }) {
         <div className="max-w-[1180px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
           {PROCESS_STEPS.map(([num, title, sub]) => (
             <div key={title} className="flex gap-4 items-start">
-              <span className="font-display font-black text-[1.6rem] text-lime leading-none">
+              <span className="font-display font-black text-[1.6rem] text-ink leading-none">
                 {num}
               </span>
               <div>

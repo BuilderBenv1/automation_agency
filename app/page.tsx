@@ -206,14 +206,14 @@ const heroStats: [string, string][] = [
 ]
 
 const popularAutomations = [
-  <>New enquiry → straight into your <em className="not-italic font-semibold text-lime">CRM</em>, with a Slack or email nudge</>,
-  <>Website or <em className="not-italic font-semibold text-lime">WhatsApp</em> message → booked in → your team notified</>,
-  <>Messy inbox → <em className="not-italic font-semibold text-lime">AI reads it</em>, summarises, drops it in a sheet</>,
-  <>Google Sheet → tidy report → <em className="not-italic font-semibold text-lime">emailed to your client</em> on schedule</>,
-  <><em className="not-italic font-semibold text-lime">Stripe</em> payment → CRM updated, receipt sent, subscription sorted</>,
-  <>Broken <em className="not-italic font-semibold text-lime">Zapier or Make</em> flow → rebuilt so it stops falling over</>,
-  <><em className="not-italic font-semibold text-lime">Telegram bot</em> for alerts, content delivery or internal tools</>,
-  <><em className="not-italic font-semibold text-lime">AI chatbot</em> for FAQs, bookings and lead capture</>,
+  <>New enquiry → straight into your <em className="not-italic font-semibold text-ink underline decoration-lime decoration-2 underline-offset-4">CRM</em>, with a Slack or email nudge</>,
+  <>Website or <em className="not-italic font-semibold text-ink underline decoration-lime decoration-2 underline-offset-4">WhatsApp</em> message → booked in → your team notified</>,
+  <>Messy inbox → <em className="not-italic font-semibold text-ink underline decoration-lime decoration-2 underline-offset-4">AI reads it</em>, summarises, drops it in a sheet</>,
+  <>Google Sheet → tidy report → <em className="not-italic font-semibold text-ink underline decoration-lime decoration-2 underline-offset-4">emailed to your client</em> on schedule</>,
+  <><em className="not-italic font-semibold text-ink underline decoration-lime decoration-2 underline-offset-4">Stripe</em> payment → CRM updated, receipt sent, subscription sorted</>,
+  <>Broken <em className="not-italic font-semibold text-ink underline decoration-lime decoration-2 underline-offset-4">Zapier or Make</em> flow → rebuilt so it stops falling over</>,
+  <><em className="not-italic font-semibold text-ink underline decoration-lime decoration-2 underline-offset-4">Telegram bot</em> for alerts, content delivery or internal tools</>,
+  <><em className="not-italic font-semibold text-ink underline decoration-lime decoration-2 underline-offset-4">AI chatbot</em> for FAQs, bookings and lead capture</>,
 ]
 
 const trustedClients = [
@@ -359,7 +359,7 @@ export default function HomePage() {
           <ol className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-10 list-none">
             {popularAutomations.map((item, i) => (
               <li key={i} className="flex gap-5 items-start">
-                <span className="font-display font-black text-lime text-xl leading-none flex-shrink-0">
+                <span className="font-display font-black text-ink text-xl leading-none flex-shrink-0">
                   {String(i + 1).padStart(2, '0')}
                 </span>
                 <p className="text-ink leading-[1.6]">{item}</p>
@@ -781,7 +781,7 @@ export default function HomePage() {
               <div className="kicker-cream mb-5">About</div>
               <h2 className="font-display font-black text-h2-band uppercase text-ink mb-6 max-w-[16ch]">
                 Built by someone who has{' '}
-                <em className="not-italic text-lime">actually built it.</em>
+                <em className="not-italic text-ink underline decoration-lime decoration-2 underline-offset-4">actually built it.</em>
               </h2>
               <p className="text-[0.95rem] text-muted-cream leading-[1.8] mb-[18px]">
                 The Automation Agency is run by <strong className="text-ink font-semibold">Ben Horne</strong>,
@@ -907,7 +907,7 @@ export default function HomePage() {
               <div className="kicker-cream mb-5">Get in touch</div>
               <h2 className="font-display font-black text-h2-band uppercase text-ink mb-6 max-w-[18ch]">
                 Find out what your business could{' '}
-                <em className="not-italic text-lime">stop doing manually.</em>
+                <em className="not-italic text-ink underline decoration-lime decoration-2 underline-offset-4">stop doing manually.</em>
               </h2>
               <p className="text-[0.95rem] text-muted-cream leading-[1.75] mb-7">
                 Pick a slot below — 30 minutes, free, no commitment. We&apos;ll talk through your business
