@@ -100,8 +100,8 @@ export default function LandingPage({ data }: { data: LandingData }) {
               <a href="#book" className="btn-lime">
                 Book free discovery call
               </a>
-              <a href="/#services" className="btn-ghost">
-                See fixed-price services →
+              <a href="#book" className="btn-ghost">
+                See available times ↓
               </a>
             </div>
           </div>
