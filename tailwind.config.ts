@@ -9,12 +9,9 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        bg: '#faf9f7',
+        // `accent` is retained only because /lp + city page H1 data still embeds
+        // `text-accent`, which the H1 wrapper overrides to lime ([&_.text-accent]:text-lime).
         accent: '#1a4fa0',
-        'accent-light': '#e8eef8',
-        brand: {
-          text: '#141210',
-        },
         ink: '#131210',
         'ink-2': '#1c1a16',
         cream: '#f4ede0',
