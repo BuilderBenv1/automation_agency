@@ -117,5 +117,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'yearly',
       priority: 0.2,
     },
+    {
+      url: 'https://www.automation-agency.co.uk/cookies',
+      lastModified: now,
+      changeFrequency: 'yearly',
+      priority: 0.2,
+    },
   ]
 }
