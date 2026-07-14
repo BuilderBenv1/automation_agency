@@ -304,8 +304,10 @@ git commit -m "Homepage: 8 service cards, starter builds, reframed case studies,
 
 ## Task 4: Homepage — audit callout, how-it-works, pricing ladder, about, FAQ, contact
 
-**Files:** Modify `app/page.tsx` (restyle remaining sections to tokens; add FAQ; remove phone from contact).
+**Files:** Modify `app/page.tsx` (restyle remaining sections to tokens; add FAQ; remove phone from contact; resolve the two legacy sections left from the original homepage — Testimonial and "The Problem").
 
+- [ ] **Step 0a: Restyle + KEEP the Testimonial section** (the Dor Iluz 5-star Google review). It's genuine social proof and supports trust/GEO. Restyle to Bold Dark tokens (dark or cream to fit the alternating rhythm with its neighbours), preserve the quote, name, and star rating exactly. Do not remove it.
+- [ ] **Step 0b: REMOVE the old "The Problem" 3-card section** (the 📋/⏱️/📈 cards). Its job — problem framing in plain English — is now done better and with keywords by the new "Popular automations we build" band. Delete the section and its data. (This trims page length and removes redundancy; spec §6's final order does not include a standalone problem section.)
 - [ ] **Step 1: Restyle the Process Audit callout** (dark) — keep copy/bullets; tokens only; CTA `btn-lime` → `#contact`.
 - [ ] **Step 2: Restyle "How it works"** (cream) — keep the 4 `processSteps`; tokens only.
 - [ ] **Step 3: Restyle the pricing ladder** (dark) — keep the 4 `pricingTiers`; tokens; featured tier uses lime accent instead of navy.
@@ -319,7 +321,7 @@ git commit -m "Homepage: 8 service cards, starter builds, reframed case studies,
   6. Will the automation keep working after handover?
   Render as an accordion-style list; include the `FAQPage` JSON-LD script (same shape as `CityPage`).
 - [ ] **Step 6: Restyle the Contact section** (cream) — keep Calendly + ContactForm. **Remove the phone block and the `tel:` link entirely**; keep the email block; keep "Reply within 24 hours".
-- [ ] **Step 7: Build + full-page dev check** — scroll `/` top to bottom: alternating dark/cream rhythm holds, FAQ renders + JSON-LD present in source, zero phone numbers on the page. `npm run build` clean, `npm run lint` clean.
+- [ ] **Step 7: Build + full-page dev check** — scroll `/` top to bottom: entire homepage is Bold Dark with the alternating dark/cream rhythm holding (no leftover old-theme sections — Testimonial restyled, "The Problem" gone), FAQ renders + JSON-LD present in source, zero phone numbers on the page. `npm run build` clean. (No `npm run lint` — ESLint is not installed in this repo; the build's type-check is the gate.)
 - [ ] **Step 8: Commit**
 
 ```bash
