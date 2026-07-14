@@ -75,7 +75,7 @@ Goal: when an AI answer engine is asked about UK automation help, our content is
 
 - **Self-contained, extractable answers.** Each landing page opens with a plain-English 2–3 sentence definition of the problem and what we do about it — quotable without surrounding context.
 - **FAQPage schema on every landing page + homepage**, with questions phrased the way people actually ask them ("How much does a WhatsApp chatbot cost?", "Is n8n better than Zapier?"). Answers are direct and factual, 40–60 words.
-- **Consistent entity signals (E-E-A-T):** one canonical business name ("The Automation Agency"), consistent locality (Chesterfield, Derbyshire — **no street address**, per standing preference), consistent phone/email, named author (Ben Horne) with credentials on relevant pages. Add `sameAs` links (Google profile, client sites) to the org schema.
+- **Consistent entity signals (E-E-A-T):** one canonical business name ("The Automation Agency"), consistent locality (Chesterfield, Derbyshire — **no street address**, per standing preference), consistent email (**no public phone number**, by preference), named author (Ben Horne) with credentials on relevant pages. Add `sameAs` links (Google profile, client sites) to the org schema.
 - **Update `public/llms.txt`** to reflect the new service vocabulary, the starter pricing tiers, and the buyer-keyword framing. It currently lists the old five services and old pricing — bring it in line.
 - **Comparison/decision content** where it fits ("n8n vs Zapier vs Make — which is right for you") on the relevant landing pages — the kind of thing generative engines love to summarise.
 - **Real specifics over adjectives:** concrete metrics (65% lower messaging cost, 97% borough coverage, 6 daily data sources) read as citable facts.
@@ -103,7 +103,7 @@ New section order (dark/cream rhythm in brackets):
 9. **Pricing ladder** [dark] — keep Discovery (free) → Audit (£1,500) → Build (from £3,000) → Retainer (£1,500/mo).
 10. **About Ben** [cream] — keep the senior-engineer angle + founder photo; restyle.
 11. **FAQ** [dark] — new; 6–8 buyer questions with FAQPage schema.
-12. **Contact** [cream] — keep Calendly + ContactForm + phone/email.
+12. **Contact** [cream] — Calendly + ContactForm + email only (no phone).
 
 ### 6.1 Case study reframes
 
@@ -157,7 +157,8 @@ Because most visual identity lives in shared tokens (`tailwind.config.ts`, `glob
 
 ## 9. Architecture & files
 
-- **`app/layout.tsx`** — swap fonts to Archivo via `next/font/google`; update global metadata (title, description, keywords, OG/Twitter); extend `ProfessionalService` JSON-LD (`serviceType[]`, `sameAs`). Keep Plausible + Google Ads gtag exactly as-is.
+- **`app/layout.tsx`** — swap fonts to Archivo via `next/font/google`; update global metadata (title, description, keywords, OG/Twitter); extend `ProfessionalService` JSON-LD (`serviceType[]`, `sameAs`) and **remove `telephone`**. Keep Plausible + Google Ads gtag exactly as-is.
+- **Phone removal (site-wide):** strip `01246 923041` and all `tel:` links from `Nav`, `Footer`, `LandingPage`, `CityPage`, homepage contact, `/audit`, `/quick-audit`, and every schema block. Contact = Calendly + email + form only.
 - **`tailwind.config.ts` + `app/globals.css`** — new color tokens (near-black, cream, lime, tints), Archivo font vars, button/utility classes (`btn-lime`, marquee keyframes, outline-text helper). Retire the old serif/navy/accent-blue tokens once nothing references them.
 - **`components/ServicePage.tsx`** (new) — data-driven template for the 10 pages; `ServiceData` type; renders all sections + schema.
 - **`data/servicePages.ts`** (new) — 10 typed entries.
@@ -183,13 +184,13 @@ Because most visual identity lives in shared tokens (`tailwind.config.ts`, `glob
 6. **SEO/GEO wiring** — sitemap, llms.txt, org schema, internal links, per-page meta audit.
 7. **Verify** — build, Lighthouse/SEO check, schema validation, click every CTA.
 
-## 12. Open items for Ben (confirm on review)
+## 12. Decisions
 
-1. **Starter prices** — £350 / £750 / £750 / £1,500 / £1,500 as published commitments? (Trivial to change; they anchor the whole pricing section.)
-2. **Restyle existing `/lp` + city pages now** (§8) — yes as specced, or defer to a follow-up to ship the homepage + new pages sooner?
-3. **Phone/email** — keep `01246 923041` and `hello@automation-agency.co.uk` on the new pages? (Same as today.)
-4. **"We" vs "I"** — spec uses conversational "we". Happy with that, or lean into first-person "I" for the solo-operator warmth?
-5. **`sameAs` links for schema** — which profiles to point at (Google Business, LinkedIn, client sites)?
+1. **Starter prices** — ✅ Confirmed: £350 / £750 / £750 / £1,500 / £1,500.
+2. **Restyle existing `/lp` + city pages** (§8) — ⏳ pending (restyle now vs ship homepage + new pages first).
+3. **Contact** — ✅ **Email only.** The phone number `01246 923041` is removed site-wide: no `tel:` links, no phone in the contact section, no `telephone` in JSON-LD. Contact paths = Calendly booking, `hello@automation-agency.co.uk`, and the contact form.
+4. **Voice** — ✅ Conversational "we".
+5. **`sameAs` links** — ⏳ optional; add profile URLs (Google Business / LinkedIn / client sites) when available.
 
 ## 13. Non-goals
 
