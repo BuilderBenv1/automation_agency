@@ -20,6 +20,13 @@ export type LandingData = {
   proofs: LandingProof[]
 }
 
+const PROCESS_STEPS: [string, string, string][] = [
+  ['1', 'Free 30-min call', 'No commitment, no pitch'],
+  ['2', 'Process Audit', '£1,500 fixed · credited if you build'],
+  ['3', 'Fixed-price build', 'From £3,000 · 2–6 weeks'],
+  ['4', 'Handover & support', '30 days post-launch included'],
+]
+
 export default function LandingPage({ data }: { data: LandingData }) {
   const canonical = `https://www.automation-agency.co.uk/lp/${data.urlSlug}`
   const serviceLd = {
@@ -30,7 +37,6 @@ export default function LandingPage({ data }: { data: LandingData }) {
       '@type': 'ProfessionalService',
       name: 'The Automation Agency',
       url: 'https://www.automation-agency.co.uk',
-      telephone: '+441246923041',
       address: {
         '@type': 'PostalAddress',
         addressLocality: 'Chesterfield',
@@ -49,162 +55,160 @@ export default function LandingPage({ data }: { data: LandingData }) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceLd) }}
       />
 
-      {/* MINIMAL NAV — single conversion path */}
-      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between h-[68px] px-8 md:px-14 bg-bg border-b border-brand-border">
-        <Link href="/" className="font-serif text-[1.05rem] text-brand-text no-underline">
-          The Automation Agency
-        </Link>
-        <a
-          href="tel:+441246923041"
-          className="text-sm font-semibold text-brand-text hover:text-accent transition-colors no-underline"
-        >
-          <span className="hidden md:inline">Call </span>01246 923041
-        </a>
-      </nav>
+      {/* MINIMAL HEADER — single conversion path, no phone */}
+      <header className="fixed top-0 inset-x-0 z-50 bg-ink/95 backdrop-blur border-b border-[rgba(244,237,224,0.14)]">
+        <div className="max-w-[1180px] mx-auto px-8 md:px-14 py-4 flex items-center justify-between">
+          <Link href="/" className="font-display font-bold text-[1.05rem] text-cream no-underline">
+            The Automation Agency
+          </Link>
+          <a href="#book" className="btn-lime">
+            Book a call
+          </a>
+        </div>
+      </header>
 
       {/* HERO */}
-      <div className="max-w-[1180px] mx-auto px-8 md:px-14 pt-32 md:pt-36 pb-12 md:pb-16 grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-12 lg:gap-16 items-start bg-bg">
-        <div>
-          <div className="eyebrow mb-4">{data.eyebrow}</div>
-          <h1 className="font-serif font-normal text-display-xl text-brand-text mb-6">
-            {data.h1}
-          </h1>
-          <p className="text-[1.1rem] text-brand-text leading-[1.55] font-medium mb-5 max-w-[560px]">
-            {data.subhead}
-          </p>
-          <p className="text-[1rem] text-brand-mid leading-[1.75] mb-8 max-w-[560px]">
-            {data.intro}
-          </p>
-          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-y-2.5 gap-x-6 max-w-[560px] mb-9">
-            {data.bullets.map((b) => (
-              <li
-                key={b}
-                className="flex items-start gap-2.5 text-[0.92rem] text-brand-mid leading-snug"
-              >
-                <span className="text-accent font-semibold flex-shrink-0 mt-0.5">✓</span>
-                {b}
-              </li>
-            ))}
-          </ul>
-          <div className="flex flex-col sm:flex-row gap-3">
-            <a href="#book" className="btn-primary px-7 py-3.5 text-sm font-semibold">
-              Book Free Discovery Call
-            </a>
-            <a
-              href="tel:+441246923041"
-              className="btn-outline px-7 py-3.5 text-sm font-semibold no-underline"
-            >
-              Call 01246 923041
-            </a>
-          </div>
-        </div>
+      <div className="bg-ink text-cream">
+        <div className="max-w-[1180px] mx-auto px-8 md:px-14 pt-32 md:pt-36 pb-16 md:pb-20 grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-12 lg:gap-16 items-start">
+          <div>
+            <div className="kicker mb-6">{data.eyebrow}</div>
 
-        <RevealWrapper>
-          <div className="bg-white border border-brand-border rounded-brand p-8">
-            <div className="flex items-center gap-4 mb-6 pb-6 border-b border-brand-border">
-              <img
-                src="/founder.jpg"
-                alt="Ben Horne, founder of The Automation Agency"
-                width={72}
-                height={72}
-                className="rounded-full object-cover w-[72px] h-[72px] flex-shrink-0 bg-bg-2"
-              />
-              <div>
-                <p className="font-serif text-[1.15rem] text-brand-text leading-tight">Ben Horne</p>
-                <p className="text-[0.78rem] text-brand-muted mt-1">
-                  Founder · 10+ yrs production automation
-                </p>
-              </div>
-            </div>
-            <div className="flex gap-0.5 mb-3 text-[0.95rem]" style={{ color: '#fbbc04' }}>
-              <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-            </div>
-            <p className="font-serif font-normal text-[1.02rem] text-brand-text leading-[1.5] mb-3">
-              &ldquo;Hard working, fast responding, and very dedicated agency. Highly recommend.&rdquo;
+            <h1 className="font-display font-black text-h1-mega uppercase mb-8 [&_.text-accent]:text-lime">
+              {data.h1}
+            </h1>
+
+            <p className="text-[1.1rem] text-cream font-bold leading-[1.55] mb-5 max-w-[560px]">
+              {data.subhead}
             </p>
-            <p className="text-[0.78rem] text-brand-muted">
-              Dor Iluz · Marmadbir · Verified Google review
+            <p className="text-[1rem] text-muted-dark leading-[1.75] mb-9 max-w-[560px]">
+              {data.intro}
             </p>
-            <div className="mt-6 pt-6 border-t border-brand-border grid grid-cols-3 gap-3">
-              {data.proofs.map(({ client, metric, metricLabel }) => (
-                <div key={client}>
-                  <p className="font-serif text-[1.5rem] text-accent leading-none tracking-[-0.03em]">
-                    {metric}
+
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-y-2.5 gap-x-6 max-w-[560px] mb-10">
+              {data.bullets.map((b) => (
+                <li
+                  key={b}
+                  className="flex items-start gap-2.5 text-[0.92rem] text-muted-dark leading-snug"
+                >
+                  <span className="text-lime font-bold flex-shrink-0 mt-0.5">✓</span>
+                  {b}
+                </li>
+              ))}
+            </ul>
+
+            <div className="flex flex-wrap gap-4">
+              <a href="#book" className="btn-lime">
+                Book free discovery call
+              </a>
+              <a href="/#services" className="btn-ghost">
+                See fixed-price services →
+              </a>
+            </div>
+          </div>
+
+          <RevealWrapper>
+            <div className="bg-ink-2 rounded-2xl p-8 border border-[rgba(244,237,224,0.14)]">
+              <div className="flex items-center gap-4 mb-6 pb-6 border-b border-[rgba(244,237,224,0.14)]">
+                <img
+                  src="/founder.jpg"
+                  alt="Ben Horne, founder of The Automation Agency"
+                  width={72}
+                  height={72}
+                  className="rounded-full object-cover w-[72px] h-[72px] flex-shrink-0 bg-ink"
+                />
+                <div>
+                  <p className="font-display font-bold text-[1.05rem] text-cream leading-tight">
+                    Ben Horne
                   </p>
-                  <p className="text-[0.7rem] text-brand-muted mt-1.5 leading-tight">
-                    {metricLabel}
-                  </p>
-                  <p className="text-[0.65rem] text-brand-muted/70 mt-0.5 font-medium tracking-[0.04em] uppercase">
-                    {client}
+                  <p className="text-[0.78rem] text-muted-dark mt-1">
+                    Founder · 10+ yrs production automation
                   </p>
                 </div>
-              ))}
+              </div>
+              <div className="flex gap-0.5 mb-3 text-[0.95rem] text-lime">
+                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+              </div>
+              <p className="font-display font-bold text-[1.02rem] text-cream leading-[1.5] mb-3">
+                &ldquo;Hard working, fast responding, and very dedicated agency. Highly
+                recommend.&rdquo;
+              </p>
+              <p className="text-[0.78rem] text-muted-dark">
+                Dor Iluz · Marmadbir · Verified Google review
+              </p>
+              <div className="mt-6 pt-6 border-t border-[rgba(244,237,224,0.14)] grid grid-cols-3 gap-3">
+                {data.proofs.map(({ client, metric, metricLabel }) => (
+                  <div key={client}>
+                    <p className="font-display font-black text-lime text-[1.5rem] leading-none tracking-[-0.03em]">
+                      {metric}
+                    </p>
+                    <p className="text-[0.7rem] text-muted-dark mt-1.5 leading-tight">
+                      {metricLabel}
+                    </p>
+                    <p className="text-[0.65rem] text-muted-dark/70 mt-0.5 font-bold tracking-[0.04em] uppercase">
+                      {client}
+                    </p>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
-        </RevealWrapper>
+          </RevealWrapper>
+        </div>
       </div>
 
       {/* PROCESS BAR */}
-      <div className="bg-navy text-white py-8 px-8 md:px-14">
-        <div className="max-w-[1180px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-6">
-          {[
-            ['1', 'Free 30-min call', 'No commitment, no pitch'],
-            ['2', 'Process Audit', '£1,500 fixed · credited if you build'],
-            ['3', 'Fixed-price build', 'From £3,000 · 2–6 weeks'],
-            ['4', 'Handover & support', '30 days post-launch included'],
-          ].map(([num, title, sub]) => (
+      <div className="bg-cream text-ink py-14 px-8 md:px-14">
+        <div className="max-w-[1180px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
+          {PROCESS_STEPS.map(([num, title, sub]) => (
             <div key={title} className="flex gap-4 items-start">
-              <span className="font-serif font-normal text-[1.6rem] text-white/30 leading-none">
+              <span className="font-display font-black text-[1.6rem] text-lime leading-none">
                 {num}
               </span>
               <div>
-                <p className="font-serif text-[1rem] text-white leading-tight mb-1">{title}</p>
-                <p className="text-[0.78rem] text-white/45 leading-snug">{sub}</p>
+                <p className="font-display font-bold text-[1rem] text-ink leading-tight mb-1">
+                  {title}
+                </p>
+                <p className="text-[0.78rem] text-muted-cream leading-snug">{sub}</p>
               </div>
             </div>
           ))}
         </div>
       </div>
 
-      {/* CALENDAR */}
-      <section id="book" className="py-20 bg-bg">
-        <div className="max-w-[1180px] mx-auto px-8 md:px-14">
-          <div className="max-w-[680px] mb-10">
-            <div className="eyebrow mb-4">Book Now</div>
-            <h2 className="font-serif font-normal text-display-md text-brand-text mb-4">
-              Free 30-minute discovery call.{' '}
-              <em className="not-italic text-accent">No commitment, no pitch.</em>
-            </h2>
-            <p className="text-[0.95rem] text-brand-mid leading-[1.75]">
-              Pick a slot below. We&apos;ll talk through your business, identify the highest-ROI
-              automation opportunities, and tell you honestly whether a Process Audit is the right
-              next step. Fixed prices, no scope creep, no commitment to proceed.
-            </p>
-          </div>
+      {/* BOOKING — Calendly + contact form, no phone */}
+      <section id="book" className="bg-cream text-ink border-t border-[rgba(19,18,16,0.12)]">
+        <div className="max-w-[1180px] mx-auto px-8 md:px-14 py-20 md:py-28">
+          <RevealWrapper>
+            <div className="max-w-[680px] mb-10">
+              <div className="kicker-cream mb-5">Book now</div>
+              <h2 className="font-display font-black text-h2-band uppercase text-ink mb-6">
+                Free 30-minute discovery call.{' '}
+                <span className="text-muted-cream">No commitment, no pitch.</span>
+              </h2>
+              <p className="text-[0.95rem] text-muted-cream leading-[1.75]">
+                Pick a slot below. We&apos;ll talk through your business, identify the
+                highest-ROI automation opportunities, and tell you honestly whether a Process
+                Audit is the right next step. Fixed prices, no scope creep, no commitment to
+                proceed.
+              </p>
+            </div>
+          </RevealWrapper>
+
           <RevealWrapper>
             <CalendlyEmbed />
           </RevealWrapper>
 
-          <div className="mt-16 pt-16 border-t border-brand-border">
+          <div className="mt-16 pt-16 border-t border-[rgba(19,18,16,0.12)]">
             <div className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-12 items-start">
               <div>
-                <p className="text-[0.7rem] font-semibold tracking-[0.12em] uppercase text-brand-muted mb-4">
+                <p className="text-[0.7rem] font-bold tracking-[0.12em] uppercase text-muted-cream mb-4">
                   Or send a message
                 </p>
-                <h3 className="font-serif font-normal text-[1.6rem] text-brand-text mb-4 leading-tight">
-                  Prefer email?{' '}
-                  <em className="not-italic text-accent">Drop us a note instead.</em>
+                <h3 className="font-display font-black text-[1.6rem] uppercase text-ink mb-4 leading-tight">
+                  Prefer email? <span className="text-muted-cream">Drop us a note instead.</span>
                 </h3>
-                <p className="text-[0.92rem] text-brand-mid leading-[1.75] mb-6">
-                  Walk us through what your team is doing manually. We&apos;ll reply within 24 hours
-                  with an honest read on whether it&apos;s a fit and what it would cost.
-                </p>
-                <p className="text-[0.85rem] text-brand-muted leading-[1.7]">
-                  Or call directly:{' '}
-                  <a href="tel:+441246923041" className="text-accent hover:underline">
-                    01246 923041
-                  </a>{' '}
-                  · weekdays 9–5
+                <p className="text-[0.92rem] text-muted-cream leading-[1.75] mb-6">
+                  Walk us through what your team is doing manually. We&apos;ll reply within 24
+                  hours with an honest read on whether it&apos;s a fit and what it would cost.
                 </p>
               </div>
               <ContactForm />
@@ -214,19 +218,28 @@ export default function LandingPage({ data }: { data: LandingData }) {
       </section>
 
       {/* MINIMAL FOOTER */}
-      <footer className="py-8 px-8 md:px-14 border-t border-brand-border bg-bg">
-        <div className="max-w-[1180px] mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
-          <p className="text-[0.78rem] text-brand-muted">
+      <footer className="bg-ink text-cream py-10 px-8 md:px-14">
+        <div className="max-w-[1180px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-[0.78rem] text-muted-dark">
             © 2026 The Automation Agency · Chesterfield, Derbyshire, UK
           </p>
-          <div className="flex gap-6 text-[0.78rem]">
-            <Link href="/" className="text-brand-muted hover:text-brand-text no-underline">
+          <div className="flex gap-6 text-[0.8rem]">
+            <Link
+              href="/"
+              className="font-display font-bold text-cream hover:text-lime no-underline transition-colors"
+            >
               Main site
             </Link>
-            <Link href="/privacy" className="text-brand-muted hover:text-brand-text no-underline">
+            <Link
+              href="/privacy"
+              className="font-display font-bold text-muted-dark hover:text-cream no-underline transition-colors"
+            >
               Privacy
             </Link>
-            <Link href="/terms" className="text-brand-muted hover:text-brand-text no-underline">
+            <Link
+              href="/terms"
+              className="font-display font-bold text-muted-dark hover:text-cream no-underline transition-colors"
+            >
               Terms
             </Link>
           </div>
