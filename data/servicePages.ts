@@ -234,4 +234,178 @@ export const servicePages: Record<string, ServiceData> = {
       { slug: '/stripe-payment-integration', label: 'Stripe & payments' },
     ],
   },
+
+  'ai-automation-agency': {
+    slug: 'ai-automation-agency',
+    metaTitle: 'AI Automation Agency UK | AI Agents & Workflows Built Properly',
+    metaDescription:
+      'UK AI automation agency building AI agents, chatbots, workflows and data pipelines that actually work, with a human in the loop where it matters. Fixed prices from £750.',
+    kicker: 'AI automation agency · UK',
+    h1Lead: 'AI automation,',
+    h1Accent: 'end to end.',
+    h1Outline: 'Agents, workflows, data — one team.',
+    intro:
+      "We're a UK AI automation agency that builds AI agents, automated workflows and connected data pipelines for growing businesses — not one at a time, but as one system that talks to your CRM, your inbox, your spreadsheets and your customers. An \"AI automation agency\" should mean more than a chatbot bolted onto a website; it means using AI where it actually saves time, and plain, deterministic automation everywhere else, so nothing is held together by hope.",
+    problem:
+      "Most businesses end up hiring separately for the chatbot, the CRM integration and the reporting dashboard — three different freelancers, three half-finished systems that don't talk to each other, and nobody who understands the whole picture once something breaks. On top of that, \"AI\" gets bolted onto every sales pitch going right now, and a lot of what is sold as an AI agent turns out to be a chatbot wrapper with no real engineering behind it. We build the whole stack ourselves — workflows, agents, integrations and the plain code in between — so there is one team who understands how it all fits together.",
+    workflows: [
+      "New enquiry arrives by form, email or WhatsApp → an AI agent reads it, checks your CRM, and either replies or flags it for a human",
+      'Nightly data pipeline → pulls figures from several sources, runs them through your scoring or prediction logic, and refreshes a dashboard before anyone is awake',
+      'Public or partner websites → monitored on a schedule, with an alert the moment something relevant changes',
+      'CRM record updated → triggers whatever needs to happen elsewhere: a Slack message, a WhatsApp confirmation, an invoice, a row in a sheet',
+      "Multi-tenant platform → each customer's workflows, permissions and messaging kept separate but running on one shared system underneath",
+      'Recurring manual report → replaced with a scheduled job that pulls the numbers and sends itself',
+    ],
+    from: '£750',
+    faqs: [
+      {
+        q: 'What does "AI agent" actually mean?',
+        a: "It means software that can look at unstructured information — an email, a message, a scraped web page — decide what it means, and take an action, rather than just following a fixed if-this-then-that rule. In practice that's usually a language model doing the reading and deciding, wired into ordinary code and APIs that do the actual work: updating a CRM, sending a message, writing to a database. It's less mysterious than the marketing suggests, and more useful once you see it running on your own data.",
+      },
+      {
+        q: 'Is it safe to let AI make decisions in our business?',
+        a: "We build with a human in the loop by default — the agent handles the routine cases and hands over anything it isn't confident about, with the full context attached, rather than guessing. For anything touching money, contracts or a customer commitment, we add explicit checks and an approval step rather than letting the AI act unsupervised. You decide where that line sits; we build to it.",
+      },
+      {
+        q: 'How much does AI automation cost?',
+        a: 'A single AI-powered workflow or agent — reading messages and taking one clear action — starts at £750, fixed price. Bigger builds spanning multiple systems (CRM, WhatsApp, dashboards, data pipelines) are quoted after a scoping call, always as one fixed number agreed before we start, never billed hourly.',
+      },
+      {
+        q: "What's the difference between this and hiring separate agencies for the chatbot, the CRM and the reporting?",
+        a: "Mainly that one team builds and understands the whole thing. When your chatbot, your CRM integration and your reporting dashboard are each built by a different freelancer, nobody is accountable when they stop talking to each other. We design them as one system from the start, which is also why it usually costs less than three separate projects.",
+      },
+      {
+        q: 'Do you only use AI, or plain automation too?',
+        a: "Both, and usually mostly the latter. AI is genuinely good at reading and understanding messy, unstructured information; deterministic automation is faster, cheaper and more predictable for everything else. We use AI where it earns its place and skip it everywhere it would just add cost and unpredictability for no real benefit.",
+      },
+    ],
+    proof: {
+      client: 'Marmadbir, Punthub & PlusRooms',
+      url: 'https://www.automation-agency.co.uk/#work',
+      line: "Three different sectors — field-service dispatch, predictive racing analytics, property planning data — each running on a system we designed, built and still support end to end. Some of it is classic automation, some of it (Punthub's prediction models) is genuinely AI; we use whichever one actually solves the problem, not whichever sounds better in a pitch.",
+      metric: '3',
+      metricLabel: 'production systems shipped, three different industries',
+    },
+    related: [
+      { slug: '/n8n-automation-agency', label: 'n8n automation' },
+      { slug: '/ai-chatbot-development', label: 'AI chatbot development' },
+      { slug: '/crm-automation', label: 'CRM automation' },
+    ],
+  },
+
+  'crm-automation': {
+    slug: 'crm-automation',
+    metaTitle: 'CRM Automation UK | HubSpot, Pipedrive & Airtable Workflows',
+    metaDescription:
+      'UK CRM automation agency. We connect HubSpot, Pipedrive, Airtable and other CRMs to your forms, inbox and invoicing so records update themselves. Fixed prices from £350.',
+    kicker: 'CRM automation · UK',
+    h1Lead: 'Your CRM,',
+    h1Accent: 'finally up to date.',
+    h1Outline: 'Automatically, not by hand.',
+    intro:
+      "We build CRM automation for UK businesses using HubSpot, Pipedrive, Airtable and similar tools — connecting your CRM to your forms, inbox, WhatsApp and invoicing so records update themselves the moment something happens. CRM automation just means the lead, deal or customer record gets created, updated and moved along the pipeline without someone doing it by hand.",
+    problem:
+      "A CRM is only useful if it's actually kept up to date, and in most businesses it isn't — leads sit in an inbox for two days before anyone adds them, deal stages get forgotten, and half the team works from memory instead of the record. That isn't really a CRM problem, it's a data-entry problem, and it's exactly what automation removes: the record updates the moment the trigger happens, not whenever someone remembers to open the tab.",
+    workflows: [
+      'New website enquiry or form submission → lead created in your CRM automatically, tagged with its source and assigned to the right person',
+      'Deal moves to "won" → invoice generated, onboarding tasks created, welcome email sent, with nobody having to remember the steps',
+      'WhatsApp or email reply from a customer → logged against their CRM record as a note, so the whole history stays in one place',
+      'Quote sent but not accepted after a set number of days → an automatic reminder, to the salesperson or the customer',
+      'Two systems, one customer → your CRM stays in sync with your invoicing or booking tool, so nobody re-types the same details twice',
+      'Lead scoring based on behaviour or form answers → the CRM sorts the hottest leads to the top automatically',
+    ],
+    from: '£350',
+    faqs: [
+      {
+        q: 'Which CRMs do you work with?',
+        a: "Most of them — HubSpot, Pipedrive and Airtable come up the most, but we've also automated Zoho, Close, and CRMs built in-house on a spreadsheet or Airtable base. If it has an API, and nearly everything does, we can connect it; if you haven't picked a CRM yet, we'll help you choose one that actually fits rather than the one with the biggest marketing budget.",
+      },
+      {
+        q: 'How much does CRM automation cost?',
+        a: 'A single automation — say, new enquiries creating CRM records automatically — starts at £350, fixed price. Multi-step automations spanning your CRM, invoicing and messaging are quoted after a short call, always as one fixed number agreed before we start.',
+      },
+      {
+        q: 'Do we need to switch CRM to get this?',
+        a: "Almost never. We build around whatever you already use — ripping out a CRM your team already knows is usually more disruptive than the automation is worth. The exception is if what you have genuinely can't do the job (no API, no way to trigger anything), in which case we'll say so honestly before you spend a penny.",
+      },
+      {
+        q: 'Can you migrate our data into a new CRM?',
+        a: "Yes — cleaning up and importing existing records is often the first job, especially if you're moving off spreadsheets or a CRM that's been badly set up over the years. We'll flag duplicates and dead data on the way through, rather than just copying the mess into a shinier system.",
+      },
+      {
+        q: 'How long does CRM automation take to set up?',
+        a: 'A single automation, like new-enquiry-to-CRM-record, usually takes a few days from the scoping call to going live. Bigger builds connecting several systems typically take one to three weeks, and the timeline is agreed upfront as part of the fixed quote.',
+      },
+    ],
+    proof: {
+      client: 'Marmadbir',
+      url: 'https://www.marmadbir.com/',
+      line: "Every job, tenant and worker at Marmadbir lives in one system that updates itself — no dispatcher opening a spreadsheet to log who did what. That's the same job CRM automation does for a sales or service team: the record updates the moment something happens, so nobody has to remember to do it by hand.",
+      metric: '< 5 min',
+      metricLabel: "to bring a new tenant's records fully live, no manual setup",
+    },
+    related: [
+      { slug: '/n8n-automation-agency', label: 'n8n automation' },
+      { slug: '/google-sheets-automation', label: 'Google Sheets automation' },
+      { slug: '/ai-automation-agency', label: 'AI agents & workflows' },
+    ],
+  },
+
+  'google-sheets-automation': {
+    slug: 'google-sheets-automation',
+    metaTitle: 'Google Sheets Automation UK | Scheduled, Connected Spreadsheets',
+    metaDescription:
+      'UK Google Sheets automation agency. We connect your spreadsheets to forms, APIs and other systems on a schedule, so the sheet updates itself. Fixed prices from £350.',
+    kicker: 'Google Sheets automation · UK',
+    h1Lead: 'Google Sheets,',
+    h1Accent: 'that update themselves.',
+    h1Outline: 'No copy-paste, no missed rows.',
+    intro:
+      'We build Google Sheets automation for UK businesses that want to keep using spreadsheets, just without updating them by hand. That means pulling data in from your forms, inbox, CRM or an external API on a schedule, writing it into the right sheet and tab automatically, and triggering whatever needs to happen next once it lands.',
+    problem:
+      'Spreadsheets are genuinely good tools — the problem is almost never the sheet, it\'s the person copying numbers into it every morning, or forgetting to on the one day it mattered. That manual step is where the mistakes creep in: a row skipped, a formula overwritten, an out-of-date version emailed around. Automating the sheet itself, rather than replacing it, usually gets a business most of the way to "having a database" without a migration project.',
+    workflows: [
+      'Form or website enquiry → new row added to the right sheet automatically, with its source and timestamp',
+      'Scheduled job → pulls data from an API or another system each morning or evening and writes it straight into the sheet',
+      'Row added or updated → triggers an email, a Slack message or a CRM update, so the sheet drives everything downstream',
+      'Several data sources → merged and reconciled into one sheet overnight, so nobody copies figures between tabs by hand',
+      'Sheet reaches a threshold — stock low, budget spent, a date passed → an automatic alert before it becomes a problem',
+      "Recurring report → built straight from the sheet's data and emailed out on a schedule, without anyone opening it",
+    ],
+    from: '£350',
+    faqs: [
+      {
+        q: 'Should we use Google Sheets or move to a proper database?',
+        a: "Sheets are fine for most businesses well past the point people assume — you can automate the writing and reading, add validation, and connect it to other tools, and it holds up for a surprisingly long time. The tipping point is usually volume (thousands of rows updating constantly) or several people editing at once and tripping over each other; that's when a proper database like Supabase or Postgres starts paying for itself. We'll tell you honestly which side of that line you're on.",
+      },
+      {
+        q: 'Can Google Sheets automation run on a schedule?',
+        a: 'Yes — most of what we build runs on a timer, whether that\'s every few minutes, once a night, or first thing every morning, so the sheet is current before anyone opens it. Nobody has to remember to run anything.',
+      },
+      {
+        q: 'How much does Google Sheets automation cost?',
+        a: 'A single automation — pulling data into a sheet on a schedule, or writing a new row when something happens — starts at £350, fixed price. Pipelines pulling from several sources or feeding a dashboard are quoted after a short call, always fixed.',
+      },
+      {
+        q: 'Will this break our existing formulas or formatting?',
+        a: "No — we write into the sheet the way a careful person would, respecting the tabs, formulas and formatting you already have rather than overwriting the whole thing. If a formula depends on a cell we're updating, we test it before going live so nothing quietly stops calculating.",
+      },
+      {
+        q: 'Can several sheets feed into one dashboard?',
+        a: "Yes — a lot of what we build reconciles several sheets or external sources into one clean view, so you get one place to look rather than six tabs open at once. That's usually the point where it starts to feel like a database, without the disruption of migrating to one.",
+      },
+    ],
+    proof: {
+      client: 'Punthub',
+      url: 'https://punthub.co.uk/',
+      line: "Punthub's prediction pipeline puts Google Sheets right at the centre of the data flow: Python pulls in 6 live data sources every evening, runs them through 7 prediction models, reconciles everything across 21 automated jobs, and writes the results straight into the sheet, no one touching it by hand, ready before Supabase and the live site sync overnight.",
+      metric: '21',
+      metricLabel: 'reconciliation jobs run automatically into the sheet, every night',
+    },
+    related: [
+      { slug: '/n8n-automation-agency', label: 'n8n automation' },
+      { slug: '/crm-automation', label: 'CRM automation' },
+      { slug: '/ai-automation-agency', label: 'AI agents & workflows' },
+    ],
+  },
 }
