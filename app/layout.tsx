@@ -1,22 +1,14 @@
 import type { Metadata } from 'next'
-import { Instrument_Sans, Instrument_Serif } from 'next/font/google'
+import { Archivo } from 'next/font/google'
 import Script from 'next/script'
 import './globals.css'
 
 const GOOGLE_ADS_ID = 'AW-18121615285'
 
-const instrumentSans = Instrument_Sans({
+const archivo = Archivo({
   subsets: ['latin'],
-  weight: ['400', '500', '600'],
-  variable: '--font-instrument-sans',
-  display: 'swap',
-})
-
-const instrumentSerif = Instrument_Serif({
-  subsets: ['latin'],
-  weight: ['400'],
-  style: ['normal', 'italic'],
-  variable: '--font-instrument-serif',
+  weight: ['400', '500', '600', '700', '800', '900'],
+  variable: '--font-archivo',
   display: 'swap',
 })
 
@@ -59,8 +51,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      className={`${instrumentSans.variable} ${instrumentSerif.variable}`}
-      style={{ colorScheme: 'light' }}
+      className={archivo.variable}
+      style={{ colorScheme: 'dark' }}
     >
       <head>
         {/* Plausible Analytics — cookieless, no consent needed */}

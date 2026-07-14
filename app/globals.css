@@ -9,11 +9,11 @@
 
   html {
     scroll-behavior: smooth;
-    background: #faf9f7;
+    background: #131210;
   }
 
   body {
-    background: #faf9f7 !important;
+    background: #131210 !important;
   }
 }
 
@@ -42,6 +42,22 @@
 
   .eyebrow-light::before {
     @apply bg-white/20;
+  }
+
+  .font-display { font-family: var(--font-archivo), system-ui, sans-serif; }
+
+  .kicker {
+    @apply text-[0.72rem] font-bold tracking-[0.16em] uppercase text-lime;
+  }
+  .kicker-cream { @apply text-[0.72rem] font-bold tracking-[0.16em] uppercase; color:#9a7b1e; }
+
+  .outline-text {
+    -webkit-text-stroke: 1.4px #f4ede0;
+    color: transparent;
+  }
+  .outline-text-ink {
+    -webkit-text-stroke: 1.4px #131210;
+    color: transparent;
   }
 }
 
@@ -121,3 +137,33 @@
   cursor: pointer;
 }
 .btn-white:hover { background: #f0efec; }
+
+.btn-lime {
+  display:inline-flex; align-items:center; gap:.5rem;
+  background:#c8f04a; color:#161500; font-family:var(--font-archivo),system-ui,sans-serif;
+  font-weight:700; border-radius:9px; padding:1rem 1.7rem; font-size:.92rem;
+  text-decoration:none; border:none; cursor:pointer; transition:transform .2s, background .2s;
+}
+.btn-lime:hover { background:#d6fb5f; transform:translateY(-2px); }
+
+.btn-ghost {
+  display:inline-flex; align-items:center; gap:.5rem;
+  background:transparent; color:#f4ede0; border:1px solid rgba(244,237,224,.14);
+  font-family:var(--font-archivo),system-ui,sans-serif; font-weight:700; border-radius:9px;
+  padding:1rem 1.7rem; font-size:.92rem; text-decoration:none; cursor:pointer; transition:border-color .2s;
+}
+.btn-ghost:hover { border-color:#f4ede0; }
+
+.btn-dark {
+  display:inline-flex; align-items:center; gap:.5rem;
+  background:#131210; color:#f4ede0; font-family:var(--font-archivo),system-ui,sans-serif;
+  font-weight:700; border-radius:9px; padding:1rem 1.7rem; font-size:.92rem;
+  text-decoration:none; border:none; cursor:pointer; transition:transform .2s;
+}
+.btn-dark:hover { transform:translateY(-2px); }
+
+.marquee-track {
+  display:inline-flex; gap:2rem; white-space:nowrap;
+  animation:marquee 26s linear infinite;
+}
+@keyframes marquee { from { transform:translateX(0);} to { transform:translateX(-50%);} }
