@@ -250,12 +250,54 @@ const starterBuilds = [
   },
 ]
 
+const faqs = [
+  {
+    q: 'What kinds of automation do you build?',
+    a: "Mostly the day-to-day admin your team does by hand: n8n, Zapier and Make workflows, WhatsApp and website chatbots, CRM and spreadsheet syncing, AI agents that read and sort your inbox, data pipelines, and the odd custom dashboard or internal tool when no-code can't quite get there.",
+  },
+  {
+    q: 'Which tools do you use — n8n, Zapier, Make or custom code?',
+    a: "Whichever fits the job. n8n and Make handle most workflow automation at a sensible cost. Zapier suits simple, low-volume connections. When something needs real logic — AI decision-making, a bespoke dashboard, tricky data — we write custom Python or Next.js instead. We'll always recommend the cheapest option that holds up long-term.",
+  },
+  {
+    q: 'How much does a typical automation cost?',
+    a: "Simple workflows connecting two or three tools start at £350. AI workflows and chatbots usually run £750. Bigger builds — dashboards, multi-step systems, custom web apps — start around £1,500 and scale from there depending on scope. Everything is quoted as a fixed price before we start, so there's no surprise on the invoice.",
+  },
+  {
+    q: 'Do you work with businesses outside Derbyshire?',
+    a: "Yes — most of our clients aren't local. We're based in Chesterfield, Derbyshire, but discovery calls, audits and builds all happen remotely by default, over video call, Slack or email. In-person kickoffs are available across Derbyshire and the wider East Midlands when that's genuinely useful, but it's never required.",
+  },
+  {
+    q: "What if I'm not sure what to automate?",
+    a: "That's exactly what the free discovery call and Process Audit are for. We'll ask about your day-to-day, spot where time's being lost, and tell you honestly what's worth automating and what isn't. There's no pressure to book a build afterwards — sometimes the honest answer is to leave it as it is.",
+  },
+  {
+    q: 'Will the automation keep working after handover?',
+    a: "Yes. We test everything thoroughly before handover and give you full documentation plus a walkthrough with your team, so everyone knows how it works and why. Every build includes 30 days of post-launch support, and there's an optional monthly retainer if you'd rather we kept monitoring, fixing and expanding things ourselves.",
+  },
+]
+
 /* ─────────────────────────── PAGE ─────────────────────────── */
 
 export default function HomePage() {
+  const faqLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map(({ q, a }) => ({
+      '@type': 'Question',
+      name: q,
+      acceptedAnswer: { '@type': 'Answer', text: a },
+    })),
+  }
+
   return (
     <>
       <Nav />
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }}
+      />
 
       {/* HERO */}
       <div className="bg-ink text-cream">
@@ -352,65 +394,31 @@ export default function HomePage() {
       </div>
 
       {/* TESTIMONIAL */}
-      <section className="py-20 border-b border-brand-border bg-bg">
-        <div className="max-w-[1280px] mx-auto px-14">
+      <section className="bg-ink text-cream">
+        <div className="max-w-[1180px] mx-auto px-8 md:px-14 py-20 md:py-28">
           <RevealWrapper>
-            <div className="max-w-[880px] mx-auto text-center">
+            <div className="max-w-[820px] mx-auto text-center">
               <div
-                className="flex justify-center gap-1 mb-7 text-[1.1rem]"
-                style={{ color: '#fbbc04' }}
+                className="flex justify-center gap-1 mb-7 text-[1.1rem] text-lime"
                 aria-label="5 out of 5 stars"
               >
                 <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
               </div>
-              <blockquote className="font-serif font-normal text-[clamp(1.35rem,2.4vw,2rem)] text-brand-text leading-[1.4] tracking-[-0.01em] mb-9">
+              <blockquote className="font-display font-medium text-[clamp(1.25rem,2.2vw,1.9rem)] text-cream leading-[1.4] tracking-[-0.01em] mb-9">
                 &ldquo;I work with them for a while now, they are nothing less than hard working,
                 fast responding, and very dedicated agency. Highly recommend.&rdquo;
               </blockquote>
-              <div className="flex items-center justify-center gap-4 pt-6 border-t border-brand-border max-w-[440px] mx-auto">
-                <div className="w-12 h-12 rounded-full bg-navy text-white flex items-center justify-center font-serif text-[1.05rem] flex-shrink-0">
+              <div className="flex items-center justify-center gap-4 pt-6 border-t border-[rgba(244,237,224,0.14)] max-w-[440px] mx-auto">
+                <div className="w-12 h-12 rounded-full bg-lime text-ink flex items-center justify-center font-display font-bold text-[1.05rem] flex-shrink-0">
                   DI
                 </div>
                 <div className="text-left">
-                  <p className="text-[0.95rem] font-semibold text-brand-text">Dor Iluz</p>
-                  <p className="text-[0.78rem] text-brand-muted">
+                  <p className="text-[0.95rem] font-semibold text-cream">Dor Iluz</p>
+                  <p className="text-[0.78rem] text-muted-dark">
                     Marmadbir · Verified Google review · Local Guide, 27 reviews
                   </p>
                 </div>
               </div>
-            </div>
-          </RevealWrapper>
-        </div>
-      </section>
-
-      {/* THE PROBLEM */}
-      <section className="py-20 border-b border-brand-border bg-bg">
-        <div className="max-w-[1280px] mx-auto px-14">
-          <RevealWrapper>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-brand-border">
-              {[
-                {
-                  icon: '📋',
-                  title: "Your team copies data between systems that don't talk",
-                  body: "CRM, spreadsheet, email, WhatsApp, ERP. Someone is manually bridging the gaps every single day. That's salary spent on data entry.",
-                },
-                {
-                  icon: '⏱️',
-                  title: 'Reporting takes hours that should take minutes',
-                  body: 'Pulling numbers from four different places, formatting a spreadsheet, sending it manually — every week. Automatable in a day.',
-                },
-                {
-                  icon: '📈',
-                  title: "You're scaling but can't hire fast enough",
-                  body: 'Headcount is expensive and slow to ramp. The right automation means your existing team handles two or three times the volume without burning out.',
-                },
-              ].map(({ icon, title, body }) => (
-                <div key={title} className="bg-bg p-10">
-                  <div className="text-[1.4rem] mb-4">{icon}</div>
-                  <h3 className="font-serif font-normal text-[1.2rem] mb-2.5 tracking-[-0.01em]">{title}</h3>
-                  <p className="text-[0.875rem] text-brand-muted leading-[1.75]">{body}</p>
-                </div>
-              ))}
             </div>
           </RevealWrapper>
         </div>
@@ -485,26 +493,26 @@ export default function HomePage() {
       </section>
 
       {/* PROCESS AUDIT CALLOUT */}
-      <section id="audit" className="py-20 bg-accent-light border-t border-b" style={{ borderColor: '#c5d5ee' }}>
-        <div className="max-w-[1280px] mx-auto px-14">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+      <section id="audit" className="bg-ink text-cream">
+        <div className="max-w-[1180px] mx-auto px-8 md:px-14 py-20 md:py-28">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center">
             <RevealWrapper>
-              <div className="eyebrow mb-4">First Paid Engagement</div>
-              <h2 className="font-serif font-normal text-display-md text-brand-text mb-5">
+              <div className="kicker mb-5">First paid engagement</div>
+              <h2 className="font-display font-black text-h2-band uppercase text-cream mb-5">
                 The Process Audit:{' '}
-                <em className="not-italic text-accent">
+                <span className="text-lime">
                   know exactly what to automate before spending a pound on building it.
-                </em>
+                </span>
               </h2>
-              <p className="text-[0.95rem] text-brand-mid leading-[1.75] mb-4">
+              <p className="text-[0.95rem] text-muted-dark leading-[1.75] mb-4">
                 A discovery call shows you what&apos;s possible. A Process Audit tells you exactly what to
                 build, in what order, and what return to expect — in writing.
               </p>
-              <p className="text-[0.95rem] text-brand-mid leading-[1.75] mb-6">
+              <p className="text-[0.95rem] text-muted-dark leading-[1.75] mb-6">
                 Over one to two weeks we map your core workflows, identify the automation opportunities with
                 the highest ROI, and deliver a written report you can hand to any developer — including us.
               </p>
-              <ul className="mb-8" style={{ borderTop: '1px solid #c5d5ee' }}>
+              <ul className="mb-8 border-t border-[rgba(244,237,224,0.14)]">
                 {[
                   'Full process map of your current workflows',
                   'Prioritised automation opportunities with effort and ROI estimates',
@@ -514,32 +522,31 @@ export default function HomePage() {
                 ].map((item) => (
                   <li
                     key={item}
-                    className="flex items-start gap-2.5 py-2.5 text-[0.9rem] text-brand-mid"
-                    style={{ borderBottom: '1px solid #c5d5ee' }}
+                    className="flex items-start gap-2.5 py-2.5 text-[0.9rem] text-muted-dark border-b border-[rgba(244,237,224,0.14)]"
                   >
-                    <span className="text-accent font-semibold flex-shrink-0">✓</span>
+                    <span className="text-lime font-semibold flex-shrink-0">✓</span>
                     {item}
                   </li>
                 ))}
               </ul>
-              <a href="#contact" className="btn-accent px-7 py-3 text-[0.9rem] font-semibold inline-flex">
+              <a href="#contact" className="btn-lime">
                 Get Started — Book a Discovery Call
               </a>
             </RevealWrapper>
 
             <RevealWrapper>
-              <div className="bg-navy rounded-[6px] p-12 text-white relative overflow-hidden">
+              <div className="bg-ink-2 rounded-2xl p-8 md:p-12 relative overflow-hidden">
                 <div
                   className="absolute -top-16 -right-16 w-52 h-52 rounded-full pointer-events-none"
-                  style={{ background: 'radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 70%)' }}
+                  style={{ background: 'radial-gradient(circle, rgba(200,240,74,0.1) 0%, transparent 70%)' }}
                 />
-                <p className="text-[0.72rem] font-semibold tracking-[0.12em] uppercase text-white/35 mb-5">
+                <p className="text-[0.72rem] font-bold tracking-[0.12em] uppercase text-muted-dark mb-5">
                   Process Audit
                 </p>
-                <p className="font-serif font-normal text-[3.6rem] text-white tracking-[-0.04em] leading-none mb-2">
+                <p className="font-display font-black text-[3rem] md:text-[3.6rem] text-cream tracking-[-0.03em] leading-none mb-2">
                   <span className="text-[1.2rem] font-sans font-normal">£</span>1,500
                 </p>
-                <p className="text-[0.85rem] text-white/45 mb-8 pb-8 leading-relaxed" style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+                <p className="text-[0.85rem] text-muted-dark mb-8 pb-8 leading-relaxed border-b border-[rgba(244,237,224,0.14)]">
                   Fixed fee. Credited in full against your build if you proceed within 60 days. If you
                   don&apos;t, you keep the report — no strings attached.
                 </p>
@@ -553,15 +560,14 @@ export default function HomePage() {
                   ].map((item) => (
                     <li
                       key={item}
-                      className="flex items-start gap-2.5 py-2.5 text-[0.875rem] text-white/60"
-                      style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}
+                      className="flex items-start gap-2.5 py-2.5 text-[0.875rem] text-muted-dark border-b border-[rgba(244,237,224,0.1)]"
                     >
-                      <span className="text-white/35 flex-shrink-0">✓</span>
+                      <span className="text-lime flex-shrink-0">✓</span>
                       {item}
                     </li>
                   ))}
                 </ul>
-                <a href="#contact" className="btn-white w-full justify-center py-3 text-sm font-semibold">
+                <a href="#contact" className="btn-lime w-full justify-center">
                   Book a Discovery Call First
                 </a>
               </div>
@@ -571,37 +577,42 @@ export default function HomePage() {
       </section>
 
       {/* PROCESS */}
-      <section id="process" className="py-28 bg-navy">
-        <div className="max-w-[1280px] mx-auto px-14">
-          <div className="flex justify-between items-end mb-[72px] gap-12 flex-col md:flex-row">
+      <section id="process" className="bg-cream text-ink">
+        <div className="max-w-[1180px] mx-auto px-8 md:px-14 py-20 md:py-28">
+          <div className="flex justify-between items-end mb-16 gap-12 flex-col md:flex-row">
             <div>
-              <div className="eyebrow eyebrow-light mb-4">How It Works</div>
-              <h2 className="font-serif font-normal text-display-lg text-white">
+              <div className="kicker-cream mb-5">How it works</div>
+              <h2 className="font-display font-black text-h2-band uppercase text-ink">
                 From first call to live
                 <br />
-                <span className="text-white/40 italic">system in weeks.</span>
+                <span className="text-muted-cream">system in weeks.</span>
               </h2>
             </div>
-            <p className="text-base text-white/40 leading-[1.75] max-w-[500px]">
+            <p className="text-[0.95rem] text-muted-cream leading-[1.75] max-w-[440px]">
               A clear, predictable process. No hidden phases, no scope creep. You know exactly what&apos;s
               happening — and what it costs — at every stage.
             </p>
           </div>
 
           <RevealWrapper>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4" style={{ border: '1px solid rgba(255,255,255,0.08)' }}>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 border border-[rgba(19,18,16,0.12)]">
               {processSteps.map(({ num, title, body, tag }, i) => (
                 <div
                   key={num}
-                  className="p-12"
-                  style={{ borderRight: i < 3 ? '1px solid rgba(255,255,255,0.08)' : 'none' }}
+                  className="p-10 md:p-12"
+                  style={{ borderRight: i < 3 ? '1px solid rgba(19,18,16,0.12)' : 'none' }}
                 >
-                  <p className="font-serif font-normal text-[3rem] text-white/7 leading-none mb-6 tracking-[-0.04em]">
+                  <p
+                    className="font-display font-black text-[3rem] leading-none mb-6 tracking-[-0.03em]"
+                    style={{ color: 'rgba(19,18,16,0.08)' }}
+                  >
                     {num}
                   </p>
-                  <h4 className="font-serif font-normal text-[1.2rem] text-white mb-3">{title}</h4>
-                  <p className="text-[0.85rem] text-white/42 leading-[1.75] mb-4">{body}</p>
-                  <span className="text-[0.72rem] font-semibold text-white/22 tracking-[0.08em]">{tag}</span>
+                  <h4 className="font-display font-bold text-[1.1rem] text-ink mb-3">{title}</h4>
+                  <p className="text-[0.85rem] text-muted-cream leading-[1.75] mb-4">{body}</p>
+                  <span className="text-[0.7rem] font-bold text-muted-cream/70 tracking-[0.08em] uppercase">
+                    {tag}
+                  </span>
                 </div>
               ))}
             </div>
@@ -687,68 +698,71 @@ export default function HomePage() {
       </section>
 
       {/* PRICING */}
-      <section id="pricing" className="py-28 bg-bg-2 border-t border-b border-brand-border">
-        <div className="max-w-[1280px] mx-auto px-14">
+      <section id="pricing" className="bg-ink text-cream">
+        <div className="max-w-[1180px] mx-auto px-8 md:px-14 py-20 md:py-28">
           <div className="flex justify-between items-end mb-16 gap-12 flex-col md:flex-row">
             <div>
-              <div className="eyebrow mb-4">Pricing</div>
-              <h2 className="font-serif font-normal text-display-lg text-brand-text">
+              <div className="kicker mb-5">Pricing</div>
+              <h2 className="font-display font-black text-h2-band uppercase text-cream">
                 Fixed prices.
                 <br />
                 No surprises.
               </h2>
             </div>
-            <p className="text-base text-brand-mid leading-[1.75] max-w-[500px]">
+            <p className="text-[0.95rem] text-muted-dark leading-[1.75] max-w-[440px]">
               Every engagement is agreed upfront. You know exactly what you&apos;re paying before a line of
               code is written.
             </p>
           </div>
 
           <RevealWrapper>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-brand-border">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px" style={{ background: 'rgba(244,237,224,0.14)' }}>
               {pricingTiers.map(({ tier, name, amount, cadence, desc, features, cta, ctaStyle, featured, note }) => (
-                <div key={name} className={`p-10 ${featured ? 'bg-navy' : 'bg-bg'}`}>
-                  <p className={`text-[0.7rem] font-semibold tracking-[0.12em] uppercase mb-3 ${featured ? 'text-white/35' : 'text-brand-muted'}`}>
+                <div key={name} className={`p-8 md:p-10 ${featured ? 'bg-lime' : 'bg-ink-2'}`}>
+                  <p className={`text-[0.7rem] font-bold tracking-[0.12em] uppercase mb-3 ${featured ? 'text-ink/60' : 'text-muted-dark'}`}>
                     {tier}
                   </p>
-                  <p className={`font-serif font-normal text-[1.4rem] tracking-[-0.02em] mb-6 leading-[1.2] ${featured ? 'text-white' : 'text-brand-text'}`}>
+                  <p className={`font-display font-bold text-[1.3rem] tracking-[-0.01em] mb-6 leading-[1.2] ${featured ? 'text-ink' : 'text-cream'}`}>
                     {name}
                   </p>
-                  <p className={`font-serif font-normal text-[2.6rem] tracking-[-0.04em] leading-none ${featured ? 'text-white' : 'text-brand-text'}`}>
+                  <p className={`font-display font-black text-[2.4rem] tracking-[-0.03em] leading-none ${featured ? 'text-ink' : 'text-cream'}`}>
                     {amount}
                   </p>
-                  <p className={`text-[0.8rem] mt-1.5 mb-6 pb-6 ${featured ? 'text-white/30 border-white/8' : 'text-brand-muted border-brand-border'}`} style={{ borderBottom: '1px solid' }}>
+                  <p
+                    className={`text-[0.8rem] mt-1.5 mb-6 pb-6 ${featured ? 'text-ink/55' : 'text-muted-dark'}`}
+                    style={{ borderBottom: featured ? '1px solid rgba(19,18,16,0.16)' : '1px solid rgba(244,237,224,0.14)' }}
+                  >
                     {cadence}
                   </p>
-                  <p className={`text-[0.855rem] leading-[1.7] mb-6 ${featured ? 'text-white/45' : 'text-brand-mid'}`}>
+                  <p className={`text-[0.855rem] leading-[1.7] mb-6 ${featured ? 'text-ink/70' : 'text-muted-dark'}`}>
                     {desc}
                   </p>
                   <ul className="mb-8">
                     {features.map((f) => (
                       <li
                         key={f}
-                        className={`flex items-start gap-2.5 py-2 text-[0.84rem] ${featured ? 'text-white/55 border-white/8' : 'text-brand-mid border-brand-border'}`}
-                        style={{ borderBottom: '1px solid' }}
+                        className={`flex items-start gap-2.5 py-2 text-[0.84rem] ${featured ? 'text-ink/70' : 'text-muted-dark'}`}
+                        style={{ borderBottom: featured ? '1px solid rgba(19,18,16,0.12)' : '1px solid rgba(244,237,224,0.1)' }}
                       >
-                        <span className={featured ? 'text-white/40' : 'text-accent'}>✓</span>
+                        <span className={featured ? 'text-ink/50' : 'text-lime'}>✓</span>
                         {f}
                       </li>
                     ))}
                   </ul>
                   <a
                     href="#contact"
-                    className={`w-full flex justify-center py-3 px-4 text-sm font-semibold rounded-brand transition-colors ${
-                      ctaStyle === 'white'
-                        ? 'bg-white text-navy hover:bg-[#f0efec]'
-                        : ctaStyle === 'outline'
-                        ? 'border border-brand-border-dark text-brand-mid hover:border-brand-mid hover:text-brand-text bg-transparent'
-                        : 'bg-navy text-white hover:bg-navy-mid'
+                    className={`w-full flex justify-center py-3 px-4 text-sm font-bold font-display rounded-xl transition-colors ${
+                      featured
+                        ? 'bg-ink text-cream hover:bg-[#000]'
+                        : ctaStyle === 'white'
+                        ? 'bg-cream text-ink hover:bg-cream-2'
+                        : 'border border-[rgba(244,237,224,0.2)] text-muted-dark hover:border-cream hover:text-cream bg-transparent'
                     }`}
                   >
                     {cta}
                   </a>
                   {note && (
-                    <p className={`text-[0.77rem] mt-3 italic ${featured ? 'text-white/30' : 'text-brand-muted'}`}>
+                    <p className={`text-[0.77rem] mt-3 italic ${featured ? 'text-ink/55' : 'text-muted-dark'}`}>
                       {note}
                     </p>
                   )}
@@ -759,89 +773,27 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* CONTACT */}
-      <section id="contact" className="py-28 bg-bg">
-        <div className="max-w-[1280px] mx-auto px-14">
-          <RevealWrapper>
-            <div className="max-w-[760px] mb-14">
-              <div className="eyebrow mb-4">Get In Touch</div>
-              <h2 className="font-serif font-normal text-display-lg text-brand-text mb-5">
-                Find out what your business could{' '}
-                <em className="not-italic text-accent">stop doing manually.</em>
-              </h2>
-              <p className="text-[0.95rem] text-brand-mid leading-[1.75] mb-7">
-                Pick a slot below — 30 minutes, free, no commitment. We&apos;ll talk through your business
-                and tell you honestly what&apos;s automatable. Prefer email? Use the form.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-8 pb-8 border-b border-brand-border">
-                <div>
-                  <p className="text-[0.7rem] font-semibold tracking-[0.1em] uppercase text-brand-muted mb-1.5">
-                    Call us
-                  </p>
-                  <a
-                    href="tel:+441246923041"
-                    className="font-serif text-[1.4rem] text-brand-text hover:text-accent transition-colors no-underline"
-                  >
-                    01246 923041
-                  </a>
-                  <p className="text-[0.78rem] text-brand-muted mt-1">Chesterfield · weekdays 9–5</p>
-                </div>
-                <div>
-                  <p className="text-[0.7rem] font-semibold tracking-[0.1em] uppercase text-brand-muted mb-1.5">
-                    Email
-                  </p>
-                  <a
-                    href="mailto:hello@automation-agency.co.uk"
-                    className="font-serif text-[1.05rem] text-brand-text hover:text-accent transition-colors no-underline break-all"
-                  >
-                    hello@automation-agency.co.uk
-                  </a>
-                  <p className="text-[0.78rem] text-brand-muted mt-1">Reply within 24 hours</p>
-                </div>
-              </div>
-            </div>
-          </RevealWrapper>
-
-          <div className="grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-10 items-start">
-            <RevealWrapper>
-              <p className="text-[0.7rem] font-semibold tracking-[0.12em] uppercase text-brand-muted mb-4">
-                Book a slot — instant
-              </p>
-              <CalendlyEmbed />
-            </RevealWrapper>
-
-            <RevealWrapper>
-              <p className="text-[0.7rem] font-semibold tracking-[0.12em] uppercase text-brand-muted mb-4">
-                Or send a message
-              </p>
-              <ContactForm />
-            </RevealWrapper>
-          </div>
-        </div>
-      </section>
-
       {/* ABOUT */}
-      <section id="about" className="py-28 bg-bg-2 border-t border-brand-border">
-        <div className="max-w-[1280px] mx-auto px-14">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
+      <section id="about" className="bg-cream text-ink">
+        <div className="max-w-[1180px] mx-auto px-8 md:px-14 py-20 md:py-28">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-start">
             <RevealWrapper>
-              <div className="eyebrow mb-4">About</div>
-              <h2 className="font-serif font-normal text-display-md text-brand-text mb-6">
-                Built by someone who has{' '}
-                <em className="not-italic text-accent">actually built it.</em>
+              <div className="kicker-cream mb-5">About</div>
+              <h2 className="font-display font-black text-h2-band uppercase text-ink mb-6 max-w-[16ch]">
+                Built by someone who has actually built it.
               </h2>
-              <p className="text-[0.925rem] text-brand-mid leading-[1.8] mb-[18px]">
-                The Automation Agency is run by <strong className="text-brand-text font-semibold">Ben Horne</strong>,
+              <p className="text-[0.95rem] text-muted-cream leading-[1.8] mb-[18px]">
+                The Automation Agency is run by <strong className="text-ink font-semibold">Ben Horne</strong>,
                 a developer with over a decade of building real production systems — automation stacks, ML
                 pipelines, multi-tenant SaaS platforms, AI agents, and data infrastructure across multiple
                 industries.
               </p>
-              <p className="text-[0.925rem] text-brand-mid leading-[1.8] mb-[18px]">
+              <p className="text-[0.95rem] text-muted-cream leading-[1.8] mb-[18px]">
                 Not a consultant who reads about AI. Someone who writes the code, ships it to production,
                 and keeps it running. Ask what stack we&apos;d use for your project and you&apos;ll get a direct
                 answer — usually with a system already built with it that you can look at.
               </p>
-              <p className="text-[0.925rem] text-brand-mid leading-[1.8] mb-7">
+              <p className="text-[0.95rem] text-muted-cream leading-[1.8] mb-7">
                 Based in Chesterfield, Derbyshire, working with clients across the UK.
               </p>
               <div className="flex flex-wrap gap-1.5">
@@ -849,7 +801,7 @@ export default function HomePage() {
                   (skill) => (
                     <span
                       key={skill}
-                      className="text-[0.775rem] px-2.5 py-1 border border-brand-border-dark text-brand-mid rounded-[2px]"
+                      className="text-[0.775rem] px-2.5 py-1 border border-[rgba(19,18,16,0.16)] text-muted-cream rounded-full"
                     >
                       {skill}
                     </span>
@@ -860,23 +812,23 @@ export default function HomePage() {
 
             <div className="flex flex-col gap-5">
               <RevealWrapper>
-                <div className="bg-white border border-brand-border rounded-brand p-9">
-                  <div className="flex items-center gap-5 mb-5 pb-5 border-b border-brand-border">
+                <div className="bg-cream-2 rounded-2xl p-8 md:p-9">
+                  <div className="flex items-center gap-5 mb-5 pb-5 border-b border-[rgba(19,18,16,0.1)]">
                     <img
                       src="/founder.jpg"
                       alt="Ben Horne, founder of The Automation Agency"
                       width={92}
                       height={92}
-                      className="rounded-full object-cover w-[92px] h-[92px] flex-shrink-0 bg-bg-2"
+                      className="rounded-full object-cover w-[92px] h-[92px] flex-shrink-0 bg-cream"
                     />
                     <div>
-                      <h3 className="font-serif font-normal text-[1.4rem] text-brand-text leading-tight tracking-[-0.01em]">
+                      <h3 className="font-display font-bold text-[1.2rem] text-ink leading-tight">
                         Ben Horne
                       </h3>
-                      <p className="text-[0.82rem] text-brand-muted mt-1.5">Founder · Senior Developer</p>
+                      <p className="text-[0.82rem] text-muted-cream mt-1.5">Founder · Senior Developer</p>
                     </div>
                   </div>
-                  <p className="text-[0.7rem] font-semibold tracking-[0.1em] uppercase text-brand-muted mb-3">
+                  <p className="text-[0.7rem] font-bold tracking-[0.1em] uppercase text-muted-cream mb-3">
                     Previously
                   </p>
                   <ul className="list-none">
@@ -887,10 +839,10 @@ export default function HomePage() {
                     ].map(([name, role]) => (
                       <li
                         key={name}
-                        className="flex items-baseline justify-between gap-3 py-2.5 border-b border-brand-border last:border-0"
+                        className="flex items-baseline justify-between gap-3 py-2.5 border-b border-[rgba(19,18,16,0.1)] last:border-0"
                       >
-                        <span className="font-serif text-[0.98rem] text-brand-text">{name}</span>
-                        <span className="text-[0.78rem] text-brand-muted text-right">{role}</span>
+                        <span className="font-display font-semibold text-[0.95rem] text-ink">{name}</span>
+                        <span className="text-[0.78rem] text-muted-cream text-right">{role}</span>
                       </li>
                     ))}
                   </ul>
@@ -898,7 +850,7 @@ export default function HomePage() {
               </RevealWrapper>
 
               <RevealWrapper>
-                <div className="bg-white border border-brand-border rounded-brand p-9 grid grid-cols-2 gap-7">
+                <div className="bg-cream-2 rounded-2xl p-8 md:p-9 grid grid-cols-2 gap-7">
                   {[
                     ['10+', 'Years shipping production automation'],
                     ['<10%', 'of UK businesses run agentic workflows today'],
@@ -906,15 +858,88 @@ export default function HomePage() {
                     ['2–4wk', 'Typical audit-to-live timeline'],
                   ].map(([stat, label]) => (
                     <div key={stat}>
-                      <h4 className="font-serif font-normal text-[2.2rem] text-accent tracking-[-0.03em] leading-none">
+                      <h4 className="font-display font-black text-[2.1rem] text-ink tracking-[-0.02em] leading-none">
                         {stat}
                       </h4>
-                      <p className="text-[0.78rem] text-brand-muted mt-1">{label}</p>
+                      <p className="text-[0.78rem] text-muted-cream mt-1">{label}</p>
                     </div>
                   ))}
                 </div>
               </RevealWrapper>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="bg-ink text-cream">
+        <div className="max-w-[1180px] mx-auto px-8 md:px-14 py-20 md:py-28">
+          <div className="kicker mb-5">Common questions</div>
+          <h2 className="font-display font-black text-h2-band uppercase text-cream mb-12 max-w-[20ch]">
+            Answers before you ask.
+          </h2>
+
+          <div className="max-w-[820px] border-t border-[rgba(244,237,224,0.14)]">
+            {faqs.map(({ q, a }) => (
+              <details
+                key={q}
+                className="group py-6 border-b border-[rgba(244,237,224,0.14)]"
+              >
+                <summary className="flex items-center justify-between gap-6 cursor-pointer list-none marker:content-none [&::-webkit-details-marker]:hidden font-display font-bold text-[1.02rem] text-cream">
+                  {q}
+                  <span className="flex-shrink-0 text-lime text-xl leading-none transition-transform duration-200 group-open:rotate-45">
+                    +
+                  </span>
+                </summary>
+                <p className="text-[0.9rem] text-muted-dark leading-[1.75] mt-4 max-w-[64ch]">{a}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CONTACT */}
+      <section id="contact" className="bg-cream text-ink">
+        <div className="max-w-[1180px] mx-auto px-8 md:px-14 py-20 md:py-28">
+          <RevealWrapper>
+            <div className="max-w-[760px] mb-14">
+              <div className="kicker-cream mb-5">Get in touch</div>
+              <h2 className="font-display font-black text-h2-band uppercase text-ink mb-6 max-w-[18ch]">
+                Find out what your business could stop doing manually.
+              </h2>
+              <p className="text-[0.95rem] text-muted-cream leading-[1.75] mb-7">
+                Pick a slot below — 30 minutes, free, no commitment. We&apos;ll talk through your business
+                and tell you honestly what&apos;s automatable. Prefer email? Use the form.
+              </p>
+              <div className="pb-8 border-b border-[rgba(19,18,16,0.12)]">
+                <p className="text-[0.7rem] font-bold tracking-[0.1em] uppercase text-muted-cream mb-1.5">
+                  Email
+                </p>
+                <a
+                  href="mailto:hello@automation-agency.co.uk"
+                  className="font-display font-bold text-[1.15rem] text-ink hover:text-muted-cream transition-colors no-underline break-all"
+                >
+                  hello@automation-agency.co.uk
+                </a>
+                <p className="text-[0.78rem] text-muted-cream mt-1">Reply within 24 hours</p>
+              </div>
+            </div>
+          </RevealWrapper>
+
+          <div className="grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-10 items-start">
+            <RevealWrapper>
+              <p className="text-[0.7rem] font-bold tracking-[0.12em] uppercase text-muted-cream mb-4">
+                Book a slot — instant
+              </p>
+              <CalendlyEmbed />
+            </RevealWrapper>
+
+            <RevealWrapper>
+              <p className="text-[0.7rem] font-bold tracking-[0.12em] uppercase text-muted-cream mb-4">
+                Or send a message
+              </p>
+              <ContactForm />
+            </RevealWrapper>
           </div>
         </div>
       </section>
