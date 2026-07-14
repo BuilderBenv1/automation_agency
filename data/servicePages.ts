@@ -408,4 +408,183 @@ export const servicePages: Record<string, ServiceData> = {
       { slug: '/ai-automation-agency', label: 'AI agents & workflows' },
     ],
   },
+
+  'email-deliverability': {
+    slug: 'email-deliverability',
+    metaTitle: 'Email Deliverability UK | SPF, DKIM & DMARC Fixed Properly',
+    metaDescription:
+      'UK email deliverability agency. We set up SPF, DKIM and DMARC correctly and warm up your sending domain so campaigns and transactional email land in the inbox, not spam. Fixed prices from £350.',
+    kicker: 'Email deliverability · UK',
+    h1Lead: 'Emails that,',
+    h1Accent: 'actually land.',
+    h1Outline: 'SPF, DKIM & DMARC, done properly.',
+    intro:
+      "We set up email deliverability for UK businesses — SPF, DKIM and DMARC configured correctly, plus the domain warm-up that goes with them, so the email you send actually reaches the inbox instead of spam or nowhere at all. Deliverability is really just proof: three DNS records that tell Gmail, Outlook and everyone else that a message genuinely came from you and hasn't been tampered with on the way.",
+    problem:
+      "Most deliverability problems aren't a broken email service, they're a missing or half-finished DNS record — an SPF record that doesn't cover every tool sending on your behalf, a DKIM key that was never switched on, or a DMARC policy left on 'do nothing' because nobody wanted to risk emails bouncing. Add a brand-new domain sending a few hundred emails on day one with no sending history behind it, and providers treat you as a stranger — however careful the setup, the volume alone trips the spam filter.",
+    workflows: [
+      'New sending domain → SPF, DKIM and DMARC records written, verified and checked against every service that sends on your behalf',
+      'Existing domain with patchy deliverability → records audited line by line to find the actual cause of the spam-folder problem before anything changes',
+      "DMARC policy moved from 'none' to 'quarantine' to 'reject' in stages, with reports checked at each step so nothing genuine gets blocked",
+      'New domain or IP → warmed up on a gradual sending schedule so mailbox providers build up trust before you rely on it for real volume',
+      "Transactional email — receipts, password resets, booking confirmations — monitored separately from marketing sends, so one bad campaign can't take the important ones down with it",
+      'Monthly deliverability check → inbox placement and DMARC reports reviewed so a problem gets caught before customers start asking why your emails end up in spam',
+    ],
+    from: '£350',
+    faqs: [
+      {
+        q: 'What are SPF, DKIM and DMARC, in plain English?',
+        a: "SPF is a DNS record listing which servers are allowed to send email as your domain. DKIM adds a digital signature proving the message wasn't altered in transit. DMARC tells receiving providers what to do if a message fails either check, and sends you a report when it happens. Get all three right and providers trust that mail claiming to be from you actually is.",
+      },
+      {
+        q: 'Why are our emails landing in spam?',
+        a: "Nine times out of ten it's one of a handful of things: a missing or incomplete SPF record, DKIM that was never switched on for every sending tool, a brand-new domain with no sending history, or a DMARC policy that isn't enforcing anything. We check all of them, in that order, before touching anything else.",
+      },
+      {
+        q: 'What does domain warm-up actually involve?',
+        a: "Sending a small, steadily increasing volume from a new domain or IP so mailbox providers build up a track record for it, rather than seeing a stranger suddenly send thousands of emails on day one. It usually takes two to four weeks depending on your volume, and we set the schedule so real customer email keeps working throughout.",
+      },
+      {
+        q: 'How much does fixing email deliverability cost?',
+        a: "Auditing and correcting SPF, DKIM and DMARC for a single domain starts at £350, fixed price. If you're also warming up a new domain or sending from several subdomains and platforms, we'll quote that as one fixed number after a short look at your setup.",
+      },
+      {
+        q: 'Will changing our DMARC policy break anything?',
+        a: "It can, if it's done carelessly — jumping straight to 'reject' before you know every legitimate sender is passing SPF and DKIM will bounce genuine email along with the fake stuff. We move the policy up in stages and watch the reports at each one, so nothing gets blocked that shouldn't be.",
+      },
+      {
+        q: 'Do you fix this once, or does it need ongoing attention?',
+        a: "The DNS records are a one-off fix, but deliverability drifts — a new marketing tool gets added and nobody updates the SPF record, or a spike in complaints hurts your sender reputation. A short monthly check catches that before it costs you inbox placement.",
+      },
+    ],
+    related: [
+      { slug: '/crm-automation', label: 'CRM automation' },
+      { slug: '/n8n-automation-agency', label: 'n8n automation' },
+      { slug: '/ai-automation-agency', label: 'AI agents & workflows' },
+    ],
+  },
+
+  'stripe-payment-integration': {
+    slug: 'stripe-payment-integration',
+    metaTitle: 'Stripe Payment Integration UK | Subscriptions, Webhooks & Refunds',
+    metaDescription:
+      'UK Stripe payment integration agency. We connect Stripe to your site or app for subscriptions, one-off payments, webhooks and refunds, wired into your CRM. Fixed prices from £750.',
+    kicker: 'Stripe payment integration · UK',
+    h1Lead: 'Stripe, wired in,',
+    h1Accent: 'properly.',
+    h1Outline: 'Subscriptions, webhooks, refunds — handled.',
+    intro:
+      "We build Stripe payment integrations for UK businesses — subscriptions, one-off payments, invoicing and the webhooks that keep everything else in sync, connected straight into your CRM or database. A proper Stripe integration means the payment, the receipt, the subscription status and your own records all update together the moment money moves, rather than someone reconciling a spreadsheet against the Stripe dashboard at the end of the month.",
+    problem:
+      "The Stripe checkout page is the easy part; what usually goes wrong is everything downstream of it — a webhook that isn't verified properly and can be spoofed, a subscription that renews in Stripe but never updates your CRM, or a refund that's issued but nobody tells the customer or adjusts their access. We've seen plenty of 'basic' Stripe integrations that only handle the happy path and quietly fall over the first time a card gets declined or a customer disputes a charge.",
+    workflows: [
+      'Customer subscribes or pays → Stripe webhook verified → your CRM or database updated with the subscription status in real time',
+      'Card payment fails or a subscription lapses → customer notified automatically and access paused, rather than someone spotting it days later',
+      'Refund or partial refund issued → receipt sent, CRM record updated, and access adjusted automatically',
+      'Multiple products or tiers → checkout and billing handle upgrades, downgrades and proration without manual invoicing',
+      'Marketplace or multi-tenant payments → funds split and paid out to the right account automatically, claimed race-safe so two people can never take the same payment',
+      "Failed payment → automatic retry on Stripe's schedule, with a dunning email sequence so you're not chasing customers by hand",
+    ],
+    from: '£750',
+    faqs: [
+      {
+        q: 'Can you set up subscriptions and recurring billing?',
+        a: "Yes — tiered plans, free trials, upgrades and downgrades with proration, and cancellations that take effect at the right time rather than cutting someone off mid-period. We wire the subscription status straight into your CRM so your team can see it without logging into Stripe.",
+      },
+      {
+        q: 'What are webhooks and why do they matter?',
+        a: "A webhook is Stripe telling your system the moment something happens — a payment succeeds, a subscription renews, a card fails — so your CRM, your database and your customer's access all update automatically instead of you finding out when they complain. We verify every webhook signature properly, which a lot of quick integrations skip, so nobody can fake a payment event.",
+      },
+      {
+        q: 'How do refunds and receipts work?',
+        a: "Refunds get issued through Stripe and reflected back into your own records automatically — access revoked or adjusted, the customer notified, nobody manually updating a spreadsheet. Receipts go out the moment a payment succeeds, formatted the way you want rather than Stripe's generic default.",
+      },
+      {
+        q: 'How much does Stripe integration cost?',
+        a: 'A straightforward Stripe setup — checkout, one payment type, webhooks wired to your CRM — starts at £750, fixed price. Subscriptions, multiple products or a payout and marketplace structure are quoted after a short call, always fixed.',
+      },
+      {
+        q: 'Do you only work with Stripe, or other payment processors too?',
+        a: "Stripe is what we recommend for most UK businesses starting fresh — it's well documented and the webhooks are reliable. That said, we've built payment automation on other processors too: Marmadbir's field-service platform runs on Tranzilla rather than Stripe, for reasons specific to that business, and the same principles — payments claimed race-safe, zero double-charging, everything confirmed automatically — carried over regardless of which processor sat underneath.",
+      },
+      {
+        q: 'Can Stripe payments trigger other automations?',
+        a: "Yes — a successful payment is usually the trigger for several other things: an invoice, a CRM update, a Slack notification, access to a product or booking. We build the payment integration as part of the wider workflow, not as an isolated piece that still needs someone to join the dots by hand.",
+      },
+    ],
+    proof: {
+      client: 'Marmadbir',
+      url: 'https://www.marmadbir.com/',
+      line: "Marmadbir's payment flow doesn't actually run on Stripe — it runs on Tranzilla, for reasons specific to that business — but the outcome is exactly what a Stripe integration is built to deliver: jobs broadcast, workers apply, payment claimed race-safe so two people can never take the same job, client confirmed automatically. Zero payment race conditions, zero manual reconciliation.",
+      metric: '0',
+      metricLabel: 'payment race conditions',
+    },
+    related: [
+      { slug: '/whatsapp-chatbot', label: 'WhatsApp chatbot' },
+      { slug: '/crm-automation', label: 'CRM automation' },
+      { slug: '/internal-tools-dashboard', label: 'Internal tools & dashboards' },
+    ],
+  },
+
+  'internal-tools-dashboard': {
+    slug: 'internal-tools-dashboard',
+    metaTitle: 'Internal Tools & Dashboards UK | Built on Supabase & Next.js',
+    metaDescription:
+      'UK agency building internal tools and dashboards — live data, scraping pipelines and alerts on Supabase and Next.js, replacing manual checking for good. Fixed prices from £1,500.',
+    kicker: 'Internal tools & dashboards · UK',
+    h1Lead: 'Internal tools,',
+    h1Accent: 'built for how you work.',
+    h1Outline: 'Not off-the-shelf software.',
+    intro:
+      'We build internal tools and dashboards for UK businesses — live views of your data, scraping pipelines that watch public or partner sites, and internal apps that replace the spreadsheet or manual check somebody does every day. Usually built on Supabase and Next.js, an internal tool just needs to show the right people the right information, updated automatically, without anyone opening ten browser tabs to piece it together.',
+    problem:
+      "A lot of businesses are one person's daily routine away from a proper system — someone opens the same six websites every morning and copies what's changed into a spreadsheet, and that spreadsheet is the only record anyone has. It works until that person is on holiday, or a site changes its layout, or the business grows past what one person checking by hand can keep up with. An internal tool takes that routine and runs it automatically, then shows you the result in one place instead of a shared spreadsheet nobody fully trusts.",
+    workflows: [
+      'Public or partner websites → scraped on a schedule with Playwright → structured data written straight into your own dashboard',
+      'Live dashboard → shows the current state of your business — bookings, stock, applications, leads — refreshed automatically, not a snapshot from last week',
+      "Threshold or change detected → an alert goes out by email, Slack or WhatsApp the moment something needs a person's attention",
+      "Several data sources → reconciled into one internal view, so nobody's cross-referencing three systems by hand to answer a simple question",
+      'Staff-facing tool → replaces a shared spreadsheet or a rigid off-the-shelf app that almost fits, built instead around how your team actually works',
+      "Historical data → kept and queryable, so you can see trends over time rather than just today's snapshot",
+    ],
+    from: '£1,500',
+    faqs: [
+      {
+        q: 'Should we build a custom internal tool, or buy off-the-shelf software?',
+        a: "Buy first, if something already does exactly what you need — there's no point paying to rebuild a stock-management tool that's already a solved problem. Custom is worth it once you're bending an off-the-shelf tool to do something it wasn't designed for, or once the 'software' you're actually running is a spreadsheet and someone's memory. We'll tell you honestly which side of that line you're on before quoting anything.",
+      },
+      {
+        q: 'Why Supabase and Next.js specifically?',
+        a: "Supabase gives us a proper Postgres database with authentication and real-time updates out of the box, and Next.js builds a fast, straightforward dashboard on top of it — together they get you from spreadsheet to a real internal tool without a six-month build. It's also a stack you're not locked into: a standard database and a standard web app, not a proprietary platform you can't leave.",
+      },
+      {
+        q: 'How much does an internal tool or dashboard cost?',
+        a: 'A single dashboard showing live data from one or two sources starts at £1,500, fixed price. A scraping pipeline covering many sources, with alerts and historical data, is quoted after a scoping call — always fixed, and sized to what the tool actually needs to do rather than billed by the hour.',
+      },
+      {
+        q: 'What happens if it breaks or a data source changes?',
+        a: "We build in monitoring so a scraping pipeline that stops matching a site's layout gets flagged rather than silently going stale, and we offer an ongoing retainer for fixes and small changes as your needs shift. Most clients keep us on a light retainer specifically for this — data sources change, and someone needs to notice when they do.",
+      },
+      {
+        q: 'Can you migrate our existing spreadsheet into a proper tool?',
+        a: "Yes — that's often exactly how these projects start. We take what's in the spreadsheet, clean it up, and build the dashboard or database around it, so you don't lose the history you already have while gaining something that updates itself.",
+      },
+      {
+        q: 'Who ends up using the tool day to day?',
+        a: "Whoever currently does the manual version of the job — usually one or two people who go from checking things by hand every morning to glancing at a dashboard instead. We build the interface around what they actually need to see, not a generic admin panel.",
+      },
+    ],
+    proof: {
+      client: 'PlusRooms',
+      url: 'https://plusrooms.co.uk/',
+      line: 'PlusRooms needed daily coverage of planning applications across England — previously a full working day of one person trawling council websites by hand. We built Planscope: a Playwright scraping pipeline covering 97% of London boroughs, feeding a live dashboard with alerts, refreshed on a 24-hour cycle. Nobody has to check a council website again.',
+      metric: '97%',
+      metricLabel: 'London borough coverage, refreshed every 24 hours',
+    },
+    related: [
+      { slug: '/google-sheets-automation', label: 'Google Sheets automation' },
+      { slug: '/ai-automation-agency', label: 'AI agents & workflows' },
+      { slug: '/n8n-automation-agency', label: 'n8n automation' },
+    ],
+  },
 }
