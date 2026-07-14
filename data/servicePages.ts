@@ -86,7 +86,7 @@ export const servicePages: Record<string, ServiceData> = {
     faqs: [
       {
         q: 'n8n vs Zapier vs Make — which one do we need?',
-        a: "Zapier is the simplest to learn, Make gives you more visual control over branching logic, and n8n is what we reach for once you're past a handful of steps or want to stop paying per task. We usually start clients on Zapier or Make for speed, then move the heavier workflows to n8n as volume grows. We'll tell you honestly which fits your case.",
+        a: "Zapier is simplest to learn, Make gives more visual control over branching logic, and n8n is what we reach for once you're past a handful of steps or tired of paying per task. We start most clients on Zapier or Make, then move heavier workflows to n8n as volume grows — we'll tell you honestly which fits.",
       },
       {
         q: 'How much does a Zapier or Make setup cost?',
@@ -108,7 +108,7 @@ export const servicePages: Record<string, ServiceData> = {
     proof: {
       client: 'Marmadbir',
       url: 'https://www.marmadbir.com/',
-      line: "Marmadbir needed exactly the kind of automation we build with Zapier and Make every week — manual coordination replaced with a flow that runs itself. We automated their WhatsApp dispatch end-to-end and cut messaging costs by roughly two-thirds, with the coordinator's manual workload down to zero.",
+      line: "What we build for clients like Marmadbir is really about eliminating manual coordination and copy-paste between tools — the tool depends on how complex the job is. Zapier, Make or n8n cover most cases; something as involved as Marmadbir's WhatsApp dispatch platform needed custom code instead. Either way: messaging costs down roughly two-thirds, coordinator's manual workload at zero.",
       metric: '~65%',
       metricLabel: 'lower messaging cost after automating dispatch',
     },
