@@ -459,7 +459,7 @@ export default function HomePage() {
       </section>
 
       {/* STARTER BUILDS */}
-      <section className="bg-ink text-cream">
+      <section className="bg-ink text-cream border-b border-[rgba(244,237,224,0.14)]">
         <div className="max-w-[1180px] mx-auto px-8 md:px-14 py-20 md:py-28">
           <div className="kicker mb-5">Fixed-price starter builds</div>
           <h2 className="font-display font-black text-h2-band uppercase text-cream mb-8 max-w-[18ch]">
@@ -577,7 +577,7 @@ export default function HomePage() {
       </section>
 
       {/* PROCESS */}
-      <section id="process" className="bg-cream text-ink">
+      <section id="process" className="bg-cream text-ink border-b border-[rgba(19,18,16,0.12)]">
         <div className="max-w-[1180px] mx-auto px-8 md:px-14 py-20 md:py-28">
           <div className="flex justify-between items-end mb-16 gap-12 flex-col md:flex-row">
             <div>
@@ -780,7 +780,8 @@ export default function HomePage() {
             <RevealWrapper>
               <div className="kicker-cream mb-5">About</div>
               <h2 className="font-display font-black text-h2-band uppercase text-ink mb-6 max-w-[16ch]">
-                Built by someone who has actually built it.
+                Built by someone who has{' '}
+                <em className="not-italic text-lime">actually built it.</em>
               </h2>
               <p className="text-[0.95rem] text-muted-cream leading-[1.8] mb-[18px]">
                 The Automation Agency is run by <strong className="text-ink font-semibold">Ben Horne</strong>,
@@ -905,7 +906,8 @@ export default function HomePage() {
             <div className="max-w-[760px] mb-14">
               <div className="kicker-cream mb-5">Get in touch</div>
               <h2 className="font-display font-black text-h2-band uppercase text-ink mb-6 max-w-[18ch]">
-                Find out what your business could stop doing manually.
+                Find out what your business could{' '}
+                <em className="not-italic text-lime">stop doing manually.</em>
               </h2>
               <p className="text-[0.95rem] text-muted-cream leading-[1.75] mb-7">
                 Pick a slot below — 30 minutes, free, no commitment. We&apos;ll talk through your business
