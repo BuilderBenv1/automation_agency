@@ -136,7 +136,7 @@ Write the Quick-Audit now.`,
           </div>
           <div style="margin-top:36px;padding-top:24px;border-top:1px solid #e2ddd8;font-size:12px;color:#767b82;">
             <p>When you&apos;re ready to dig deeper, book a free 30-minute discovery call at <a href="https://www.automation-agency.co.uk/#contact" style="color:#1a4fa0;">automation-agency.co.uk</a> — or just reply to this email.</p>
-            <p>The Automation Agency · Chesterfield, Derbyshire · 01246 923041</p>
+            <p>The Automation Agency · Chesterfield, Derbyshire</p>
           </div>
         </div>
       `,
