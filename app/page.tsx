@@ -17,31 +17,52 @@ export const metadata: Metadata = {
 
 const services = [
   {
-    num: '01',
-    title: 'AI Agent Development',
-    body: 'Agents that monitor, decide, and act autonomously — pulling data, triggering actions, escalating only when a human is genuinely needed. Integrated into your existing tools, not bolted on top.',
-    tag: 'Most requested',
+    title: 'n8n, Make & Zapier automation',
+    body: 'Connect the apps you already pay for — your CRM, forms, sheets, inbox, Slack and Airtable — so the admin in between just happens.',
+    from: '£350',
+    slug: '/zapier-make-automation',
   },
   {
-    num: '02',
-    title: 'Process Automation',
-    body: "We map where your team's time actually goes, identify the high-value targets, and automate end-to-end. Data entry, approvals, reporting, notifications — eliminated.",
-    tag: 'Fastest ROI',
+    title: 'AI agents & Claude/OpenAI workflows',
+    body: 'AI that reads, sorts, drafts and updates records for you, with a check-before-send step wherever a mistake would cost you.',
+    from: '£750',
+    slug: '/ai-automation-agency',
   },
   {
-    num: '03',
-    title: 'Data Pipeline Engineering',
-    body: 'Automated collection, cleaning, and delivery of data from any source — web, APIs, documents, emails — into wherever your team needs it, on a schedule, without touching it.',
+    title: 'WhatsApp & website chatbots',
+    body: 'Answer FAQs, capture leads and book jobs over WhatsApp, your website, Telegram or SMS — handed to a human when it matters.',
+    from: '£750',
+    slug: '/whatsapp-chatbot',
   },
   {
-    num: '04',
-    title: 'Custom Integrations',
-    body: 'Connect the tools you already use. CRM, ERP, WhatsApp, Slack, calendar, payment systems — we build the bridges so your software communicates without manual input.',
+    title: 'CRM, Google Sheets & Airtable automation',
+    body: 'Stop copying data between systems. We wire your forms, sheets, CRM, calendar and notifications into one flow that holds together.',
+    from: '£350',
+    slug: '/crm-automation',
   },
   {
-    num: '05',
-    title: 'Communication Automation',
-    body: 'Email sequences, multi-channel notifications, scheduled reporting, client updates — automated and personalised without anyone touching a template or copy-pasting an address.',
+    title: 'Data pipelines & web data extraction',
+    body: 'Scheduled collection, cleaning and delivery of data — public sources, APIs, emails or documents — into a dashboard, database or sheet.',
+    from: '£1,500',
+    slug: '/internal-tools-dashboard',
+  },
+  {
+    title: 'Custom web apps & internal tools',
+    body: 'When no-code runs out of road: Next.js and Supabase dashboards, portals and admin panels built to fit how you actually work.',
+    from: '£1,500',
+    slug: '/internal-tools-dashboard',
+  },
+  {
+    title: 'Email deliverability & sending setup',
+    body: 'SPF, DKIM, DMARC and domain authentication sorted, so the emails you send at scale actually land in the inbox.',
+    from: '£350',
+    slug: '/email-deliverability',
+  },
+  {
+    title: 'Stripe, payments & subscription automation',
+    body: 'Checkout, subscriptions, webhooks and receipts wired to your CRM, so payments update everything without you touching it.',
+    from: '£750',
+    slug: '/stripe-payment-integration',
   },
 ]
 
@@ -77,7 +98,7 @@ const caseStudies = [
     client: 'Marmadbir',
     clientUrl: 'https://www.marmadbir.com/',
     sector: 'Field Services · Multi-Tenant SaaS',
-    title: 'WhatsApp Job Dispatch Platform',
+    title: 'WhatsApp dispatch automation for field-service teams',
     body: "Marmadbir was coordinating field workers manually across WhatsApp groups and phone calls — dispatchers chasing workers, payments handled by phone. We built the full stack: customer-facing front-end, multi-tenant Twilio-powered WhatsApp dispatch flow, and Tranzilla payment integration. Jobs broadcast, workers apply, payments claimed race-safe, client confirmed. The coordinator's manual workload: zero.",
     results: [
       ['Coordinator manual time', 'Eliminated'],
@@ -85,13 +106,13 @@ const caseStudies = [
       ['New tenant onboarding', '< 5 minutes'],
       ['Messaging cost reduction', '~65%'],
     ],
-    tags: ['Next.js', 'Supabase', 'Twilio', 'Tranzilla', 'PostgreSQL'],
+    tags: ['WhatsApp automation', 'Twilio', 'Job dispatch', 'Payments', 'CRM workflow'],
   },
   {
     client: 'Punthub',
     clientUrl: 'https://punthub.co.uk/',
     sector: 'Horse Racing · Predictive Analytics',
-    title: 'End-to-End Predictive Racing Pipeline',
+    title: 'Automated data pipeline & prediction dashboard',
     body: 'Punthub needed daily horse-racing data from 6 live sources, run through 7 ML prediction models, results reconciled overnight, and insights surfaced through a custom-plugin front-end. Python scripts feed Google Sheets each evening; Supabase syncs overnight; the Next.js site renders prediction cards via bespoke plugins. Runs unattended every night.',
     results: [
       ['Data sources automated', '6 daily'],
@@ -99,14 +120,14 @@ const caseStudies = [
       ['Reconciliation jobs', '21 automated'],
       ['Human touchpoints required', 'Zero'],
     ],
-    tags: ['Python', 'scikit-learn', 'Next.js', 'Supabase', 'Playwright'],
+    tags: ['Python automation', 'Data pipeline', 'ML models', 'Daily reporting', 'Supabase'],
     note: 'Built and owned by The Automation Agency.',
   },
   {
     client: 'PlusRooms',
     clientUrl: 'https://plusrooms.co.uk/',
     sector: 'Property Intelligence · Data Pipeline',
-    title: 'Planscope — UK Planning Application Monitor',
+    title: 'Public-data extraction & planning-alert dashboard',
     body: 'PlusRooms needed daily coverage of planning applications across England — previously a full working day of manual council-website trawling. We built Planscope: an automated scraping pipeline covering 97% of London boroughs and a live dashboard with alerts. Nobody has to check a council website anymore.',
     results: [
       ['Borough coverage', '97%'],
@@ -114,7 +135,7 @@ const caseStudies = [
       ['Data freshness', '24-hour cycle'],
       ['Dashboard & alerts', 'Live'],
     ],
-    tags: ['Python', 'Playwright', 'Next.js', 'Supabase', 'React'],
+    tags: ['Web data extraction', 'Playwright', 'Scheduled scraping', 'Dashboard', 'Alerts'],
   },
 ]
 
@@ -195,6 +216,40 @@ const popularAutomations = [
   <><em className="not-italic font-semibold text-lime">AI chatbot</em> for FAQs, bookings and lead capture</>,
 ]
 
+const trustedClients = [
+  { name: 'Marmadbir', url: 'https://www.marmadbir.com/' },
+  { name: 'Punthub', url: 'https://punthub.co.uk/' },
+  { name: 'PlusRooms', url: 'https://plusrooms.co.uk/' },
+]
+
+const starterBuilds = [
+  {
+    name: 'Simple automation',
+    price: '£350',
+    body: 'One workflow connecting 2–3 tools — a form, a sheet, a CRM update, a Slack or email alert.',
+  },
+  {
+    name: 'AI workflow',
+    price: '£750',
+    body: 'A Claude or OpenAI workflow that classifies, drafts, summarises, routes or extracts.',
+  },
+  {
+    name: 'Chatbot',
+    price: '£750',
+    body: 'A WhatsApp, website, Telegram or SMS chatbot for FAQs, bookings, lead capture or support.',
+  },
+  {
+    name: 'Internal tool / dashboard',
+    price: '£1,500',
+    body: 'A small dashboard, admin panel, Supabase app or workflow control panel.',
+  },
+  {
+    name: 'Process audit',
+    price: '£1,500',
+    body: 'The full diagnostic — see the audit section below.',
+  },
+]
+
 /* ─────────────────────────── PAGE ─────────────────────────── */
 
 export default function HomePage() {
@@ -272,6 +327,30 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* PROOF STRIP */}
+      <div className="bg-ink text-cream border-b border-[rgba(244,237,224,0.14)]">
+        <div className="max-w-[1180px] mx-auto px-8 md:px-14 py-8 flex flex-col md:flex-row md:items-center gap-5 md:gap-10">
+          <span className="kicker flex-shrink-0">Trusted by</span>
+          <div className="flex flex-wrap gap-x-9 gap-y-3 items-center">
+            {trustedClients.map(({ name, url }) => (
+              <a
+                key={name}
+                href={url}
+                target="_blank"
+                rel="noopener"
+                className="font-display font-bold text-[1.05rem] text-cream hover:text-lime no-underline transition-colors"
+              >
+                {name}
+              </a>
+            ))}
+            <span className="text-[0.85rem] text-muted-dark italic">and more across the UK</span>
+          </div>
+          <span className="hidden lg:block text-[0.8rem] text-muted-dark md:ml-auto whitespace-nowrap">
+            10+ years shipping production systems
+          </span>
+        </div>
+      </div>
+
       {/* TESTIMONIAL */}
       <section className="py-20 border-b border-brand-border bg-bg">
         <div className="max-w-[1280px] mx-auto px-14">
@@ -338,56 +417,70 @@ export default function HomePage() {
       </section>
 
       {/* SERVICES */}
-      <section id="services" className="py-28 bg-bg">
-        <div className="max-w-[1280px] mx-auto px-14">
-          <div className="flex justify-between items-end mb-16 gap-12 flex-col md:flex-row">
-            <div>
-              <div className="eyebrow mb-4">What We Build</div>
-              <h2 className="font-serif font-normal text-display-lg text-brand-text">
-                The right automation
-                <br />
-                for your business.
-              </h2>
-            </div>
-            <p className="text-base text-brand-mid leading-[1.75] max-w-[500px]">
-              We don&apos;t sell software subscriptions or retainer hours. We scope the problem, build the
-              solution, and hand you something that runs without you.
-            </p>
+      <section id="services" className="bg-cream text-ink">
+        <div className="max-w-[1180px] mx-auto px-8 md:px-14 py-20 md:py-28">
+          <div className="kicker-cream mb-5">What we build</div>
+          <h2 className="font-display font-black text-h2-band uppercase text-ink mb-14 max-w-[22ch]">
+            Buyer-friendly, engineer-built.
+          </h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+            {services.map(({ title, body, from, slug }) => (
+              <a
+                key={title}
+                href={slug}
+                className="flex flex-col bg-cream-2 rounded-2xl p-7 no-underline transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_14px_36px_rgba(19,18,16,0.12)]"
+              >
+                <h3 className="font-display font-bold text-ink text-[1.05rem] leading-snug mb-3">{title}</h3>
+                <p className="text-[0.88rem] text-muted-cream leading-[1.65] mb-6 flex-1">{body}</p>
+                <span className="inline-flex self-start items-center bg-lime text-ink font-display font-bold text-[0.8rem] px-3 py-1.5 rounded-full">
+                  From {from}
+                </span>
+              </a>
+            ))}
           </div>
 
-          <RevealWrapper>
-            <div className="grid grid-cols-1 md:grid-cols-3 border border-brand-border">
-              {services.map(({ num, title, body, tag }, i) => (
-                <div
-                  key={num}
-                  className={`p-10 border-b border-r border-brand-border hover:bg-bg-2 transition-colors ${
-                    i % 3 === 2 ? 'border-r-0' : ''
-                  } ${i >= 3 ? 'border-b-0' : ''}`}
-                >
-                  <p className="text-[0.7rem] font-semibold text-brand-muted tracking-[0.08em] mb-5">{num}</p>
-                  <h3 className="font-serif font-normal text-[1.35rem] tracking-[-0.01em] mb-3">{title}</h3>
-                  <p className="text-[0.88rem] text-brand-muted leading-[1.75]">{body}</p>
-                  {tag && <span className="inline-block mt-5 text-[0.8rem] font-semibold text-accent">{tag} →</span>}
-                </div>
-              ))}
-              <div className="p-10 bg-navy border-brand-border hover:bg-navy-mid transition-colors md:border-r-0">
-                <p className="text-[0.7rem] font-semibold text-white/30 tracking-[0.08em] mb-5">→</p>
-                <h3 className="font-serif font-normal text-[1.35rem] text-white tracking-[-0.01em] mb-3">
-                  Not sure where to start?
-                </h3>
-                <p className="text-[0.88rem] text-white/50 leading-[1.75]">
-                  Book a free 30-minute discovery call. We&apos;ll ask the right questions, tell you what&apos;s
-                  automatable, and give you an honest view of cost and effort — no pitch, no obligation.
-                </p>
-                <a
-                  href="#contact"
-                  className="btn-white mt-6 inline-flex px-5 py-2.5 text-sm font-semibold"
-                >
-                  Book Discovery Call
-                </a>
+          <p className="mt-12 text-[0.92rem] text-muted-cream">
+            Not sure which one fits?{' '}
+            <a href="#contact" className="text-ink font-semibold underline hover:text-muted-cream">
+              Book a free audit
+            </a>{' '}
+            and we&apos;ll tell you straight.
+          </p>
+        </div>
+      </section>
+
+      {/* STARTER BUILDS */}
+      <section className="bg-ink text-cream">
+        <div className="max-w-[1180px] mx-auto px-8 md:px-14 py-20 md:py-28">
+          <div className="kicker mb-5">Fixed-price starter builds</div>
+          <h2 className="font-display font-black text-h2-band uppercase text-cream mb-8 max-w-[18ch]">
+            Need one thing built? Start here.
+          </h2>
+          <p className="text-muted-dark leading-[1.7] max-w-[52em] mb-14 text-[1.02rem]">
+            Two ways to work with us. Need one specific thing built? Pick a fixed-price starter below.
+            Not sure where to start, or want a plan first? Book the free audit — we&apos;ll map it out and
+            only build what&apos;s worth building.
+          </p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
+            {starterBuilds.map(({ name, price, body }) => (
+              <div
+                key={name}
+                className="flex flex-col bg-ink-2 border border-[rgba(244,237,224,0.1)] rounded-2xl p-7"
+              >
+                <p className="font-display font-black text-lime text-[1.6rem] leading-none mb-4">{price}</p>
+                <h3 className="font-display font-bold text-cream text-[1rem] mb-3">{name}</h3>
+                <p className="text-[0.85rem] text-muted-dark leading-[1.6]">{body}</p>
               </div>
-            </div>
-          </RevealWrapper>
+            ))}
+          </div>
+
+          <div className="mt-12">
+            <a href="#contact" className="btn-lime">
+              Book the free audit
+            </a>
+          </div>
         </div>
       </section>
 
@@ -517,18 +610,18 @@ export default function HomePage() {
       </section>
 
       {/* WORK */}
-      <section id="work" className="py-28 bg-bg">
-        <div className="max-w-[1280px] mx-auto px-14">
+      <section id="work" className="bg-cream text-ink">
+        <div className="max-w-[1180px] mx-auto px-8 md:px-14 py-20 md:py-28">
           <div className="flex justify-between items-end mb-16 gap-12 flex-col md:flex-row">
             <div>
-              <div className="eyebrow mb-4">Our Work</div>
-              <h2 className="font-serif font-normal text-display-lg text-brand-text">
+              <div className="kicker-cream mb-5">Our work</div>
+              <h2 className="font-display font-black text-h2-band uppercase text-ink">
                 Built. Shipped.
                 <br />
                 Running autonomously.
               </h2>
             </div>
-            <p className="text-base text-brand-mid leading-[1.75] max-w-[500px]">
+            <p className="text-[0.95rem] text-muted-cream leading-[1.75] max-w-[440px]">
               Real systems, real outcomes. Every project below operates unattended today.
             </p>
           </div>
@@ -536,55 +629,56 @@ export default function HomePage() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {caseStudies.map(({ client, clientUrl, sector, title, body, results, tags, note }) => (
               <RevealWrapper key={title}>
-                <div className="bg-white border border-brand-border rounded-brand p-10 flex flex-col h-full hover:shadow-[0_8px_32px_rgba(0,0,0,0.06)] transition-shadow">
-                  <div
-                    className="flex items-baseline justify-between gap-3 mb-4 pb-4"
-                    style={{ borderBottom: '1px solid #e2ddd8' }}
-                  >
+                <div className="bg-cream-2 rounded-2xl p-8 flex flex-col h-full transition-shadow hover:shadow-[0_14px_36px_rgba(19,18,16,0.1)]">
+                  <div className="flex items-baseline justify-between gap-3 mb-4 pb-4 border-b border-[rgba(19,18,16,0.1)]">
                     {clientUrl ? (
                       <a
                         href={clientUrl}
                         target="_blank"
                         rel="noopener"
-                        className="font-serif text-[1.05rem] text-navy tracking-[-0.01em] hover:text-accent transition-colors no-underline"
+                        className="font-display font-bold text-[1.02rem] text-ink hover:text-muted-cream transition-colors no-underline"
                       >
                         {client} <span aria-hidden="true">→</span>
                       </a>
                     ) : (
-                      <p className="font-serif text-[1.05rem] text-navy tracking-[-0.01em]">{client}</p>
+                      <p className="font-display font-bold text-[1.02rem] text-ink">{client}</p>
                     )}
-                    <p className="text-[0.65rem] font-semibold tracking-[0.1em] uppercase text-brand-muted text-right">
+                    <p className="text-[0.65rem] font-semibold tracking-[0.1em] uppercase text-muted-cream text-right">
                       {sector}
                     </p>
                   </div>
-                  <h3 className="font-serif font-normal text-[1.3rem] tracking-[-0.01em] mb-3.5 leading-[1.25]">
+
+                  <h3 className="font-display font-bold text-[1.15rem] tracking-[-0.01em] mb-4 leading-[1.3] text-ink">
                     {title}
                   </h3>
-                  <p className="text-[0.875rem] text-brand-muted leading-[1.75] mb-7">{body}</p>
-                  <div className="bg-bg-2 rounded-brand p-5 flex flex-col gap-2.5">
-                    {results.map(([label, value]) => (
-                      <div key={label} className="flex justify-between text-[0.82rem]">
-                        <span className="text-brand-muted">{label}</span>
-                        <span className="font-semibold text-navy">{value}</span>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="flex flex-wrap gap-1.5 mt-5">
+
+                  <div className="flex flex-wrap gap-1.5 mb-5">
                     {tags.map((tag) => (
                       <span
                         key={tag}
-                        className="text-[0.7rem] px-2 py-0.5 bg-accent-light text-accent rounded-[2px] font-medium"
+                        className="text-[0.7rem] px-2.5 py-1 bg-lime/20 text-ink rounded-full font-semibold"
                       >
                         {tag}
                       </span>
                     ))}
                   </div>
+
+                  <p className="text-[0.875rem] text-muted-cream leading-[1.75] mb-7">{body}</p>
+
+                  <div className="bg-cream rounded-xl p-5 flex flex-col gap-2.5 mt-auto">
+                    {results.map(([label, value]) => (
+                      <div key={label} className="flex justify-between text-[0.82rem]">
+                        <span className="text-muted-cream">{label}</span>
+                        <span className="font-semibold text-ink">{value}</span>
+                      </div>
+                    ))}
+                  </div>
+
                   {note && (
-                    <p className="text-[0.75rem] text-brand-muted italic mt-4 pt-4 border-t border-brand-border">
+                    <p className="text-[0.75rem] text-muted-cream italic mt-4 pt-4 border-t border-[rgba(19,18,16,0.1)]">
                       {note}
                     </p>
                   )}
-                  <div className="flex-1" />
                 </div>
               </RevealWrapper>
             ))}
