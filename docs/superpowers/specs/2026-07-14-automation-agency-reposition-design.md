@@ -187,7 +187,7 @@ Because most visual identity lives in shared tokens (`tailwind.config.ts`, `glob
 ## 12. Decisions
 
 1. **Starter prices** — ✅ Confirmed: £350 / £750 / £750 / £1,500 / £1,500.
-2. **Restyle existing `/lp` + city pages** (§8) — ⏳ pending (restyle now vs ship homepage + new pages first).
+2. **Restyle existing `/lp` + city pages** (§8) — ✅ **One cohesive release.** Existing `/lp` (×4) and city (×4) pages are restyled to Bold Dark as part of this build; nothing ships until everything matches.
 3. **Contact** — ✅ **Email only.** The phone number `01246 923041` is removed site-wide: no `tel:` links, no phone in the contact section, no `telephone` in JSON-LD. Contact paths = Calendly booking, `hello@automation-agency.co.uk`, and the contact form.
 4. **Voice** — ✅ Conversational "we".
 5. **`sameAs` links** — ⏳ optional; add profile URLs (Google Business / LinkedIn / client sites) when available.
