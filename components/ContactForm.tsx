@@ -48,18 +48,18 @@ export default function ContactForm() {
   }
 
   const inputClass =
-    'w-full bg-bg border border-brand-border rounded-brand px-3.5 py-2.5 text-brand-text text-sm font-sans outline-none focus:border-accent transition-colors placeholder:text-brand-muted/50'
+    'w-full bg-cream border border-[rgba(19,18,16,0.16)] rounded-xl px-3.5 py-2.5 text-ink text-sm font-sans outline-none focus:border-lime transition-colors placeholder:text-muted-cream/60'
 
-  const labelClass = 'block text-[0.72rem] font-semibold tracking-[0.06em] uppercase text-brand-muted mb-1.5'
+  const labelClass = 'block text-[0.72rem] font-bold tracking-[0.06em] uppercase text-muted-cream mb-1.5'
 
   if (status === 'success') {
     return (
-      <div className="bg-white border border-brand-border rounded-brand p-10 flex flex-col items-center text-center gap-4">
-        <div className="w-12 h-12 rounded-full bg-[#e6f4ed] flex items-center justify-center text-[#1a6640] text-xl font-semibold">
+      <div className="bg-cream-2 border border-[rgba(19,18,16,0.12)] rounded-2xl p-10 flex flex-col items-center text-center gap-4">
+        <div className="w-12 h-12 rounded-full bg-lime text-ink flex items-center justify-center text-xl font-display font-bold">
           ✓
         </div>
-        <h3 className="font-serif text-xl font-normal">Message received</h3>
-        <p className="text-sm text-brand-muted leading-relaxed max-w-xs">
+        <h3 className="font-display font-bold text-xl text-ink">Message received</h3>
+        <p className="text-sm text-muted-cream leading-relaxed max-w-xs">
           Check your inbox — we&apos;ve sent a confirmation. We&apos;ll be in touch within 24 hours to arrange a call.
         </p>
       </div>
@@ -67,10 +67,10 @@ export default function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white border border-brand-border rounded-brand p-10 flex flex-col gap-4">
+    <form onSubmit={handleSubmit} className="bg-cream-2 border border-[rgba(19,18,16,0.12)] rounded-2xl p-10 flex flex-col gap-4">
       <div>
-        <h3 className="font-serif text-xl font-normal mb-1">Send us a message</h3>
-        <p className="text-sm text-brand-muted">We respond within 24 hours and will suggest a call time that suits you.</p>
+        <h3 className="font-display font-bold text-xl text-ink mb-1">Send us a message</h3>
+        <p className="text-sm text-muted-cream">We respond within 24 hours and will suggest a call time that suits you.</p>
       </div>
 
       <div>
@@ -106,21 +106,21 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={status === 'loading'}
-        className="btn-primary justify-center py-3 text-sm font-semibold disabled:opacity-60 disabled:cursor-not-allowed"
+        className="btn-lime justify-center w-full disabled:opacity-60 disabled:cursor-not-allowed"
       >
         {status === 'loading' ? 'Sending...' : 'Send Message'}
       </button>
 
       {status === 'error' && (
-        <p className="text-xs text-center text-red-600">
+        <p className="text-xs text-center text-ink font-semibold">
           Something went wrong — email us at{' '}
-          <a href="mailto:hello@automation-agency.co.uk" className="underline">
+          <a href="mailto:hello@automation-agency.co.uk" className="underline decoration-lime decoration-2">
             hello@automation-agency.co.uk
           </a>
         </p>
       )}
 
-      <p className="text-[0.77rem] text-brand-muted text-center">We respond within 24 hours. No spam, ever.</p>
+      <p className="text-[0.77rem] text-muted-cream text-center">We respond within 24 hours. No spam, ever.</p>
     </form>
   )
 }

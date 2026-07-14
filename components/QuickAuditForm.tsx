@@ -67,20 +67,20 @@ export default function QuickAuditForm() {
   }
 
   const inputClass =
-    'w-full bg-bg border border-brand-border rounded-brand px-3.5 py-2.5 text-brand-text text-sm font-sans outline-none focus:border-accent transition-colors placeholder:text-brand-muted/50'
+    'w-full bg-cream border border-[rgba(19,18,16,0.16)] rounded-xl px-3.5 py-2.5 text-ink text-sm font-sans outline-none focus:border-lime transition-colors placeholder:text-muted-cream/60'
   const labelClass =
-    'block text-[0.72rem] font-semibold tracking-[0.06em] uppercase text-brand-muted mb-1.5'
+    'block text-[0.72rem] font-bold tracking-[0.06em] uppercase text-muted-cream mb-1.5'
 
   if (status === 'success') {
     return (
-      <div className="bg-white border border-brand-border rounded-brand p-10 flex flex-col items-center text-center gap-4">
-        <div className="w-12 h-12 rounded-full bg-[#e6f4ed] flex items-center justify-center text-[#1a6640] text-xl font-semibold">
+      <div className="bg-cream-2 border border-[rgba(19,18,16,0.12)] rounded-2xl p-10 flex flex-col items-center text-center gap-4">
+        <div className="w-12 h-12 rounded-full bg-lime text-ink flex items-center justify-center text-xl font-display font-bold">
           ✓
         </div>
-        <h3 className="font-serif text-xl font-normal">Audit on its way</h3>
-        <p className="text-sm text-brand-muted leading-relaxed max-w-md">
-          We&apos;ve received your details and a personalised assessment is being drafted. You&apos;ll get
-          it by email within 24 hours — usually much sooner. No spam, no sales calls.
+        <h3 className="font-display font-bold text-xl text-ink">Audit on its way</h3>
+        <p className="text-sm text-muted-cream leading-relaxed max-w-md">
+          We&apos;ve got your details and we&apos;re putting the assessment together. You&apos;ll hear from us
+          by email soon — usually within 24 hours. No spam, no sales calls.
         </p>
       </div>
     )
@@ -89,7 +89,7 @@ export default function QuickAuditForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-white border border-brand-border rounded-brand p-8 md:p-10 flex flex-col gap-5"
+      className="bg-cream-2 border border-[rgba(19,18,16,0.12)] rounded-2xl p-8 md:p-10 flex flex-col gap-5"
     >
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
@@ -166,10 +166,10 @@ export default function QuickAuditForm() {
               key={s}
               type="button"
               onClick={() => update('teamSize', s)}
-              className={`px-4 py-2 rounded-brand text-sm font-medium border transition-colors ${
+              className={`px-4 py-2 rounded-full text-sm font-semibold font-display border transition-colors ${
                 form.teamSize === s
-                  ? 'border-accent text-accent bg-accent-light'
-                  : 'border-brand-border text-brand-mid hover:border-brand-border-dark'
+                  ? 'border-lime bg-lime text-ink'
+                  : 'border-[rgba(19,18,16,0.16)] text-muted-cream hover:border-ink/40 hover:text-ink'
               }`}
             >
               {s}
@@ -224,22 +224,22 @@ export default function QuickAuditForm() {
       <button
         type="submit"
         disabled={status === 'loading'}
-        className="btn-primary justify-center py-3 text-sm font-semibold disabled:opacity-60 disabled:cursor-not-allowed mt-2"
+        className="btn-lime justify-center w-full disabled:opacity-60 disabled:cursor-not-allowed mt-2"
       >
-        {status === 'loading' ? 'Submitting…' : 'Send me my Quick-Audit'}
+        {status === 'loading' ? 'Submitting…' : 'Send me my free audit'}
       </button>
 
       {status === 'error' && (
-        <p className="text-xs text-center text-red-600">
+        <p className="text-xs text-center text-ink font-semibold">
           Something went wrong — email us at{' '}
-          <a href="mailto:hello@automation-agency.co.uk" className="underline">
+          <a href="mailto:hello@automation-agency.co.uk" className="underline decoration-lime decoration-2">
             hello@automation-agency.co.uk
           </a>
         </p>
       )}
 
-      <p className="text-[0.77rem] text-brand-muted text-center">
-        Personalised assessment within 24 hours. No spam, ever.
+      <p className="text-[0.77rem] text-muted-cream text-center">
+        No commitment. No spam, ever.
       </p>
     </form>
   )

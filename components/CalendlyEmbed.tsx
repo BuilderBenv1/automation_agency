@@ -43,7 +43,7 @@ export default function CalendlyEmbed({ height = 700 }: { height?: number }) {
 
   return (
     <div
-      className="calendly-inline-widget bg-white border border-brand-border rounded-brand overflow-hidden"
+      className="calendly-inline-widget bg-cream-2 border border-[rgba(19,18,16,0.12)] rounded-2xl overflow-hidden"
       data-url={CALENDLY_URL}
       style={{ minWidth: '320px', height: `${height}px` }}
     />
