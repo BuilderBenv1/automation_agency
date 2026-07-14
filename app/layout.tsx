@@ -131,7 +131,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }}
         />
       </head>
-      <body className="bg-bg text-brand-text font-sans antialiased overflow-x-hidden">
+      <body className="bg-ink text-cream font-sans antialiased overflow-x-hidden">
         {children}
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ADS_ID}`}

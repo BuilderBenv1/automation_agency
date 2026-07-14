@@ -24,7 +24,7 @@ const config: Config = {
         'muted-cream': '#5f5648',
       },
       fontFamily: {
-        sans: ['var(--font-instrument-sans)', 'system-ui', 'sans-serif'],
+        sans: ['var(--font-archivo)', 'system-ui', 'sans-serif'],
         display: ['var(--font-archivo)', 'system-ui', 'sans-serif'],
       },
       fontSize: {

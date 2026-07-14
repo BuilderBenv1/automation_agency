@@ -19,7 +19,7 @@
 
 @layer utilities {
   .font-sans {
-    font-family: var(--font-instrument-sans), system-ui, sans-serif;
+    font-family: var(--font-archivo), system-ui, sans-serif;
   }
 
   /* Eyebrow label with leading line */
