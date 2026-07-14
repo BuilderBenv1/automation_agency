@@ -4,9 +4,12 @@ import Footer from '@/components/Footer'
 import ContactForm from '@/components/ContactForm'
 import CalendlyEmbed from '@/components/CalendlyEmbed'
 import RevealWrapper from '@/components/RevealWrapper'
+import Marquee from '@/components/Marquee'
 
 export const metadata: Metadata = {
-  title: 'The Automation Agency — AI & Process Automation for UK Businesses',
+  title: 'Automation Agency UK | n8n, Zapier, AI Agents & Chatbots',
+  description:
+    'UK automation agency building n8n, Zapier and Make workflows, AI agents, WhatsApp chatbots, CRM automation, dashboards and custom integrations for growing businesses. Fixed prices.',
   alternates: { canonical: 'https://www.automation-agency.co.uk' },
 }
 
@@ -174,6 +177,24 @@ const pricingTiers = [
   },
 ]
 
+const heroStats: [string, string][] = [
+  ['10+ yrs', 'shipping production systems'],
+  ['6', 'live data sources automated (Punthub)'],
+  ['97%', 'boroughs covered (PlusRooms)'],
+  ['5/5', 'on Google'],
+]
+
+const popularAutomations = [
+  <>New enquiry → straight into your <em className="not-italic font-semibold text-lime">CRM</em>, with a Slack or email nudge</>,
+  <>Website or <em className="not-italic font-semibold text-lime">WhatsApp</em> message → booked in → your team notified</>,
+  <>Messy inbox → <em className="not-italic font-semibold text-lime">AI reads it</em>, summarises, drops it in a sheet</>,
+  <>Google Sheet → tidy report → <em className="not-italic font-semibold text-lime">emailed to your client</em> on schedule</>,
+  <><em className="not-italic font-semibold text-lime">Stripe</em> payment → CRM updated, receipt sent, subscription sorted</>,
+  <>Broken <em className="not-italic font-semibold text-lime">Zapier or Make</em> flow → rebuilt so it stops falling over</>,
+  <><em className="not-italic font-semibold text-lime">Telegram bot</em> for alerts, content delivery or internal tools</>,
+  <><em className="not-italic font-semibold text-lime">AI chatbot</em> for FAQs, bookings and lead capture</>,
+]
+
 /* ─────────────────────────── PAGE ─────────────────────────── */
 
 export default function HomePage() {
@@ -182,100 +203,74 @@ export default function HomePage() {
       <Nav />
 
       {/* HERO */}
-      <div className="max-w-[1280px] mx-auto bg-bg">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center px-14 pt-[148px] pb-24 min-h-screen">
-          <div style={{ animation: 'fadeUp 0.7s ease both' }}>
-            <div className="eyebrow mb-7">AI &amp; Process Automation · UK</div>
-            <h1 className="font-serif font-normal text-display-xl text-brand-text mb-6">
-              Your team is doing work{' '}
-              <em className="not-italic text-accent">a machine should do.</em>
-            </h1>
-            <p className="text-[1.05rem] text-brand-mid leading-[1.75] mb-4 max-w-[500px]">
-              We identify the manual work eating your team&apos;s hours. We build the AI agents and
-              automation systems that handle it. Fixed prices, scoped within 48 hours of your first call.
-            </p>
-            <p className="text-[0.9rem] text-brand-muted leading-[1.7] mb-9 max-w-[500px]">
-              Not ready to talk yet?{' '}
-              <a href="/quick-audit" className="text-accent hover:underline">
-                Get a free 24-hour Quick-Audit by email
-              </a>{' '}
-              — 7 questions, no commitment.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3 flex-wrap">
-              <a href="#contact" className="btn-primary px-6 py-3 text-[0.9rem] font-semibold text-center">
-                Book Free Discovery Call
-              </a>
-              <a href="/audit" className="btn-outline px-6 py-3 text-[0.9rem] font-semibold text-center">
-                Process Audit — £1,500
-              </a>
-            </div>
+      <div className="bg-ink text-cream">
+        <div className="max-w-[1180px] mx-auto px-8 md:px-14 pt-32 pb-16">
+          <div className="kicker mb-6">AI · n8n · Chatbots · Custom builds · UK</div>
+
+          <h1 className="font-display font-black text-h1-mega uppercase mb-8">
+            Your busywork,
+            <br />
+            <span className="text-lime">automated.</span>{' '}
+            <span className="outline-text">Properly.</span>
+          </h1>
+
+          <p className="text-muted-dark leading-[1.7] max-w-[36em] mb-10 text-[1.05rem]">
+            We build the automations your team keeps doing by hand —{' '}
+            <b className="text-cream">
+              n8n and Zapier workflows, WhatsApp chatbots, CRM and spreadsheet sync, AI agents and custom
+              integrations
+            </b>{' '}
+            — with senior engineering behind them. Fixed scope, clear handover, no vague AI promises.
+          </p>
+
+          <div className="flex flex-wrap gap-4 mb-14">
+            <a href="#contact" className="btn-lime">
+              Book a free automation audit
+            </a>
+            <a href="#services" className="btn-ghost">
+              See fixed-price services →
+            </a>
           </div>
 
-          <div style={{ animation: 'fadeUp 0.7s 0.15s ease both' }}>
-            <div className="bg-navy text-white rounded-[6px] p-12 relative overflow-hidden">
-              <div
-                className="absolute -top-20 -right-20 w-60 h-60 rounded-full pointer-events-none"
-                style={{ background: 'radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 70%)' }}
-              />
-              <p className="text-[0.72rem] font-semibold tracking-[0.12em] uppercase text-white/35 mb-9">
-                The opportunity
-              </p>
-              <div className="grid grid-cols-2 gap-8 mb-11">
-                {[
-                  ['<10%', 'of UK businesses run any agentic workflow today'],
-                  ['34%', 'AI adoption growth among UK businesses in 2025'],
-                  ['10+', 'Years building production automation systems'],
-                  ['2–4wk', 'Typical time from scoped proposal to live system'],
-                ].map(([stat, label]) => (
-                  <div key={stat}>
-                    <h3 className="font-serif font-normal text-[2.6rem] text-white tracking-[-0.03em] leading-none">{stat}</h3>
-                    <p className="text-[0.8rem] text-white/40 mt-1.5 leading-snug">{label}</p>
-                  </div>
-                ))}
-              </div>
-              <div className="h-px bg-white/8 mb-7" />
-              <p className="text-[0.85rem] text-white/45 leading-relaxed">
-                <strong className="text-white/85 font-semibold">Based in Derbyshire.</strong> Working with
-                businesses across the UK. Every project is fixed-price, scoped within 48 hours of your
-                first call.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* TRUSTED BY STRIP */}
-      <div className="bg-bg-2 border-t border-b border-brand-border py-6 px-14">
-        <div className="max-w-[1280px] mx-auto flex flex-col md:flex-row md:items-center gap-5 md:gap-12">
-          <span className="text-[0.7rem] font-semibold tracking-[0.12em] uppercase text-brand-muted whitespace-nowrap flex-shrink-0">
-            Trusted by
-          </span>
-          <div className="flex flex-wrap gap-x-10 gap-y-3 items-center">
-            {[
-              { name: 'Marmadbir', url: 'https://www.marmadbir.com/' },
-              { name: 'Punthub', url: 'https://punthub.co.uk/' },
-              { name: 'PlusRooms', url: 'https://plusrooms.co.uk/' },
-            ].map(({ name, url }) => (
-              <a
-                key={name}
-                href={url}
-                target="_blank"
-                rel="noopener"
-                className="font-serif text-[1.15rem] text-brand-text hover:text-accent no-underline transition-colors"
-              >
-                {name}
-              </a>
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-[0.9rem] text-muted-dark pb-10 border-b border-[rgba(244,237,224,0.14)] mb-10">
+            {heroStats.map(([stat, label], i) => (
+              <span key={label} className="flex items-center gap-x-3">
+                {i > 0 && (
+                  <span aria-hidden="true" className="text-muted-dark">
+                    ·
+                  </span>
+                )}
+                <span>
+                  <b className="text-lime font-display">{stat}</b> {label}
+                </span>
+              </span>
             ))}
-            <span className="text-[0.83rem] text-brand-muted italic">
-              and more across the UK
-            </span>
           </div>
-          <div className="hidden lg:flex items-center gap-2 ml-auto text-[0.78rem] text-brand-muted">
-            <span className="font-semibold tracking-[0.12em] uppercase text-[0.7rem]">Built with</span>
-            <span>Python · Next.js · Claude · OpenAI · Supabase · Twilio</span>
-          </div>
+
+          <Marquee />
         </div>
       </div>
+
+      {/* POPULAR AUTOMATIONS */}
+      <section className="bg-cream text-ink">
+        <div className="max-w-[1180px] mx-auto px-8 md:px-14 py-20 md:py-28">
+          <div className="kicker-cream mb-5">Popular automations we build</div>
+          <h2 className="font-display font-black text-h2-band uppercase text-ink mb-12 max-w-[16ch]">
+            The jobs people ask us for most.
+          </h2>
+
+          <ol className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-10 list-none">
+            {popularAutomations.map((item, i) => (
+              <li key={i} className="flex gap-5 items-start">
+                <span className="font-display font-black text-lime text-xl leading-none flex-shrink-0">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <p className="text-ink leading-[1.6]">{item}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
 
       {/* TESTIMONIAL */}
       <section className="py-20 border-b border-brand-border bg-bg">
