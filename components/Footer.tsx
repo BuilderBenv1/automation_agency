@@ -7,6 +7,7 @@ const navLinks = [
   { href: '/#about', label: 'About' },
   { href: '/#contact', label: 'Contact' },
   { href: '/quick-audit', label: 'Free Quick-Audit' },
+  { href: '/tools/social', label: 'Social post generator' },
   { href: '/audit', label: 'Process Audit' },
 ]
 
