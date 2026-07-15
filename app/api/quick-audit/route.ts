@@ -14,6 +14,22 @@ type QuickAuditPayload = {
   tools?: string
   processes?: string
   pain?: string
+  src?: string
+}
+
+// Map short social codes to human-readable channels for the notification email.
+const SOURCE_LABELS: Record<string, string> = {
+  li: 'LinkedIn',
+  fb: 'Facebook (page)',
+  fbg: 'Facebook (group)',
+  ig: 'Instagram',
+  tool: 'Social post generator (/tools/social)',
+}
+
+function labelSource(src?: string): string {
+  if (!src) return 'Direct / unknown'
+  const clean = src.slice(0, 40)
+  return SOURCE_LABELS[clean.toLowerCase()] || clean
 }
 
 export async function POST(req: NextRequest) {
@@ -29,7 +45,8 @@ export async function POST(req: NextRequest) {
     const resend = new Resend(resendKey)
 
     const payload = (await req.json()) as QuickAuditPayload
-    const { name, email, company, industry, teamSize, tools, processes, pain } = payload
+    const { name, email, company, industry, teamSize, tools, processes, pain, src } = payload
+    const sourceLabel = labelSource(src)
 
     if (!name || !email || !processes) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
@@ -88,12 +105,13 @@ Write the Quick-Audit now.`,
     await resend.emails.send({
       from: 'noreply@automation-agency.co.uk',
       to: OWNER_EMAIL,
-      subject: `Quick-Audit submitted: ${name}${company ? ` — ${company}` : ''}`,
+      subject: `Quick-Audit [${sourceLabel}]: ${name}${company ? ` — ${company}` : ''}`,
       html: `
         <div style="font-family:sans-serif;max-width:640px;margin:0 auto;color:#141210;">
           <h2 style="color:#0f1b2d;margin-bottom:20px;">New Quick-Audit Submission</h2>
           <table style="width:100%;border-collapse:collapse;margin-bottom:24px;font-size:14px;">
-            <tr><td style="padding:6px 0;color:#767b82;width:140px;">Name</td><td style="padding:6px 0;font-weight:600;">${name}</td></tr>
+            <tr><td style="padding:6px 0;color:#767b82;width:140px;">Source</td><td style="padding:6px 0;font-weight:600;">${sourceLabel}</td></tr>
+            <tr><td style="padding:6px 0;color:#767b82;">Name</td><td style="padding:6px 0;font-weight:600;">${name}</td></tr>
             <tr><td style="padding:6px 0;color:#767b82;">Email</td><td style="padding:6px 0;"><a href="mailto:${email}">${email}</a></td></tr>
             <tr><td style="padding:6px 0;color:#767b82;">Company</td><td style="padding:6px 0;">${company || '—'}</td></tr>
             <tr><td style="padding:6px 0;color:#767b82;">Industry</td><td style="padding:6px 0;">${industry || '—'}</td></tr>

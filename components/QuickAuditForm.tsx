@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 type Status = 'idle' | 'loading' | 'success' | 'error'
 
@@ -34,6 +34,15 @@ const teamSizes = ['1–5', '6–20', '21–50', '51–200', '200+']
 export default function QuickAuditForm() {
   const [status, setStatus] = useState<Status>('idle')
   const [form, setForm] = useState(initial)
+  const [src, setSrc] = useState('')
+
+  // Capture the traffic source (?src=li / ?src=fb / ?utm_source=…) so we can
+  // see which channel a lead came from. Read once on mount; no Suspense needed.
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    const s = params.get('src') || params.get('utm_source') || ''
+    if (s) setSrc(s.slice(0, 40))
+  }, [])
 
   function update<K extends keyof typeof initial>(key: K, value: string) {
     setForm((prev) => ({ ...prev, [key]: value }))
@@ -47,7 +56,7 @@ export default function QuickAuditForm() {
       const res = await fetch('/api/quick-audit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, src }),
       })
       if (!res.ok) throw new Error()
       setStatus('success')
@@ -59,6 +68,7 @@ export default function QuickAuditForm() {
         window.gtag('event', 'generate_lead', {
           method: 'quick_audit',
           industry: form.industry || 'unspecified',
+          source: src || 'direct',
         })
       }
     } catch {
