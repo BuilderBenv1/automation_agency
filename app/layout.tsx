@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Archivo } from 'next/font/google'
 import Script from 'next/script'
+import ConversionTracker from '@/components/ConversionTracker'
 import './globals.css'
 
 const GOOGLE_ADS_ID = 'AW-18121615285'
@@ -133,6 +134,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className="bg-ink text-cream font-sans antialiased overflow-x-hidden">
         {children}
+        <ConversionTracker />
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ADS_ID}`}
           strategy="afterInteractive"

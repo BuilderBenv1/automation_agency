@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
 
     // ── Claude agent: generate personalised acknowledgement ──
     const aiResponse = await anthropic.messages.create({
-      model: 'claude-sonnet-4-20250514',
+      model: 'claude-opus-4-8',
       max_tokens: 400,
       messages: [
         {

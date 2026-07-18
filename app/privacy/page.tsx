@@ -18,7 +18,7 @@ export default function PrivacyPage() {
         <div className="max-w-[840px] mx-auto px-8 md:px-14 pt-32 md:pt-36 pb-14">
           <div className="kicker mb-6">Legal</div>
           <h1 className="font-display font-black text-display-lg uppercase mb-4">Privacy Policy</h1>
-          <p className="text-[0.85rem] text-muted-dark">Last updated: April 2026</p>
+          <p className="text-[0.85rem] text-muted-dark">Last updated: July 2026</p>
         </div>
       </div>
 
@@ -54,8 +54,21 @@ export default function PrivacyPage() {
             email. Your data is not used to train AI models.
           </p>
           <p className="text-[0.95rem] text-muted-cream leading-[1.8] mb-4">
-            We use Plausible Analytics for website analytics. Plausible is cookieless and GDPR compliant — no
-            personal data is collected, no cookies are set, and no consent is required.
+            We use Plausible Analytics for website analytics. Plausible is cookieless and GDPR compliant — it
+            collects no personal data and sets no cookies.
+          </p>
+          <p className="text-[0.95rem] text-muted-cream leading-[1.8] mb-4">
+            We also use Google Ads conversion tracking to measure whether our advertising leads to enquiries. When
+            you submit the form or book a call, this records a conversion and shares limited data with Google, and
+            it sets first-party advertising cookies (such as{' '}
+            <span className="font-mono text-[0.9em] text-ink">_gcl_au</span>). See our{' '}
+            <a
+              href="/cookies"
+              className="text-ink underline decoration-lime decoration-2 underline-offset-4"
+            >
+              Cookie Policy
+            </a>{' '}
+            for the full list and how to opt out.
           </p>
 
           <h2 className="font-display font-bold text-[1.4rem] text-ink mt-12 mb-3">3. How We Use Your Data</h2>
@@ -67,8 +80,9 @@ export default function PrivacyPage() {
 
           <h2 className="font-display font-bold text-[1.4rem] text-ink mt-12 mb-3">4. Third-Party Processors</h2>
           <p className="text-[0.95rem] text-muted-cream leading-[1.8] mb-4">
-            We use Resend (email delivery), Vercel (hosting), Anthropic (AI processing of enquiry messages), and
-            Plausible (cookieless analytics). Each operates under appropriate data protection agreements.
+            We use Resend (email delivery), Vercel (hosting), Anthropic (AI processing of enquiry messages),
+            Plausible (cookieless analytics), and Google (Google Ads conversion tracking). Each operates under
+            appropriate data protection agreements.
           </p>
 
           <h2 className="font-display font-bold text-[1.4rem] text-ink mt-12 mb-3">5. Data Retention</h2>

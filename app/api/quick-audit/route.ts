@@ -41,7 +41,7 @@ export async function POST(req: NextRequest) {
 
     // ── Claude: generate tailored 1-page Quick-Audit ──
     const aiResponse = await anthropic.messages.create({
-      model: 'claude-sonnet-4-20250514',
+      model: 'claude-opus-4-8',
       max_tokens: 1200,
       messages: [
         {
