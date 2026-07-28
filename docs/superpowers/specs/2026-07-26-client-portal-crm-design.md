@@ -1,7 +1,9 @@
 # Client Portal + Lead CRM — Design Spec
 
 **Date:** 2026-07-26
-**Status:** Approved (brainstorm) — pending implementation plan
+**Status:** Approved (brainstorm) — Phase 1 plan written
+**Revised:** 2026-07-28 — foundation changed from Supabase to **Neon Postgres** (Vercel
+Marketplace); auth and file storage are now added per phase rather than bundled.
 **Owner:** Ben Horne (The Automation Agency)
 
 ## Goal
@@ -31,9 +33,10 @@ Designed as one connected system; **built in two phases** so the live pain is fi
   Vercel). No separate app. Two new **authenticated** route groups beside the public
   marketing site:
   - `/admin/*` — Ben's CRM (single admin).
-  - `/portal/*` — client onboarding (invited magic-link users).
-- **Foundation:** Supabase — Postgres (data), Auth (admin + client magic-link), Storage (file
-  repo), Row-Level Security (per-client isolation).
+  - `/portal/*` — client onboarding (invited users).
+- **Foundation:** **Neon Postgres** via the Vercel Marketplace (auto-injected `DATABASE_URL`).
+  Postgres only — auth and file storage are added **per phase** (see below), not bundled. This
+  keeps everything in the Vercel ecosystem and free.
 - **Email:** Resend (already integrated) for the daily digest and portal invites.
 - **Scheduling:** Vercel Cron for the daily digest.
 
@@ -45,7 +48,7 @@ A lead and a client are the **same `contacts` row** with a `status` lifecycle:
 
 Marking a contact **won** is the single event that (Phase 2) triggers the portal invite.
 
-## Data model (Supabase / Postgres)
+## Data model (Neon Postgres)
 
 **Phase 1**
 
@@ -62,7 +65,7 @@ Marking a contact **won** is the single event that (Phase 2) triggers the portal
 - **contracts** — `id`, `contact_id`, `status` (`draft` | `sent` | `signed`),
   `provider_ref`, `signed_pdf_path`, `signed_at`.
 - **files** — `id`, `contact_id`, `storage_path`, `filename`, `size_bytes`, `uploaded_by`,
-  `created_at`. (Bytes live in Supabase Storage, RLS-scoped.)
+  `created_at`. (Bytes live in **Vercel Blob**, keyed by `contact_id`.)
 
 ## Phase 1 — Lead CRM + follow-up
 
@@ -80,7 +83,8 @@ Resend/Claude work, upsert into `contacts` by email:
 
 ### 2. Admin board (`/admin`)
 
-- **Auth:** Supabase Auth; access restricted to Ben's email (allowlist / single admin).
+- **Auth:** a single-admin session gate (password → signed cookie; see Cross-cutting). One
+  user, so it's kept light.
 - **Table view** (not Kanban in Phase 1): columns name · company · source · status ·
   days-waiting. Overdue rows highlighted. Filter by status.
 - **Detail view:** contact info, original message, activity timeline, editable notes, a status
@@ -100,33 +104,40 @@ Resend/Claude work, upsert into `contacts` by email:
 
 ## Phase 2 — Client portal
 
-- **Invite:** marking a contact `won` → generate a Supabase magic-link invite → Resend email →
-  client accesses `/portal`. The client user is tied to their `contact_id`.
+- **Invite:** marking a contact `won` → generate a magic-link invite (**Auth.js** or **Clerk**,
+  added in Phase 2) → Resend email → client accesses `/portal`. The client user is tied to
+  their `contact_id`.
 - **Guided checklist** in `/portal`: ① intake form → `intake_responses`; ② review & sign
   contract; ③ upload files. Progress is shown so onboarding feels guided.
 - **Contract (e-sign):** integrate a **real e-sign provider** — recommended **Documenso**
   (open-source, self-hostable) or **SignWell** (hosted API). Never a homemade acceptance
-  checkbox — the contract is legally binding. Signed PDF + audit trail → `contracts` +
-  Storage. Provider is finalized at Phase 2 build time.
-- **File repo:** client uploads → Supabase Storage, path/RLS scoped to their `contact_id`.
-  Ben views all uploads from `/admin`.
+  checkbox — the contract is legally binding. Signed PDF + audit trail → `contracts` + Blob.
+  Provider is finalized at Phase 2 build time.
+- **File repo:** client uploads → **Vercel Blob**, keyed by their `contact_id`; access
+  authorized in the app layer. Ben views all uploads from `/admin`.
 
 ## Cross-cutting
 
-- **Auth:** Supabase Auth. Admin = allowlisted email(s). Clients = invited magic-link users,
-  each mapped to a `contacts` row.
-- **Security (RLS):** every table has row-level security. Clients can read/write only rows
-  where `contact_id` = their own; admin (Ben) sees all via role. RLS policies ship with the
-  migration and are tested explicitly.
+- **Auth:** **Phase 1** — a single-admin gate: a login route checks `ADMIN_PASSWORD` and
+  issues a signed (`jose` JWT) httpOnly session cookie; middleware verifies it for `/admin/*`.
+  No auth service, no extra tables. **Phase 2** — client logins via Auth.js or Clerk, each user
+  mapped to a `contacts` row.
+- **Security:** **Phase 1** — all DB access is server-side over `DATABASE_URL`; there is only
+  one (admin) user, so no per-row isolation is needed. **Phase 2** — client data isolation is
+  enforced by **app-layer query scoping** (every client query filtered to their own
+  `contact_id`), since Neon has no Supabase-style request-scoped RLS. Tested explicitly.
 - **Error handling:** capture never blocks the enquiry email; cron/digest failures alert Ben
   (log + optional error email); e-sign and upload failures surface clearly to the client with
   a retry.
-- **Testing:** unit — the staleness query + digest builder; security — a test proving client A
-  cannot read client B's rows; integration — a form submission creates the contact + activity.
+- **Testing:** unit — the staleness rule + digest builder (foundation-agnostic pure logic);
+  integration — a form submission creates the contact + activity. (Phase 2 adds the app-layer
+  authorization test proving client A cannot read client B's data.)
 
 ## Open knobs (defaults chosen, easily changed)
 
+- Foundation = **Neon Postgres on Vercel** (Postgres-only; auth + storage added per phase).
 - Admin board = **table** (Kanban drag-drop is a later polish).
+- Admin auth = **password + signed cookie** (magic-link is an easy swap if preferred).
 - Staleness threshold = **48h**; open-status set = {`new`, `contacted`, `proposal`}.
 - E-sign provider = **Documenso** (default) vs SignWell — locked at Phase 2 build.
 - Digest send time ≈ **08:00** (Ben's timezone).

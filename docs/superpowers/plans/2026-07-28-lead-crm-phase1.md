@@ -1,78 +1,80 @@
-# Lead CRM (Phase 1) Implementation Plan
+# Lead CRM (Phase 1) Implementation Plan — Neon foundation
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Capture every website enquiry into a Supabase-backed CRM, show them on an admin board, and email Ben a daily digest of leads that have gone stale.
+**Goal:** Capture every website enquiry into a Neon-Postgres CRM, show them on an admin board, and email Ben a daily digest of leads that have gone stale.
 
-**Architecture:** New authenticated `/admin` area inside the existing Next.js app, backed by Supabase (Postgres + Auth + RLS). Existing contact/quick-audit API routes gain a best-effort CRM write. A Vercel Cron route sends a daily "leads waiting on you" digest via Resend. Pure business logic (staleness, digest building) is isolated in `lib/crm/` and unit-tested; Supabase and framework glue are thin wrappers around it.
+**Architecture:** New authenticated `/admin` area inside the existing Next.js app, backed by Neon Postgres (via the Vercel Marketplace, auto-injected `DATABASE_URL`). Existing contact/quick-audit API routes gain a best-effort CRM write. A single-admin session gate (password → signed `jose` cookie) protects `/admin`. A Vercel Cron route sends a daily "leads waiting on you" digest via Resend. Pure business logic (staleness, digest) is isolated in `lib/crm/` and unit-tested; DB and framework glue are thin wrappers around it.
 
-**Tech Stack:** Next.js 14.2.5 (App Router), TypeScript, Tailwind, Supabase (`@supabase/supabase-js`, `@supabase/ssr`), Resend (already installed), Vitest (new), Vercel Cron.
+**Tech Stack:** Next.js 14.2.5 (App Router), TypeScript, Tailwind, Neon (`@neondatabase/serverless`), `jose` (admin session), Resend (already installed), Vitest (new), Vercel Cron.
 
 ## Global Constraints
 
 - Next.js **14.2.5**, App Router, TypeScript strict; import alias `@/` maps to repo root.
-- API/cron/admin code that uses the Supabase **service role** must run on the Node runtime (`export const runtime = 'nodejs'`).
+- API/cron/admin data code runs on the Node runtime (`export const runtime = 'nodejs'`). Middleware runs on Edge (jose verifies there fine).
 - **The enquiry email is sacred:** CRM capture is best-effort — wrapped so it can never throw into, delay, or fail the existing `/api/contact` and `/api/quick-audit` responses.
 - **Do not touch** the existing `window.gtag` conversion firing or the Resend/Claude email logic in the two API routes beyond appending the capture call.
-- Secrets are **server-only**: `SUPABASE_SERVICE_ROLE_KEY`, `CRON_SECRET`, `ADMIN_EMAILS` must never be exposed via `NEXT_PUBLIC_*`. Only `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` are public.
-- Admin UI matches existing design tokens (`ink`, `cream`, `cream-2`, `lime`, `muted-cream`) and `font-display`/`font-sans`.
+- Secrets are **server-only**: `DATABASE_URL`, `ADMIN_PASSWORD`, `ADMIN_SESSION_SECRET`, `CRON_SECRET`. Only `NEXT_PUBLIC_SITE_URL` is public.
+- Provisioning is Ben's: Neon is created via **Vercel dashboard → Storage → Neon**, which injects `DATABASE_URL` into the project. Locally it lives in `.env.local`.
+- Admin UI matches existing design tokens (`ink`, `cream`, `cream-2`, `lime`, `muted-cream`, `muted-dark`) and `font-display`/`font-sans`.
 - Statuses: `new | contacted | proposal | won | onboarding | active | lost`. Open (stale-eligible) set: `new | contacted | proposal`. Stale threshold: **48h**.
+- No RLS (Neon is plain Postgres; all Phase-1 DB access is server-side over `DATABASE_URL`, single admin).
 
 ---
 
 ## File Structure
 
 **Create:**
-- `supabase/migrations/0001_crm_phase1.sql` — tables, enum, indexes, RLS.
+- `db/migrations/0001_crm_phase1.sql` — tables, enum, indexes.
+- `scripts/migrate.mjs` — applies pending SQL migrations (tracked in `schema_migrations`).
+- `lib/db.ts` — Neon SQL client (`neon(DATABASE_URL)`).
+- `lib/auth.ts` — `createSession`, `verifySession` (jose HS256).
 - `lib/crm/types.ts` — `Contact`, `Activity`, `ContactStatus`, constants.
 - `lib/crm/staleness.ts` — `daysWaiting`, `hoursWaiting`, `isOverdue`, `OPEN_STATUSES`, `STALE_THRESHOLD_HOURS`.
 - `lib/crm/digest.ts` — `buildDigestEmail`.
-- `lib/crm/contacts.ts` — Supabase data layer (capture + board queries).
-- `lib/supabase/admin.ts` — service-role client (server-only).
-- `lib/supabase/server.ts` — SSR server client (cookie-based, for admin auth).
-- `lib/supabase/client.ts` — browser client.
+- `lib/crm/contacts.ts` — Neon data layer.
 - `lib/crm/staleness.test.ts`, `lib/crm/digest.test.ts` — Vitest unit tests.
-- `app/api/cron/lead-digest/route.ts` — daily digest cron.
-- `middleware.ts` — refresh session + protect `/admin`.
-- `app/admin/login/page.tsx` — magic-link login.
-- `app/admin/layout.tsx` — admin shell + sign-out.
-- `app/admin/page.tsx` — board (table).
-- `app/admin/contacts/[id]/page.tsx` — detail view.
-- `app/admin/actions.ts` — server actions (log reply, change status, add note, manual add).
+- `middleware.ts` — protect `/admin` via session cookie.
+- `app/api/admin/login/route.ts` — password → signed cookie.
+- `app/admin/login/page.tsx` — login form.
+- `app/admin/layout.tsx`, `app/admin/page.tsx`, `app/admin/contacts/[id]/page.tsx`, `app/admin/actions.ts`.
+- `app/api/cron/lead-digest/route.ts` — daily digest.
 - `vitest.config.ts`, `vercel.json`.
 
 **Modify:**
-- `app/api/contact/route.ts` — append best-effort capture.
-- `app/api/quick-audit/route.ts` — append best-effort capture.
-- `package.json` — deps + `test` script.
+- `app/api/contact/route.ts`, `app/api/quick-audit/route.ts` — append best-effort capture.
+- `package.json` — deps + `test`/`db:migrate` scripts.
 
 ---
 
-## Task 1: Tooling, deps, and Supabase clients
+## Task 1: Tooling, deps, Neon client, migrate runner
 
 **Files:**
 - Modify: `package.json`
-- Create: `vitest.config.ts`, `lib/supabase/admin.ts`, `lib/supabase/server.ts`, `lib/supabase/client.ts`
+- Create: `vitest.config.ts`, `lib/db.ts`, `scripts/migrate.mjs`
 - Test: `lib/crm/sanity.test.ts` (temporary)
 
 **Interfaces:**
-- Produces: `createAdminClient()` → service-role `SupabaseClient` (server-only, bypasses RLS); `createServerClient()` → cookie-bound SSR client; `createBrowserClient()` → browser client.
+- Produces: `sql` — a Neon `NeonQueryFunction` from `lib/db.ts` (tagged-template SQL); `npm run db:migrate` applies `db/migrations/*.sql`.
 
 - [ ] **Step 1: Install dependencies**
 
 ```bash
-npm install @supabase/supabase-js @supabase/ssr
+npm install @neondatabase/serverless jose
 npm install -D vitest
 ```
 
-- [ ] **Step 2: Add test script to package.json**
+- [ ] **Step 2: Add scripts to package.json**
 
-In `package.json` `"scripts"`, add:
+In `"scripts"` add:
 
 ```json
 "test": "vitest run",
-"test:watch": "vitest"
+"test:watch": "vitest",
+"db:migrate": "node --env-file=.env.local scripts/migrate.mjs"
 ```
+
+(`--env-file` needs Node ≥ 20.6; if older, `export DATABASE_URL=...` before running.)
 
 - [ ] **Step 3: Create vitest.config.ts**
 
@@ -80,110 +82,79 @@ In `package.json` `"scripts"`, add:
 import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
-  test: {
-    environment: 'node',
-    include: ['lib/**/*.test.ts'],
-  },
+  test: { environment: 'node', include: ['lib/**/*.test.ts'] },
 })
 ```
 
-- [ ] **Step 4: Write a sanity test and confirm the runner works**
+- [ ] **Step 4: Sanity test + confirm the runner works**
 
 Create `lib/crm/sanity.test.ts`:
 
 ```ts
 import { describe, it, expect } from 'vitest'
-
-describe('vitest', () => {
-  it('runs', () => {
-    expect(1 + 1).toBe(2)
-  })
-})
+describe('vitest', () => { it('runs', () => { expect(1 + 1).toBe(2) }) })
 ```
 
-- [ ] **Step 5: Run it**
+Run: `npm test` → 1 passing test. Then delete `lib/crm/sanity.test.ts`.
 
-Run: `npm test`
-Expected: 1 passing test. Then delete `lib/crm/sanity.test.ts`.
-
-- [ ] **Step 6: Create the service-role client (`lib/supabase/admin.ts`)**
+- [ ] **Step 5: Create the Neon client (`lib/db.ts`)**
 
 ```ts
-import { createClient, type SupabaseClient } from '@supabase/supabase-js'
+import { neon } from '@neondatabase/serverless'
 
-// Server-only. Uses the service role key and bypasses RLS. Never import from client components.
-export function createAdminClient(): SupabaseClient {
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY
-  if (!url || !key) throw new Error('Supabase admin env vars missing')
-  return createClient(url, key, { auth: { persistSession: false } })
-}
+// Server-only. DATABASE_URL is injected by the Vercel Neon integration (and lives in
+// .env.local for local dev). Never import this from a client component.
+export const sql = neon(process.env.DATABASE_URL!)
 ```
 
-- [ ] **Step 7: Create the SSR + browser clients**
+- [ ] **Step 6: Create the migrate runner (`scripts/migrate.mjs`)**
 
-`lib/supabase/server.ts`:
+```js
+import { readFileSync, readdirSync } from 'node:fs'
+import { neon } from '@neondatabase/serverless'
 
-```ts
-import { createServerClient as createSSRClient } from '@supabase/ssr'
-import { cookies } from 'next/headers'
+if (!process.env.DATABASE_URL) throw new Error('DATABASE_URL not set')
+const sql = neon(process.env.DATABASE_URL)
 
-export function createServerClient() {
-  const cookieStore = cookies()
-  return createSSRClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
-      cookies: {
-        getAll: () => cookieStore.getAll(),
-        setAll: (all) => {
-          try {
-            all.forEach(({ name, value, options }) => cookieStore.set(name, value, options))
-          } catch {
-            // called from a Server Component — safe to ignore; middleware refreshes the session
-          }
-        },
-      },
-    },
-  )
+await sql.query(
+  'create table if not exists schema_migrations (name text primary key, applied_at timestamptz default now())',
+)
+const applied = new Set((await sql.query('select name from schema_migrations')).map((r) => r.name))
+const files = readdirSync('db/migrations').filter((f) => f.endsWith('.sql')).sort()
+
+for (const file of files) {
+  if (applied.has(file)) { console.log(`skip ${file}`); continue }
+  const body = readFileSync(`db/migrations/${file}`, 'utf8')
+  // Simple DDL migrations only — split on ';'. Do not put ';' inside string literals/function bodies.
+  const statements = body.split(';').map((s) => s.trim()).filter(Boolean)
+  for (const stmt of statements) await sql.query(stmt)
+  await sql.query('insert into schema_migrations (name) values ($1)', [file])
+  console.log(`applied ${file}`)
 }
+console.log('migrations up to date')
 ```
 
-`lib/supabase/client.ts`:
-
-```ts
-'use client'
-import { createBrowserClient as createSSRBrowserClient } from '@supabase/ssr'
-
-export function createBrowserClient() {
-  return createSSRBrowserClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-  )
-}
-```
-
-- [ ] **Step 8: Commit**
+- [ ] **Step 7: Commit**
 
 ```bash
-git add package.json package-lock.json vitest.config.ts lib/supabase/
-git commit -m "chore: add vitest + supabase clients"
+git add package.json package-lock.json vitest.config.ts lib/db.ts scripts/migrate.mjs
+git commit -m "chore: add vitest + neon client + migrate runner"
 ```
 
 ---
 
-## Task 2: Database migration (contacts + activities + RLS)
+## Task 2: Database migration (contacts + activities)
 
 **Files:**
-- Create: `supabase/migrations/0001_crm_phase1.sql`
+- Create: `db/migrations/0001_crm_phase1.sql`
 
 **Interfaces:**
-- Produces: `contacts` and `activities` tables; enum `contact_status`. RLS enabled; no public/anon policies (Phase 1 access is service-role only from server code — admin auth policies added in Task 7).
+- Produces: `contacts` and `activities` tables; enum `contact_status`; supporting indexes. No RLS (server-side access only in Phase 1).
 
 - [ ] **Step 1: Write the migration**
 
 ```sql
--- supabase/migrations/0001_crm_phase1.sql
+-- db/migrations/0001_crm_phase1.sql
 create type contact_status as enum
   ('new','contacted','proposal','won','onboarding','active','lost');
 
@@ -210,27 +181,26 @@ create table activities (
 );
 
 create index contacts_status_last_activity_idx on contacts (status, last_activity_at);
-create index activities_contact_id_created_idx on activities (contact_id, created_at desc);
-
--- RLS on. Server code uses the service role (bypasses RLS). Admin-user policies come in Task 7.
-alter table contacts enable row level security;
-alter table activities enable row level security;
+create index activities_contact_id_created_idx on activities (contact_id, created_at desc)
 ```
 
-- [ ] **Step 2: Apply the migration**
+(No trailing `;` on the last statement — the runner splits on `;`.)
 
-During execution, apply via the Supabase MCP `apply_migration` tool (name: `crm_phase1`), OR `supabase db push` if using the CLI. Provision a project first if none exists.
+- [ ] **Step 2: Apply it**
+
+Ensure `DATABASE_URL` is in `.env.local`, then: `npm run db:migrate`
+Expected: `applied 0001_crm_phase1.sql` then `migrations up to date`.
 
 - [ ] **Step 3: Verify tables exist**
 
-Query (MCP `execute_sql` or SQL editor): `select count(*) from contacts; select count(*) from activities;`
-Expected: both return 0, no error.
+Run a throwaway check (or via the Neon dashboard SQL editor):
+`select count(*) from contacts; select count(*) from activities;` → both 0, no error.
 
 - [ ] **Step 4: Commit**
 
 ```bash
-git add supabase/migrations/0001_crm_phase1.sql
-git commit -m "feat: crm phase 1 schema + rls"
+git add db/migrations/0001_crm_phase1.sql
+git commit -m "feat: crm phase 1 schema"
 ```
 
 ---
@@ -244,7 +214,9 @@ git commit -m "feat: crm phase 1 schema + rls"
 **Interfaces:**
 - Produces:
   - `type ContactStatus = 'new'|'contacted'|'proposal'|'won'|'onboarding'|'active'|'lost'`
+  - `type ContactSource = 'contact_form'|'quick_audit'|'manual'`
   - `interface Contact { id, name, email, company, source, message, status, notes, last_activity_at, created_at, updated_at }` (string dates)
+  - `interface Activity { id, contact_id, type, body, created_at }`
   - `const OPEN_STATUSES: ContactStatus[]`, `const STALE_THRESHOLD_HOURS = 48`
   - `hoursWaiting(lastActivityAtISO: string, now: Date): number`
   - `daysWaiting(lastActivityAtISO: string, now: Date): number` (whole days, floored)
@@ -289,15 +261,13 @@ describe('isOverdue', () => {
 
 - [ ] **Step 2: Run to verify it fails**
 
-Run: `npm test`
-Expected: FAIL (module `./staleness` not found).
+Run: `npm test` → FAIL (module `./staleness` not found).
 
 - [ ] **Step 3: Write `lib/crm/types.ts`**
 
 ```ts
 export type ContactStatus =
   | 'new' | 'contacted' | 'proposal' | 'won' | 'onboarding' | 'active' | 'lost'
-
 export type ContactSource = 'contact_form' | 'quick_audit' | 'manual'
 
 export interface Contact {
@@ -334,8 +304,7 @@ export const OPEN_STATUSES: ContactStatus[] = ['new', 'contacted', 'proposal']
 export const STALE_THRESHOLD_HOURS = 48
 
 export function hoursWaiting(lastActivityAtISO: string, now: Date): number {
-  const ms = now.getTime() - new Date(lastActivityAtISO).getTime()
-  return Math.floor(ms / 3600_000)
+  return Math.floor((now.getTime() - new Date(lastActivityAtISO).getTime()) / 3600_000)
 }
 
 export function daysWaiting(lastActivityAtISO: string, now: Date): number {
@@ -352,10 +321,7 @@ export function isOverdue(
 }
 ```
 
-- [ ] **Step 5: Run to verify pass**
-
-Run: `npm test`
-Expected: PASS.
+- [ ] **Step 5: Run to verify pass** — `npm test` → PASS.
 
 - [ ] **Step 6: Commit**
 
@@ -374,7 +340,7 @@ git commit -m "feat: crm contact types + staleness logic"
 
 **Interfaces:**
 - Consumes: `Contact` (types.ts), `daysWaiting` (staleness.ts).
-- Produces: `buildDigestEmail(contacts: Contact[], now: Date, baseUrl: string): { subject: string; html: string } | null` — returns `null` when `contacts` is empty (caller sends nothing).
+- Produces: `buildDigestEmail(contacts: Contact[], now: Date, baseUrl: string): { subject: string; html: string } | null` — `null` when `contacts` is empty.
 
 - [ ] **Step 1: Write the failing test**
 
@@ -404,16 +370,13 @@ describe('buildDigestEmail', () => {
   it('links each contact to its admin detail page and shows days waiting', () => {
     const out = buildDigestEmail([base({ id: 'abc' })], now, 'https://x.co')!
     expect(out.html).toContain('https://x.co/admin/contacts/abc')
-    expect(out.html).toContain('3 days') // 2026-07-25 -> 2026-07-28
+    expect(out.html).toContain('3 days')
     expect(out.html).toContain('Jane')
   })
 })
 ```
 
-- [ ] **Step 2: Run to verify it fails**
-
-Run: `npm test`
-Expected: FAIL (module not found).
+- [ ] **Step 2: Run to verify it fails** — `npm test` → FAIL.
 
 - [ ] **Step 3: Write `lib/crm/digest.ts`**
 
@@ -426,23 +389,19 @@ function esc(s: string): string {
 }
 
 export function buildDigestEmail(
-  contacts: Contact[],
-  now: Date,
-  baseUrl: string,
+  contacts: Contact[], now: Date, baseUrl: string,
 ): { subject: string; html: string } | null {
   if (contacts.length === 0) return null
   const subject = `${contacts.length} lead${contacts.length === 1 ? '' : 's'} waiting on you`
-  const rows = contacts
-    .map((c) => {
-      const d = daysWaiting(c.last_activity_at, now)
-      const waited = d === 0 ? 'today' : `${d} day${d === 1 ? '' : 's'}`
-      const who = esc(c.name) + (c.company ? ` — ${esc(c.company)}` : '')
-      return `<tr>
-        <td style="padding:8px 0;"><a href="${baseUrl}/admin/contacts/${c.id}">${who}</a></td>
-        <td style="padding:8px 0;color:#5f5648;">waiting ${waited}</td>
-      </tr>`
-    })
-    .join('')
+  const rows = contacts.map((c) => {
+    const d = daysWaiting(c.last_activity_at, now)
+    const waited = d === 0 ? 'today' : `${d} day${d === 1 ? '' : 's'}`
+    const who = esc(c.name) + (c.company ? ` — ${esc(c.company)}` : '')
+    return `<tr>
+      <td style="padding:8px 0;"><a href="${baseUrl}/admin/contacts/${c.id}">${who}</a></td>
+      <td style="padding:8px 0;color:#5f5648;">waiting ${waited}</td>
+    </tr>`
+  }).join('')
   const html = `<div style="font-family:sans-serif;max-width:560px;margin:0 auto;">
     <h2 style="color:#131210;">${subject}</h2>
     <table style="width:100%;border-collapse:collapse;">${rows}</table>
@@ -452,10 +411,7 @@ export function buildDigestEmail(
 }
 ```
 
-- [ ] **Step 4: Run to verify pass**
-
-Run: `npm test`
-Expected: PASS.
+- [ ] **Step 4: Run to verify pass** — `npm test` → PASS.
 
 - [ ] **Step 5: Commit**
 
@@ -466,27 +422,24 @@ git commit -m "feat: daily digest email builder"
 
 ---
 
-## Task 5: Data layer — capture + queries
+## Task 5: Data layer (Neon SQL)
 
 **Files:**
 - Create: `lib/crm/contacts.ts`
 
 **Interfaces:**
-- Consumes: `createAdminClient` (admin.ts), `Contact`/`Activity`/`ContactStatus` (types.ts), `OPEN_STATUSES` (staleness.ts).
-- Produces (all take a `SupabaseClient` as first arg for testability):
-  - `captureEnquiry(db, { name, email, company, message, source }): Promise<void>` — upsert contact by email + insert `enquiry_in` activity + bump `last_activity_at`. Never throws to the caller of the API route (caller wraps it; see Task 6).
-  - `listContacts(db): Promise<Contact[]>` — ordered by `last_activity_at` asc (stalest first).
-  - `getContact(db, id): Promise<{ contact: Contact; activities: Activity[] } | null>`
-  - `getOverdueContacts(db, now, thresholdHours): Promise<Contact[]>`
-  - `logReply(db, id): Promise<void>` — insert `reply_logged` activity + set `last_activity_at = now`.
-  - `updateStatus(db, id, status): Promise<void>` — set status + `status_change` activity (does **not** bump `last_activity_at`).
-  - `addNote(db, id, body): Promise<void>` — append to `notes` + `note` activity.
-  - `createManualContact(db, { name, email, company, message }): Promise<string>` — insert with `source='manual'`, returns id.
+- Consumes: `sql` (lib/db.ts), `Contact`/`Activity`/`ContactStatus` (types.ts), `OPEN_STATUSES` (staleness.ts).
+- Produces (all use the shared `sql`; integration-verified, not unit-mocked):
+  - `captureEnquiry(input: { name, email, company?, message?, source: 'contact_form'|'quick_audit' }): Promise<void>` — upsert by email (`on conflict` bumps `last_activity_at` only) + `enquiry_in` activity.
+  - `listContacts(): Promise<Contact[]>` — stalest first (`last_activity_at` asc).
+  - `getContact(id): Promise<{ contact: Contact; activities: Activity[] } | null>`
+  - `getOverdueContacts(cutoffISO: string): Promise<Contact[]>` — open statuses with `last_activity_at <= cutoff`.
+  - `logReply(id): Promise<void>`; `updateStatus(id, status): Promise<void>`; `addNote(id, body): Promise<void>`; `createManualContact({ name, email, company?, message? }): Promise<string>`.
 
 - [ ] **Step 1: Write `lib/crm/contacts.ts`**
 
 ```ts
-import type { SupabaseClient } from '@supabase/supabase-js'
+import { sql } from '@/lib/db'
 import type { Contact, Activity, ContactStatus } from './types'
 import { OPEN_STATUSES } from './staleness'
 
@@ -495,103 +448,77 @@ type EnquiryInput = {
   source: 'contact_form' | 'quick_audit'
 }
 
-export async function captureEnquiry(db: SupabaseClient, input: EnquiryInput): Promise<void> {
-  const now = new Date().toISOString()
-  const { data: existing } = await db
-    .from('contacts').select('id').eq('email', input.email).maybeSingle()
-
-  let contactId: string
-  if (existing) {
-    contactId = existing.id
-    await db.from('contacts').update({ last_activity_at: now, updated_at: now }).eq('id', contactId)
-  } else {
-    const { data, error } = await db
-      .from('contacts')
-      .insert({
-        name: input.name, email: input.email, company: input.company ?? null,
-        message: input.message ?? null, source: input.source,
-        status: 'new', last_activity_at: now,
-      })
-      .select('id').single()
-    if (error) throw error
-    contactId = data.id
-  }
-  await db.from('activities').insert({
-    contact_id: contactId, type: 'enquiry_in', body: input.message ?? null,
-  })
+export async function captureEnquiry(input: EnquiryInput): Promise<void> {
+  const rows = await sql`
+    insert into contacts (name, email, company, message, source, status, last_activity_at)
+    values (${input.name}, ${input.email}, ${input.company ?? null},
+            ${input.message ?? null}, ${input.source}, 'new', now())
+    on conflict (email) do update set last_activity_at = now(), updated_at = now()
+    returning id`
+  const id = rows[0].id as string
+  await sql`insert into activities (contact_id, type, body)
+            values (${id}, 'enquiry_in', ${input.message ?? null})`
 }
 
-export async function listContacts(db: SupabaseClient): Promise<Contact[]> {
-  const { data, error } = await db
-    .from('contacts').select('*').order('last_activity_at', { ascending: true })
-  if (error) throw error
-  return data as Contact[]
+export async function listContacts(): Promise<Contact[]> {
+  return (await sql`select * from contacts order by last_activity_at asc`) as Contact[]
 }
 
 export async function getContact(
-  db: SupabaseClient, id: string,
+  id: string,
 ): Promise<{ contact: Contact; activities: Activity[] } | null> {
-  const { data: contact } = await db.from('contacts').select('*').eq('id', id).maybeSingle()
-  if (!contact) return null
-  const { data: activities } = await db
-    .from('activities').select('*').eq('contact_id', id).order('created_at', { ascending: false })
-  return { contact: contact as Contact, activities: (activities ?? []) as Activity[] }
+  const c = (await sql`select * from contacts where id = ${id}`) as Contact[]
+  if (c.length === 0) return null
+  const a = (await sql`select * from activities where contact_id = ${id}
+                       order by created_at desc`) as Activity[]
+  return { contact: c[0], activities: a }
 }
 
-export async function getOverdueContacts(
-  db: SupabaseClient, now: Date, thresholdHours: number,
-): Promise<Contact[]> {
-  const cutoff = new Date(now.getTime() - thresholdHours * 3600_000).toISOString()
-  const { data, error } = await db
-    .from('contacts').select('*')
-    .in('status', OPEN_STATUSES).lte('last_activity_at', cutoff)
-    .order('last_activity_at', { ascending: true })
-  if (error) throw error
-  return data as Contact[]
+export async function getOverdueContacts(cutoffISO: string): Promise<Contact[]> {
+  return (await sql`
+    select * from contacts
+    where status::text = any(${OPEN_STATUSES}) and last_activity_at <= ${cutoffISO}
+    order by last_activity_at asc`) as Contact[]
 }
 
-export async function logReply(db: SupabaseClient, id: string): Promise<void> {
-  const now = new Date().toISOString()
-  await db.from('contacts').update({ last_activity_at: now, updated_at: now }).eq('id', id)
-  await db.from('activities').insert({ contact_id: id, type: 'reply_logged', body: null })
+export async function logReply(id: string): Promise<void> {
+  await sql`update contacts set last_activity_at = now(), updated_at = now() where id = ${id}`
+  await sql`insert into activities (contact_id, type) values (${id}, 'reply_logged')`
 }
 
-export async function updateStatus(
-  db: SupabaseClient, id: string, status: ContactStatus,
-): Promise<void> {
-  await db.from('contacts').update({ status, updated_at: new Date().toISOString() }).eq('id', id)
-  await db.from('activities').insert({ contact_id: id, type: 'status_change', body: status })
+export async function updateStatus(id: string, status: ContactStatus): Promise<void> {
+  await sql`update contacts set status = ${status}::contact_status, updated_at = now() where id = ${id}`
+  await sql`insert into activities (contact_id, type, body) values (${id}, 'status_change', ${status})`
 }
 
-export async function addNote(db: SupabaseClient, id: string, body: string): Promise<void> {
-  const { data } = await db.from('contacts').select('notes').eq('id', id).single()
-  const merged = [data?.notes, body].filter(Boolean).join('\n---\n')
-  await db.from('contacts').update({ notes: merged, updated_at: new Date().toISOString() }).eq('id', id)
-  await db.from('activities').insert({ contact_id: id, type: 'note', body })
+export async function addNote(id: string, body: string): Promise<void> {
+  const rows = (await sql`select notes from contacts where id = ${id}`) as { notes: string | null }[]
+  const merged = [rows[0]?.notes, body].filter(Boolean).join('\n---\n')
+  await sql`update contacts set notes = ${merged}, updated_at = now() where id = ${id}`
+  await sql`insert into activities (contact_id, type, body) values (${id}, 'note', ${body})`
 }
 
 export async function createManualContact(
-  db: SupabaseClient,
   input: { name: string; email: string; company?: string; message?: string },
 ): Promise<string> {
-  const { data, error } = await db
-    .from('contacts')
-    .insert({ ...input, source: 'manual', status: 'new', last_activity_at: new Date().toISOString() })
-    .select('id').single()
-  if (error) throw error
-  return data.id
+  const rows = await sql`
+    insert into contacts (name, email, company, message, source, status, last_activity_at)
+    values (${input.name}, ${input.email}, ${input.company ?? null},
+            ${input.message ?? null}, 'manual', 'new', now())
+    returning id`
+  return rows[0].id as string
 }
 ```
 
-- [ ] **Step 2: Manual integration check against Supabase**
+- [ ] **Step 2: Integration check against Neon**
 
-With env vars loaded, run a throwaway script (or use the MCP `execute_sql` to verify after Task 6 wires capture). Insert a test enquiry twice with the same email and confirm: one `contacts` row, two `activities` rows, `last_activity_at` advanced. Clean up the test row afterward.
+With `DATABASE_URL` set and the migration applied, verify (throwaway script or via Task 6): calling `captureEnquiry` twice with the same email yields **one** `contacts` row and **two** `activities` rows, and `last_activity_at` advanced on the second call. Clean up the test row afterward (`delete from contacts where email = '...'`).
 
 - [ ] **Step 3: Commit**
 
 ```bash
 git add lib/crm/contacts.ts
-git commit -m "feat: crm data layer (capture + board queries)"
+git commit -m "feat: crm data layer (neon sql)"
 ```
 
 ---
@@ -601,21 +528,15 @@ git commit -m "feat: crm data layer (capture + board queries)"
 **Files:**
 - Modify: `app/api/contact/route.ts`, `app/api/quick-audit/route.ts`
 
-**Interfaces:**
-- Consumes: `createAdminClient` (admin.ts), `captureEnquiry` (contacts.ts).
-
 - [ ] **Step 1: Append capture to `app/api/contact/route.ts`**
 
-Immediately **before** `return NextResponse.json({ success: true })` (after both Resend sends), add:
+Immediately **before** `return NextResponse.json({ success: true })` (after both Resend sends):
 
 ```ts
     // Best-effort CRM capture — must never block or fail the enquiry response.
     try {
-      const { createAdminClient } = await import('@/lib/supabase/admin')
       const { captureEnquiry } = await import('@/lib/crm/contacts')
-      await captureEnquiry(createAdminClient(), {
-        name, email, company, message, source: 'contact_form',
-      })
+      await captureEnquiry({ name, email, company, message, source: 'contact_form' })
     } catch (e) {
       console.error('CRM capture failed (contact):', e)
     }
@@ -623,13 +544,12 @@ Immediately **before** `return NextResponse.json({ success: true })` (after both
 
 - [ ] **Step 2: Append capture to `app/api/quick-audit/route.ts`**
 
-Find where the quick-audit route succeeds (after its email send, before its success response). Add the same block with `source: 'quick_audit'`, mapping the quick-audit fields:
+Before its success response (after its email send). Confirm the exact field names destructured in that route and reuse them:
 
 ```ts
     try {
-      const { createAdminClient } = await import('@/lib/supabase/admin')
       const { captureEnquiry } = await import('@/lib/crm/contacts')
-      await captureEnquiry(createAdminClient(), {
+      await captureEnquiry({
         name, email, company,
         message: [processes, tools, pain].filter(Boolean).join('\n\n'),
         source: 'quick_audit',
@@ -639,15 +559,13 @@ Find where the quick-audit route succeeds (after its email send, before its succ
     }
 ```
 
-(Confirm the exact variable names destructured from the request body in that route; reuse them.)
-
 - [ ] **Step 3: Verify the enquiry still succeeds and captures**
 
-Start dev (`npm run dev`), POST a valid body to `/api/contact` (as in earlier testing). Expected: `{"success":true}`, HTTP 200, and a new `contacts` row (verify via MCP `execute_sql: select email,status,source from contacts order by created_at desc limit 1`).
+`npm run dev`; POST a valid body to `/api/contact`. Expected: `{"success":true}`, HTTP 200, and a new `contacts` row (`select email,status,source from contacts order by created_at desc limit 1`).
 
 - [ ] **Step 4: Verify capture failure does not break the response**
 
-Temporarily set `SUPABASE_SERVICE_ROLE_KEY` to an invalid value, POST again. Expected: still `{"success":true}` / 200 (email path unaffected), with `CRM capture failed` logged. Restore the key.
+Temporarily set `DATABASE_URL` to an invalid value, POST again. Expected: still `{"success":true}` / 200, with `CRM capture failed` logged. Restore `DATABASE_URL`.
 
 - [ ] **Step 5: Commit**
 
@@ -658,104 +576,97 @@ git commit -m "feat: capture enquiries into crm (best-effort)"
 
 ---
 
-## Task 7: Admin auth (Supabase magic link + RLS policy + middleware)
+## Task 7: Admin auth (single-admin password → signed cookie)
 
 **Files:**
-- Create: `middleware.ts`, `app/admin/login/page.tsx`, `app/admin/layout.tsx`
-- Modify: `supabase/migrations/0002_admin_rls.sql` (new migration)
+- Create: `lib/auth.ts`, `app/api/admin/login/route.ts`, `app/admin/login/page.tsx`, `app/admin/layout.tsx`, `middleware.ts`
 
 **Interfaces:**
-- Produces: a protected `/admin/*` area accessible only to signed-in users whose email is in `ADMIN_EMAILS`. Admin board/detail pages use `createAdminClient` (service role) for data — auth is the gate, not RLS, for admin reads. The RLS policy here is defensive (block anon entirely).
+- Produces: `createSession(): Promise<string>` (30-day HS256 JWT with `{role:'admin'}`), `verifySession(token?: string): Promise<boolean>`. `/admin/*` requires a valid `admin_session` cookie; `/admin/login` is public.
 
-- [ ] **Step 1: Add an admin RLS migration**
-
-`supabase/migrations/0002_admin_rls.sql` — allow authenticated admin users to read (defensive; server uses service role anyway):
-
-```sql
--- Authenticated users may read contacts/activities. Admin gating is enforced in the app
--- via ADMIN_EMAILS; anon has no policy and is therefore denied.
-create policy "authenticated read contacts" on contacts
-  for select to authenticated using (true);
-create policy "authenticated read activities" on activities
-  for select to authenticated using (true);
-```
-
-Apply it (MCP `apply_migration` name `admin_rls`).
-
-- [ ] **Step 2: Create `middleware.ts` (session refresh + /admin gate)**
+- [ ] **Step 1: Write `lib/auth.ts`**
 
 ```ts
-import { createServerClient } from '@supabase/ssr'
-import { NextResponse, type NextRequest } from 'next/server'
+import { SignJWT, jwtVerify } from 'jose'
 
-export async function middleware(request: NextRequest) {
-  let response = NextResponse.next({ request })
-  const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
-      cookies: {
-        getAll: () => request.cookies.getAll(),
-        setAll: (all) => {
-          all.forEach(({ name, value }) => request.cookies.set(name, value))
-          response = NextResponse.next({ request })
-          all.forEach(({ name, value, options }) => response.cookies.set(name, value, options))
-        },
-      },
-    },
-  )
-  const { data: { user } } = await supabase.auth.getUser()
-  const path = request.nextUrl.pathname
-  const isAdmin = user?.email && (process.env.ADMIN_EMAILS ?? '').split(',').includes(user.email)
+const key = () => new TextEncoder().encode(process.env.ADMIN_SESSION_SECRET!)
 
-  if (path.startsWith('/admin') && !path.startsWith('/admin/login') && !isAdmin) {
-    return NextResponse.redirect(new URL('/admin/login', request.url))
-  }
-  return response
+export async function createSession(): Promise<string> {
+  return new SignJWT({ role: 'admin' })
+    .setProtectedHeader({ alg: 'HS256' })
+    .setIssuedAt()
+    .setExpirationTime('30d')
+    .sign(key())
 }
 
-export const config = { matcher: ['/admin/:path*'] }
+export async function verifySession(token: string | undefined): Promise<boolean> {
+  if (!token) return false
+  try {
+    const { payload } = await jwtVerify(token, key())
+    return payload.role === 'admin'
+  } catch {
+    return false
+  }
+}
 ```
 
-- [ ] **Step 3: Create the login page (`app/admin/login/page.tsx`)**
+- [ ] **Step 2: Login route (`app/api/admin/login/route.ts`)**
+
+```ts
+import { NextRequest, NextResponse } from 'next/server'
+import { createSession } from '@/lib/auth'
+
+export const runtime = 'nodejs'
+
+export async function POST(req: NextRequest) {
+  const { password } = await req.json()
+  if (!password || password !== process.env.ADMIN_PASSWORD) {
+    return NextResponse.json({ error: 'wrong password' }, { status: 401 })
+  }
+  const res = NextResponse.json({ ok: true })
+  res.cookies.set('admin_session', await createSession(), {
+    httpOnly: true, secure: true, sameSite: 'lax', path: '/', maxAge: 60 * 60 * 24 * 30,
+  })
+  return res
+}
+```
+
+- [ ] **Step 3: Login page (`app/admin/login/page.tsx`)**
 
 ```tsx
 'use client'
 import { useState } from 'react'
-import { createBrowserClient } from '@/lib/supabase/client'
+import { useRouter } from 'next/navigation'
 
 export default function AdminLogin() {
-  const [email, setEmail] = useState('')
-  const [sent, setSent] = useState(false)
-  async function send() {
-    const supabase = createBrowserClient()
-    await supabase.auth.signInWithOtp({
-      email,
-      options: { emailRedirectTo: `${window.location.origin}/admin` },
+  const [password, setPassword] = useState('')
+  const [err, setErr] = useState(false)
+  const router = useRouter()
+  async function submit(e: React.FormEvent) {
+    e.preventDefault()
+    const res = await fetch('/api/admin/login', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ password }),
     })
-    setSent(true)
+    if (res.ok) router.push('/admin')
+    else setErr(true)
   }
   return (
     <div className="min-h-screen bg-ink text-cream flex items-center justify-center p-8">
-      <div className="w-full max-w-sm">
+      <form onSubmit={submit} className="w-full max-w-sm">
         <h1 className="font-display font-bold text-2xl mb-4">Admin sign in</h1>
-        {sent ? (
-          <p className="text-muted-dark">Check your email for a sign-in link.</p>
-        ) : (
-          <>
-            <input value={email} onChange={(e) => setEmail(e.target.value)} type="email"
-              placeholder="you@automation-agency.co.uk"
-              className="w-full bg-cream text-ink rounded-xl px-3.5 py-2.5 mb-3" />
-            <button onClick={send} className="btn-lime w-full justify-center">Send magic link</button>
-          </>
-        )}
-      </div>
+        <input value={password} onChange={(e) => setPassword(e.target.value)} type="password"
+          placeholder="Password"
+          className="w-full bg-cream text-ink rounded-xl px-3.5 py-2.5 mb-3" />
+        <button type="submit" className="btn-lime w-full justify-center">Sign in</button>
+        {err && <p className="text-sm mt-3 text-center">Wrong password.</p>}
+      </form>
     </div>
   )
 }
 ```
 
-- [ ] **Step 4: Create the admin shell (`app/admin/layout.tsx`)**
+- [ ] **Step 4: Admin shell (`app/admin/layout.tsx`)**
 
 ```tsx
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
@@ -770,19 +681,32 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 }
 ```
 
-- [ ] **Step 5: Configure Supabase Auth**
+- [ ] **Step 5: Middleware (`middleware.ts`)**
 
-In Supabase dashboard (or via config): enable Email provider, add the production + localhost redirect URLs (`https://www.automation-agency.co.uk/admin`, `http://localhost:3000/admin`). Set `ADMIN_EMAILS` env to Ben's email.
+```ts
+import { NextResponse, type NextRequest } from 'next/server'
+import { verifySession } from '@/lib/auth'
+
+export async function middleware(req: NextRequest) {
+  const path = req.nextUrl.pathname
+  if (path.startsWith('/admin/login')) return NextResponse.next()
+  const ok = await verifySession(req.cookies.get('admin_session')?.value)
+  if (!ok) return NextResponse.redirect(new URL('/admin/login', req.url))
+  return NextResponse.next()
+}
+
+export const config = { matcher: ['/admin/:path*'] }
+```
 
 - [ ] **Step 6: Verify the gate**
 
-Run dev. Visit `/admin` while signed out → redirected to `/admin/login`. Sign in with an allowlisted email via magic link → reach `/admin`. Sign in with a non-allowlisted email → redirected back to login.
+Set `ADMIN_PASSWORD` and `ADMIN_SESSION_SECRET` (any long random string) in `.env.local`. Run dev. Visit `/admin` signed out → redirected to `/admin/login`. Enter the wrong password → "Wrong password". Enter the right one → reach `/admin`.
 
 - [ ] **Step 7: Commit**
 
 ```bash
-git add middleware.ts app/admin/login/page.tsx app/admin/layout.tsx supabase/migrations/0002_admin_rls.sql
-git commit -m "feat: admin auth (magic link + allowlist gate)"
+git add lib/auth.ts app/api/admin/login/route.ts app/admin/login/page.tsx app/admin/layout.tsx middleware.ts
+git commit -m "feat: single-admin session gate for /admin"
 ```
 
 ---
@@ -793,34 +717,29 @@ git commit -m "feat: admin auth (magic link + allowlist gate)"
 - Create: `app/admin/page.tsx`, `app/admin/contacts/[id]/page.tsx`, `app/admin/actions.ts`
 
 **Interfaces:**
-- Consumes: `createAdminClient`, `listContacts`, `getContact`, `logReply`, `updateStatus`, `addNote`, `createManualContact`, `daysWaiting`, `isOverdue`.
+- Consumes: `listContacts`, `getContact`, `logReply`, `updateStatus`, `addNote`, `createManualContact` (contacts.ts), `daysWaiting`, `isOverdue` (staleness.ts).
 
 - [ ] **Step 1: Server actions (`app/admin/actions.ts`)**
 
 ```ts
 'use server'
 import { revalidatePath } from 'next/cache'
-import { createAdminClient } from '@/lib/supabase/admin'
 import * as crm from '@/lib/crm/contacts'
 import type { ContactStatus } from '@/lib/crm/types'
 
 export async function logReplyAction(id: string) {
-  await crm.logReply(createAdminClient(), id)
-  revalidatePath(`/admin/contacts/${id}`); revalidatePath('/admin')
+  await crm.logReply(id); revalidatePath(`/admin/contacts/${id}`); revalidatePath('/admin')
 }
 export async function updateStatusAction(id: string, status: ContactStatus) {
-  await crm.updateStatus(createAdminClient(), id, status)
-  revalidatePath(`/admin/contacts/${id}`); revalidatePath('/admin')
+  await crm.updateStatus(id, status); revalidatePath(`/admin/contacts/${id}`); revalidatePath('/admin')
 }
 export async function addNoteAction(id: string, body: string) {
-  if (body.trim()) await crm.addNote(createAdminClient(), id, body.trim())
-  revalidatePath(`/admin/contacts/${id}`)
+  if (body.trim()) await crm.addNote(id, body.trim()); revalidatePath(`/admin/contacts/${id}`)
 }
 export async function addManualContactAction(input: {
   name: string; email: string; company?: string; message?: string
 }) {
-  await crm.createManualContact(createAdminClient(), input)
-  revalidatePath('/admin')
+  await crm.createManualContact(input); revalidatePath('/admin')
 }
 ```
 
@@ -828,7 +747,6 @@ export async function addManualContactAction(input: {
 
 ```tsx
 import Link from 'next/link'
-import { createAdminClient } from '@/lib/supabase/admin'
 import { listContacts } from '@/lib/crm/contacts'
 import { daysWaiting, isOverdue } from '@/lib/crm/staleness'
 
@@ -836,7 +754,7 @@ export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 
 export default async function AdminBoard() {
-  const contacts = await listContacts(createAdminClient())
+  const contacts = await listContacts()
   const now = new Date()
   return (
     <table className="w-full text-sm">
@@ -859,19 +777,20 @@ export default async function AdminBoard() {
 }
 ```
 
-- [ ] **Step 3: Detail (`app/admin/contacts/[id]/page.tsx`)** — info, timeline, and action buttons wired to the server actions from Step 1 (status `<select>` → `updateStatusAction`, "Log reply" button → `logReplyAction`, notes `<textarea>` → `addNoteAction`). Use `createAdminClient` + `getContact` to load; `notFound()` if null. Render the activity list newest-first.
+- [ ] **Step 3: Detail (`app/admin/contacts/[id]/page.tsx`)**
+
+Load via `getContact`; `notFound()` if null. Render info, the original message, the activity timeline (newest first), and a `logReplyAction`-bound button. Add the status `<select>` (→ `updateStatusAction`) and notes `<textarea>` (→ `addNoteAction`) forms, plus a small "Add lead" form on the board bound to `addManualContactAction`, all using the `form action={...}` pattern shown.
 
 ```tsx
 import { notFound } from 'next/navigation'
-import { createAdminClient } from '@/lib/supabase/admin'
 import { getContact } from '@/lib/crm/contacts'
-import { logReplyAction, updateStatusAction, addNoteAction } from '@/app/admin/actions'
+import { logReplyAction } from '@/app/admin/actions'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 
 export default async function ContactDetail({ params }: { params: { id: string } }) {
-  const data = await getContact(createAdminClient(), params.id)
+  const data = await getContact(params.id)
   if (!data) notFound()
   const { contact, activities } = data
   return (
@@ -894,11 +813,9 @@ export default async function ContactDetail({ params }: { params: { id: string }
 }
 ```
 
-(Add the status `<select>` and notes `<textarea>` forms bound to `updateStatusAction` / `addNoteAction`, and a small "Add lead" form on the board bound to `addManualContactAction`, following the same `form action={...}` pattern.)
-
 - [ ] **Step 4: Verify end-to-end**
 
-Sign in, submit a live enquiry via the site form, confirm it appears on `/admin` (highlighted once >48h, or force by editing `last_activity_at`). Open detail, click "Log reply" → row's waiting resets and it leaves the overdue set. Change status to `won` → leaves the open set. Add a manual lead → appears.
+Sign in; submit a live enquiry via the site form; confirm it appears on `/admin` (highlighted once >48h — force by editing `last_activity_at` in the DB if needed). Open detail, click "Log reply" → waiting resets, leaves the overdue set. Change status to `won` → leaves the open set. Add a manual lead → appears.
 
 - [ ] **Step 5: Commit**
 
@@ -915,14 +832,13 @@ git commit -m "feat: admin board, detail, and actions"
 - Create: `app/api/cron/lead-digest/route.ts`, `vercel.json`
 
 **Interfaces:**
-- Consumes: `createAdminClient`, `getOverdueContacts`, `STALE_THRESHOLD_HOURS` (staleness.ts), `buildDigestEmail` (digest.ts), Resend.
+- Consumes: `getOverdueContacts` (contacts.ts), `STALE_THRESHOLD_HOURS` (staleness.ts), `buildDigestEmail` (digest.ts), Resend.
 
-- [ ] **Step 1: Write the cron route**
+- [ ] **Step 1: Cron route**
 
 ```ts
 import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
-import { createAdminClient } from '@/lib/supabase/admin'
 import { getOverdueContacts } from '@/lib/crm/contacts'
 import { STALE_THRESHOLD_HOURS } from '@/lib/crm/staleness'
 import { buildDigestEmail } from '@/lib/crm/digest'
@@ -934,7 +850,8 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: 'unauthorized' }, { status: 401 })
   }
   const now = new Date()
-  const overdue = await getOverdueContacts(createAdminClient(), now, STALE_THRESHOLD_HOURS)
+  const cutoff = new Date(now.getTime() - STALE_THRESHOLD_HOURS * 3600_000).toISOString()
+  const overdue = await getOverdueContacts(cutoff)
   const base = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.automation-agency.co.uk'
   const email = buildDigestEmail(overdue, now, base)
   if (!email) return NextResponse.json({ sent: false, count: 0 })
@@ -950,7 +867,7 @@ export async function GET(req: NextRequest) {
 }
 ```
 
-- [ ] **Step 2: Configure the cron (`vercel.json`)**
+- [ ] **Step 2: Cron config (`vercel.json`)**
 
 ```json
 {
@@ -958,11 +875,11 @@ export async function GET(req: NextRequest) {
 }
 ```
 
-Set `CRON_SECRET` and `NEXT_PUBLIC_SITE_URL` env vars in Vercel. (Vercel Cron sends the `Authorization: Bearer $CRON_SECRET` header automatically when `CRON_SECRET` is set.)
+Set `CRON_SECRET` and `NEXT_PUBLIC_SITE_URL` in Vercel. (Vercel Cron sends `Authorization: Bearer $CRON_SECRET` automatically when `CRON_SECRET` is set.)
 
 - [ ] **Step 3: Verify**
 
-Locally: `curl -H "Authorization: Bearer <CRON_SECRET>" http://localhost:3000/api/cron/lead-digest`. With ≥1 overdue lead → `{"sent":true,"count":N}` and a digest email arrives. With none → `{"sent":false,"count":0}` and no email. Without the header → 401.
+`curl -H "Authorization: Bearer <CRON_SECRET>" http://localhost:3000/api/cron/lead-digest`. With ≥1 overdue lead → `{"sent":true,"count":N}` + a digest email. None → `{"sent":false,"count":0}`. No header → 401.
 
 - [ ] **Step 4: Commit**
 
@@ -975,6 +892,7 @@ git commit -m "feat: daily stale-lead digest cron"
 
 ## Self-review notes (author)
 
-- **Spec coverage:** auto-capture (T5–6), admin board table + overdue highlight + detail + log-reply + status + notes + manual add (T8), daily digest >48h open-only (T4, T9), Supabase foundation + RLS (T1–2, T7), tests for staleness + digest (T3–4) and capture idempotency check (T5). All Phase-1 spec items map to a task.
-- **Env vars required:** `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, `ADMIN_EMAILS`, `CRON_SECRET`, `NEXT_PUBLIC_SITE_URL`, plus existing `RESEND_API_KEY`, `CONTACT_EMAIL`.
-- **Deferred to Phase 2:** portal, intake, contracts/e-sign, files, client auth/RLS policies.
+- **Spec coverage:** capture (T5–6), admin table + overdue highlight + detail + log-reply + status + notes + manual add (T8), daily digest >48h open-only (T4, T9), Neon foundation (T1–2), single-admin gate (T7), unit tests for staleness + digest (T3–4). All Phase-1 spec items map to a task.
+- **Env vars required:** `DATABASE_URL` (Vercel Neon), `ADMIN_PASSWORD`, `ADMIN_SESSION_SECRET`, `CRON_SECRET`, `NEXT_PUBLIC_SITE_URL`, plus existing `RESEND_API_KEY`, `CONTACT_EMAIL`.
+- **Prerequisite (Ben):** create Neon via Vercel dashboard → Storage → Neon (injects `DATABASE_URL`); pull/copy it to `.env.local` for local dev + migrations; set the other env vars locally and in Vercel.
+- **Deferred to Phase 2:** portal, intake, contracts/e-sign, files (Vercel Blob), client auth (Auth.js/Clerk) + app-layer isolation.
