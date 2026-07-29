@@ -142,6 +142,20 @@ Write the Quick-Audit now.`,
       `,
     })
 
+    // Best-effort CRM capture — must never block or fail the enquiry response.
+    try {
+      const { captureEnquiry } = await import('@/lib/crm/contacts')
+      await captureEnquiry({
+        name,
+        email,
+        company,
+        message: [processes, tools, pain].filter(Boolean).join('\n\n'),
+        source: 'quick_audit',
+      })
+    } catch (e) {
+      console.error('CRM capture failed (quick-audit):', e)
+    }
+
     return NextResponse.json({ success: true })
   } catch (error) {
     console.error('Quick-audit route error:', error)

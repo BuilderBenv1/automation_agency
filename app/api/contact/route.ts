@@ -103,6 +103,14 @@ Message: ${message}`,
       `,
     })
 
+    // Best-effort CRM capture — must never block or fail the enquiry response.
+    try {
+      const { captureEnquiry } = await import('@/lib/crm/contacts')
+      await captureEnquiry({ name, email, company, message, source: 'contact_form' })
+    } catch (e) {
+      console.error('CRM capture failed (contact):', e)
+    }
+
     return NextResponse.json({ success: true })
   } catch (error) {
     console.error('Contact route error:', error)
