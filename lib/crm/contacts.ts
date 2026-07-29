@@ -12,7 +12,7 @@ export async function captureEnquiry(input: EnquiryInput): Promise<void> {
     insert into contacts (name, email, company, message, source, status, last_activity_at)
     values (${input.name}, ${input.email}, ${input.company ?? null},
             ${input.message ?? null}, ${input.source}, 'new', now())
-    on conflict (email) do update set last_activity_at = now(), updated_at = now()
+    on conflict (email) do update set updated_at = now()
     returning id`
   const id = rows[0].id as string
   await sql`insert into activities (contact_id, type, body)
@@ -46,7 +46,7 @@ export async function logReply(id: string): Promise<void> {
 }
 
 export async function updateStatus(id: string, status: ContactStatus): Promise<void> {
-  await sql`update contacts set status = ${status}::contact_status, updated_at = now() where id = ${id}`
+  await sql`update contacts set status = ${status}::contact_status, last_activity_at = now(), updated_at = now() where id = ${id}`
   await sql`insert into activities (contact_id, type, body) values (${id}, 'status_change', ${status})`
 }
 
@@ -64,6 +64,7 @@ export async function createManualContact(
     insert into contacts (name, email, company, message, source, status, last_activity_at)
     values (${input.name}, ${input.email}, ${input.company ?? null},
             ${input.message ?? null}, 'manual', 'new', now())
+    on conflict (email) do update set updated_at = now()
     returning id`
   return rows[0].id as string
 }
