@@ -59,6 +59,7 @@ export default function CityPage({ data }: { data: CityData }) {
       '@type': 'ProfessionalService',
       name: 'The Automation Agency',
       url: 'https://www.automation-agency.co.uk',
+      logo: 'https://www.automation-agency.co.uk/logo.png',
       address: {
         '@type': 'PostalAddress',
         addressLocality: 'Chesterfield',

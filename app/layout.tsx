@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Archivo } from 'next/font/google'
 import Script from 'next/script'
 import ConversionTracker from '@/components/ConversionTracker'
@@ -54,6 +54,11 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://www.automation-agency.co.uk' },
 }
 
+export const viewport: Viewport = {
+  themeColor: '#131210',
+  colorScheme: 'dark',
+}
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
@@ -78,6 +83,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               description:
                 'n8n, Zapier & Make automation, AI agents, WhatsApp & website chatbots, CRM automation and internal tools for UK businesses. Based in Derbyshire.',
               url: 'https://www.automation-agency.co.uk',
+              logo: 'https://www.automation-agency.co.uk/logo.png',
+              image: 'https://www.automation-agency.co.uk/logo.png',
               email: 'hello@automation-agency.co.uk',
               address: {
                 '@type': 'PostalAddress',

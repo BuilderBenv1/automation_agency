@@ -17,6 +17,7 @@ export default function ServicePage({ data }: { data: ServiceData }) {
       '@type': 'ProfessionalService',
       name: 'The Automation Agency',
       url: 'https://www.automation-agency.co.uk',
+      logo: 'https://www.automation-agency.co.uk/logo.png',
       address: {
         '@type': 'PostalAddress',
         addressLocality: 'Chesterfield',

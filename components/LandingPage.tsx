@@ -37,6 +37,7 @@ export default function LandingPage({ data }: { data: LandingData }) {
       '@type': 'ProfessionalService',
       name: 'The Automation Agency',
       url: 'https://www.automation-agency.co.uk',
+      logo: 'https://www.automation-agency.co.uk/logo.png',
       address: {
         '@type': 'PostalAddress',
         addressLocality: 'Chesterfield',
