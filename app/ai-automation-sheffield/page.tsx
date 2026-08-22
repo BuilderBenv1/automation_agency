@@ -57,7 +57,7 @@ const data: CityData = {
     },
     {
       q: 'What does it cost to work with you from Sheffield?',
-      a: "Same as anywhere else. Process Audit £1,500 fixed (credited against build). Build projects from £3,000 fixed price. Multi-agent or full-platform builds from £8,000. No travel surcharge for Sheffield.",
+      a: "Same as anywhere else. Fixed-price starter builds from £350. Process Audit £1,500 fixed (credited against build). Full audit-scoped builds from £3,000 fixed price. Multi-agent or full-platform builds from £8,000. No travel surcharge for Sheffield.",
     },
     {
       q: 'Can you visit our Sheffield office?',

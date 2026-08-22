@@ -26,7 +26,7 @@ const data: LandingData = {
     'For UK SMEs (5–200 staff)',
     'Fixed prices · scoped before work starts',
     'Process Audit £1,500 · credited if you build',
-    'Builds from £3,000 · 2–6 weeks',
+    'Full builds from £3,000 · 2–6 weeks',
     'No retainer lock-in · no scope creep',
     'Free 30-minute discovery call',
   ],

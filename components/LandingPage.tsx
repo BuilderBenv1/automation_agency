@@ -23,7 +23,7 @@ export type LandingData = {
 const PROCESS_STEPS: [string, string, string][] = [
   ['1', 'Free 30-min call', 'No commitment, no pitch'],
   ['2', 'Process Audit', '£1,500 fixed · credited if you build'],
-  ['3', 'Fixed-price build', 'From £3,000 · 2–6 weeks'],
+  ['3', 'Full fixed-price build', 'From £3,000 · 2–6 weeks'],
   ['4', 'Handover & support', '30 days post-launch included'],
 ]
 

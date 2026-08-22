@@ -4,7 +4,7 @@ import CityPage, { type CityData } from '@/components/CityPage'
 export const metadata: Metadata = {
   title: 'AI Automation Consultant in Chesterfield — The Automation Agency',
   description:
-    'AI agents and process automation built right here in Chesterfield. Same-day on-site visits across S40–S45. Fixed prices, free discovery call, Process Audits from £1,500.',
+    'AI agents and process automation built right here in Chesterfield. Same-day on-site visits across S40–S45. Fixed prices, free discovery call, £1,500 Process Audit credited if you build.',
   alternates: { canonical: 'https://www.automation-agency.co.uk/ai-automation-chesterfield' },
 }
 
@@ -53,7 +53,7 @@ const data: CityData = {
     },
     {
       q: 'Do you work with small Chesterfield businesses?',
-      a: "Yes. Our typical client is 5–50 staff. The Process Audit is designed to be useful even at the smaller end of that range — the £1,500 fixed fee is credited if you proceed, and you keep the report regardless. So even if we conclude the right answer is a £2,000 build rather than a £20,000 one, the audit hasn't cost you anything net.",
+      a: "Yes. Our typical client is 5–50 staff. The Process Audit is designed to be useful even at the smaller end of that range — the £1,500 fixed fee is credited if you proceed, and you keep the report regardless. So even if we conclude the right answer is a £3,000 build rather than a £30,000 one, the audit hasn't cost you anything net.",
     },
     {
       q: 'Will you visit my Chesterfield office on the same day?',
@@ -65,7 +65,7 @@ const data: CityData = {
     },
     {
       q: 'How does pricing work for a Chesterfield client?',
-      a: "Same as everywhere else. Process Audit £1,500 (credited against build). Builds from £3,000 fixed price. Multi-agent / full-platform builds from £8,000. Optional retainer £1,500/month rolling. No travel surcharge — we live here.",
+      a: "Same as everywhere else. Fixed-price starter builds from £350. Process Audit £1,500 (credited against build). Full audit-scoped builds from £3,000 fixed price. Multi-agent / full-platform builds from £8,000. Optional retainer from £1,500/month rolling. No travel surcharge — we live here.",
     },
   ],
 }

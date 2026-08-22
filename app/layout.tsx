@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     template: '%s — The Automation Agency',
   },
   description:
-    'n8n, Zapier & Make automation, AI agents, WhatsApp & website chatbots, CRM automation, Google Sheets & Airtable, data pipelines, email deliverability, Stripe integration and internal tools/dashboards — fixed-price builds from £350 for UK businesses. Free process audit. Based in Derbyshire, working nationally.',
+    'n8n, Zapier & Make automation, AI agents, WhatsApp & website chatbots, CRM automation, Google Sheets & Airtable, data pipelines, email deliverability, Stripe integration and internal tools/dashboards — fixed-price builds from £350 for UK businesses. Free discovery call. Based in Derbyshire, working nationally.',
   keywords: [
     'n8n automation agency UK',
     'Zapier automation consultant',
@@ -100,7 +100,49 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               ],
               // TODO: add Google Business / LinkedIn / client profile URLs when available
               sameAs: [],
-              priceRange: '£££',
+              priceRange: '£350 - £8,000+',
+              hasOfferCatalog: {
+                '@type': 'OfferCatalog',
+                name: 'Automation services',
+                itemListElement: [
+                  {
+                    '@type': 'Offer',
+                    name: 'Discovery call',
+                    description: 'Free 30-minute call to identify automation opportunities.',
+                    price: '0',
+                    priceCurrency: 'GBP',
+                  },
+                  {
+                    '@type': 'Offer',
+                    name: 'Simple automation build',
+                    description: 'One workflow connecting 2–3 tools, fixed price.',
+                    price: '350',
+                    priceCurrency: 'GBP',
+                  },
+                  {
+                    '@type': 'Offer',
+                    name: 'AI workflow or chatbot build',
+                    description: 'AI workflow, WhatsApp/website/Telegram/SMS chatbot, fixed price.',
+                    price: '750',
+                    priceCurrency: 'GBP',
+                  },
+                  {
+                    '@type': 'Offer',
+                    name: 'Process Audit',
+                    description:
+                      '1–2 week workflow audit with written report and fixed-price build quotes. Credited in full against a build within 60 days.',
+                    price: '1500',
+                    priceCurrency: 'GBP',
+                  },
+                  {
+                    '@type': 'Offer',
+                    name: 'Full automation build',
+                    description: 'Audit-scoped project build, fixed price from £3,000 (multi-agent from £8,000).',
+                    price: '3000',
+                    priceCurrency: 'GBP',
+                  },
+                ],
+              },
               founder: {
                 '@type': 'Person',
                 name: 'Ben Horne',

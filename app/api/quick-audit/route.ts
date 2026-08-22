@@ -46,7 +46,7 @@ export async function POST(req: NextRequest) {
       messages: [
         {
           role: 'user',
-          content: `You are writing a free "Quick-Audit" email on behalf of The Automation Agency — a UK AI/process-automation consultancy run by Ben Horne, a senior developer with 10+ years building production systems. We send this audit to prospects who fill in a 7-question form. Our paid service starts with a £1,500 Process Audit (credited against any build) and full builds from £3,000.
+          content: `You are writing a free "Quick-Audit" email on behalf of The Automation Agency — a UK AI/process-automation consultancy run by Ben Horne, a senior developer with 10+ years building production systems. We send this audit to prospects who fill in a 7-question form. Our paid services: fixed-price starter builds from £350 (simple workflows), £750 (AI workflows and chatbots) and £1,500 (dashboards/internal tools); a £1,500 Process Audit (credited against any build); and full audit-scoped builds from £3,000.
 
 Write a tailored, one-page email Quick-Audit (plain text, no HTML, around 350–500 words). The structure must be:
 

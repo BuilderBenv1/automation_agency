@@ -26,7 +26,7 @@ const data: LandingData = {
     'Fixed prices · in-person kickoff in Derbyshire',
     'Free 30-minute discovery call',
     'Process Audit £1,500 · credited if you build',
-    'Builds from £3,000 · 2–6 weeks',
+    'Full builds from £3,000 · 2–6 weeks',
     'Real Derbyshire-area client case studies',
     'No retainer lock-in · no scope creep',
   ],

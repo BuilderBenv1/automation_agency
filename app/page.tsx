@@ -9,7 +9,7 @@ import Marquee from '@/components/Marquee'
 export const metadata: Metadata = {
   title: 'Automation Agency UK | n8n, Zapier, AI Agents & Chatbots',
   description:
-    'UK automation agency building n8n, Zapier and Make workflows, AI agents, WhatsApp chatbots, CRM automation, dashboards and custom integrations for growing businesses. Fixed prices.',
+    'Stop losing hours every week to manual admin. UK automation agency building n8n, Zapier and Make workflows, AI agents, WhatsApp chatbots, CRM automation and dashboards. Fixed prices from £350, free discovery call.',
   alternates: { canonical: 'https://www.automation-agency.co.uk' },
 }
 
@@ -189,7 +189,7 @@ const pricingTiers = [
   {
     tier: 'Ongoing',
     name: 'Retainer',
-    amount: '£1,500/mo',
+    amount: 'from £1,500/mo',
     cadence: 'Monthly rolling · cancel anytime',
     desc: 'An ongoing automation partner. We monitor, expand, and build new workflows as your business grows.',
     features: ['Monthly builds', 'Monitoring & fixes', 'Priority turnaround', 'Monthly strategy call'],
@@ -261,7 +261,7 @@ const faqs = [
   },
   {
     q: 'How much does a typical automation cost?',
-    a: "Simple workflows connecting two or three tools start at £350. AI workflows and chatbots usually run £750. Bigger builds — dashboards, multi-step systems, custom web apps — start around £1,500 and scale from there depending on scope. Everything is quoted as a fixed price before we start, so there's no surprise on the invoice.",
+    a: "Simple workflows connecting two or three tools start at £350. AI workflows and chatbots usually run £750. Small dashboards and internal tools start at £1,500. Full project builds scoped through the £1,500 Process Audit start at £3,000, and multi-agent systems at £8,000. Everything is quoted as a fixed price before we start, so there's no surprise on the invoice.",
   },
   {
     q: 'Do you work with businesses outside Derbyshire?',
@@ -269,7 +269,7 @@ const faqs = [
   },
   {
     q: "What if I'm not sure what to automate?",
-    a: "That's exactly what the free discovery call and Process Audit are for. We'll ask about your day-to-day, spot where time's being lost, and tell you honestly what's worth automating and what isn't. There's no pressure to book a build afterwards — sometimes the honest answer is to leave it as it is.",
+    a: "That's exactly what the free discovery call is for — and, if it's worth going deeper, the £1,500 Process Audit (credited in full if you build). We'll ask about your day-to-day, spot where time's being lost, and tell you honestly what's worth automating and what isn't. There's no pressure to book a build afterwards — sometimes the honest answer is to leave it as it is.",
   },
   {
     q: 'Will the automation keep working after handover?',
@@ -312,7 +312,8 @@ export default function HomePage() {
           </h1>
 
           <p className="text-muted-dark leading-[1.7] max-w-[36em] mb-10 text-[1.05rem]">
-            We build the automations your team keeps doing by hand —{' '}
+            Every week, someone on your team loses hours to copy-paste admin and re-typing the same data —
+            while enquiries go cold in the inbox. We make that work disappear:{' '}
             <b className="text-cream">
               n8n and Zapier workflows, WhatsApp chatbots, CRM and spreadsheet sync, AI agents and custom
               integrations
@@ -322,7 +323,7 @@ export default function HomePage() {
 
           <div className="flex flex-wrap gap-4 mb-14">
             <a href="#contact" className="btn-lime">
-              Book a free automation audit
+              Book a free discovery call
             </a>
             <a href="#services" className="btn-ghost">
               See fixed-price services →
@@ -429,7 +430,7 @@ export default function HomePage() {
         <div className="max-w-[1180px] mx-auto px-8 md:px-14 py-20 md:py-28">
           <div className="kicker-cream mb-5">What we build</div>
           <h2 className="font-display font-black text-h2-band uppercase text-ink mb-14 max-w-[22ch]">
-            Buyer-friendly, engineer-built.
+            Pick the job your team is sick of doing.
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -451,7 +452,7 @@ export default function HomePage() {
           <p className="mt-12 text-[0.92rem] text-muted-cream">
             Not sure which one fits?{' '}
             <a href="#contact" className="text-ink font-semibold underline hover:text-muted-cream">
-              Book a free audit
+              Book a free discovery call
             </a>{' '}
             and we&apos;ll tell you straight.
           </p>
@@ -467,8 +468,8 @@ export default function HomePage() {
           </h2>
           <p className="text-muted-dark leading-[1.7] max-w-[52em] mb-14 text-[1.02rem]">
             Two ways to work with us. Need one specific thing built? Pick a fixed-price starter below.
-            Not sure where to start, or want a plan first? Book the free audit — we&apos;ll map it out and
-            only build what&apos;s worth building.
+            Not sure where to start, or want a plan first? Book a free discovery call — we&apos;ll map it
+            out and only build what&apos;s worth building.
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
@@ -486,7 +487,7 @@ export default function HomePage() {
 
           <div className="mt-12">
             <a href="#contact" className="btn-lime">
-              Book the free audit
+              Book a free discovery call
             </a>
           </div>
         </div>
@@ -855,7 +856,7 @@ export default function HomePage() {
                   {[
                     ['10+', 'Years shipping production automation'],
                     ['<10%', 'of UK businesses run agentic workflows today'],
-                    ['£0', "Cost to find out what we'd automate for you"],
+                    ['£0', "Cost of the discovery call — find out what we'd automate"],
                     ['2–4wk', 'Typical audit-to-live timeline'],
                   ].map(([stat, label]) => (
                     <div key={stat}>

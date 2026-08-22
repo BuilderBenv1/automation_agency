@@ -4,7 +4,7 @@ import LandingPage, { type LandingData } from '@/components/LandingPage'
 export const metadata: Metadata = {
   title: 'AI Automation Consultant UK — Fixed Prices, Free Discovery Call',
   description:
-    'AI automation consultant UK. Process Audits from £1,500 (credited if you build), fixed-price builds from £3,000. Real production AI agents and automation systems. Book a free 30-minute call.',
+    'AI automation consultant UK. £1,500 Process Audit (credited if you build), fixed-price builds from £350, full projects from £3,000. Real production AI agents and automation systems. Book a free 30-minute call.',
   alternates: { canonical: 'https://www.automation-agency.co.uk/lp/ai-automation-consultant-uk' },
   robots: { index: false, follow: true },
 }

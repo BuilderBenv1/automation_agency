@@ -106,7 +106,7 @@ export default function ServicePage({ data }: { data: ServiceData }) {
 
           <div className="flex flex-wrap gap-4">
             <a href="#book" className="btn-lime">
-              Book a free automation audit
+              Book a free discovery call
             </a>
             <a href="#services-faq" className="btn-ghost">
               Read the FAQs →

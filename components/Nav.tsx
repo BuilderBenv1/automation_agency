@@ -7,7 +7,7 @@ const links = [
   { href: '/#services', label: 'Services' },
   { href: '/#work', label: 'Work' },
   { href: '/#pricing', label: 'Pricing' },
-  { href: '/quick-audit', label: 'Free Audit' },
+  { href: '/quick-audit', label: 'Free Quick-Audit' },
   { href: '/#contact', label: 'Contact' },
 ]
 

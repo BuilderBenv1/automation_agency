@@ -21,7 +21,7 @@ const data: LandingData = {
   subhead:
     'Not chatbots. Production agents that pull data, trigger actions, escalate only when a human is genuinely needed.',
   intro:
-    "We build custom AI agents on the Anthropic, OpenAI, and open-source ecosystems — integrated into your existing tools, not bolted on top. Multi-agent stacks from £8,000, single-workflow builds from £3,000. All fixed-price and scoped upfront. Start with a free 30-minute discovery call; if there's a clear opportunity we'll quote you a Process Audit (£1,500, credited against build).",
+    "We build custom AI agents on the Anthropic, OpenAI, and open-source ecosystems — integrated into your existing tools, not bolted on top. Single AI workflows from £750, full agent systems from £3,000, multi-agent stacks from £8,000. All fixed-price and scoped upfront. Start with a free 30-minute discovery call; if there's a clear opportunity we'll quote you a Process Audit (£1,500, credited against build).",
   bullets: [
     'Production agents · not demos or POCs',
     'Anthropic / OpenAI / open-source models',

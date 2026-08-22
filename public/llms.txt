@@ -30,6 +30,10 @@ Businesses searching for: n8n automation agency, Zapier automation consultant, M
 
 ## Pricing
 
+Free entry points:
+- Discovery call (30 minutes, no commitment): free — https://www.automation-agency.co.uk/#contact
+- Quick-Audit (emailed teardown of one manual process, based on a 7-question form): free — https://www.automation-agency.co.uk/quick-audit
+
 Fixed-price starter tiers (most engagements land here):
 - Simple automation (one workflow, 2-3 tools connected): £350
 - AI workflow (classification, drafting, summarising, routing, extraction): £750
