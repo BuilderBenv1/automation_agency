@@ -241,7 +241,7 @@ const starterBuilds = [
   {
     name: 'Internal tool / dashboard',
     price: '£1,500',
-    body: 'A small dashboard, admin panel, Supabase app or workflow control panel.',
+    body: 'One small dashboard or admin panel — a single screen over one or two data sources. Fuller custom apps are quoted from £3,000.',
   },
   {
     name: 'Process audit',
@@ -261,7 +261,7 @@ const faqs = [
   },
   {
     q: 'How much does a typical automation cost?',
-    a: "Simple workflows connecting two or three tools start at £350. AI workflows and chatbots usually run £750. Small dashboards and internal tools start at £1,500. Full project builds scoped through the £1,500 Process Audit start at £3,000, and multi-agent systems at £8,000. Everything is quoted as a fixed price before we start, so there's no surprise on the invoice.",
+    a: "Simple workflows connecting two or three tools start at £350. AI workflows and chatbots usually run £750. A small internal tool or dashboard — one screen over one or two data sources — starts at £1,500. Fuller custom apps and project builds scoped through the £1,500 Process Audit start at £3,000, and multi-agent systems at £8,000. Every price is fixed and tied to an agreed scope before we start; if the spec grows mid-project we re-quote before building more, so there's no surprise on the invoice.",
   },
   {
     q: 'Do you work with businesses outside Derbyshire?',
@@ -468,8 +468,10 @@ export default function HomePage() {
           </h2>
           <p className="text-muted-dark leading-[1.7] max-w-[52em] mb-14 text-[1.02rem]">
             Two ways to work with us. Need one specific thing built? Pick a fixed-price starter below.
-            Not sure where to start, or want a plan first? Book a free discovery call — we&apos;ll map it
-            out and only build what&apos;s worth building.
+            Each starter price covers one tightly-scoped build — we agree exactly what&apos;s included
+            before we start, and if the spec grows we re-quote before building more. Not sure where to
+            start, or want a plan first? Book a free discovery call — we&apos;ll map it out and only
+            build what&apos;s worth building.
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
@@ -485,7 +487,12 @@ export default function HomePage() {
             ))}
           </div>
 
-          <div className="mt-12">
+          <p className="mt-10 text-[0.92rem] text-muted-dark max-w-[52em]">
+            Most engagements land between £2,000 and £6,000 — the starter prices are for single,
+            well-defined pieces, a genuine way in rather than the ceiling.
+          </p>
+
+          <div className="mt-8">
             <a href="#contact" className="btn-lime">
               Book a free discovery call
             </a>
@@ -712,7 +719,8 @@ export default function HomePage() {
             </div>
             <p className="text-[0.95rem] text-muted-dark leading-[1.75] max-w-[440px]">
               Every engagement is agreed upfront. You know exactly what you&apos;re paying before a line of
-              code is written.
+              code is written — and if the scope grows mid-project, we quote the difference before building
+              it. The price only changes when you&apos;ve agreed it.
             </p>
           </div>
 

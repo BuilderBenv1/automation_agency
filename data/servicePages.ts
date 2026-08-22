@@ -559,7 +559,7 @@ export const servicePages: Record<string, ServiceData> = {
       },
       {
         q: 'How much does an internal tool or dashboard cost?',
-        a: 'A single dashboard showing live data from one or two sources starts at £1,500, fixed price. A scraping pipeline covering many sources, with alerts and historical data, is quoted after a scoping call — always fixed, and sized to what the tool actually needs to do rather than billed by the hour.',
+        a: "A single dashboard showing live data from one or two sources starts at £1,500, fixed price — that covers one screen and the plumbing behind it. Multiple screens, user accounts and roles, scraping pipelines covering many sources, alerts or historical data take it into full-build territory, typically £3,000–£8,000, quoted fixed after a scoping call. And if the spec grows mid-project, we re-quote the difference before building it — the price only changes when you've agreed it.",
       },
       {
         q: 'What happens if it breaks or a data source changes?',
