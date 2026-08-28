@@ -97,28 +97,28 @@ const caseStudies = [
   {
     client: 'Marmadbir',
     clientUrl: 'https://www.marmadbir.com/',
-    sector: 'Field Services · Multi-Tenant SaaS',
+    sector: 'Field Services',
     title: 'WhatsApp dispatch automation for field-service teams',
     body: "Marmadbir was coordinating field workers manually across WhatsApp groups and phone calls — dispatchers chasing workers, payments handled by phone. We built the full stack: customer-facing front-end, multi-tenant Twilio-powered WhatsApp dispatch flow, and Tranzilla payment integration. Jobs broadcast, workers apply, payments claimed race-safe, client confirmed. The coordinator's manual workload: zero.",
     results: [
-      ['Coordinator manual time', 'Eliminated'],
-      ['Payment race conditions', 'Zero'],
-      ['New tenant onboarding', '< 5 minutes'],
-      ['Messaging cost reduction', '~65%'],
+      ['Dispatcher time spent chasing workers', 'Eliminated'],
+      ['Messaging cost', 'Down ~65%'],
+      ['Annual saving', '[£ OUTCOME — awaiting client sign-off]'],
+      ['Payments reconciled by hand', 'None'],
     ],
     tags: ['WhatsApp automation', 'Twilio', 'Job dispatch', 'Payments', 'CRM workflow'],
   },
   {
     client: 'Punthub',
     clientUrl: 'https://punthub.co.uk/',
-    sector: 'Horse Racing · Predictive Analytics',
+    sector: 'Horse Racing',
     title: 'Automated data pipeline & prediction dashboard',
     body: 'Punthub needed daily horse-racing data from 6 live sources, run through 7 ML prediction models, results reconciled overnight, and insights surfaced through a custom-plugin front-end. Python scripts feed Google Sheets each evening; Supabase syncs overnight; the Next.js site renders prediction cards via bespoke plugins. Runs unattended every night.',
     results: [
-      ['Data sources automated', '6 daily'],
-      ['Live prediction models', '7'],
-      ['Reconciliation jobs', '21 automated'],
-      ['Human touchpoints required', 'Zero'],
+      ['Staff time to run it each night', 'None — it runs unattended'],
+      ['Overnight work replaced', '[£ OUTCOME — awaiting client sign-off]'],
+      ['Data kept current without anyone touching it', '6 sources, daily'],
+      ['Figures reconciled by hand', 'None'],
     ],
     tags: ['Python automation', 'Data pipeline', 'ML models', 'Daily reporting', 'Supabase'],
     note: 'Built and owned by The Automation Agency.',
@@ -126,14 +126,14 @@ const caseStudies = [
   {
     client: 'PlusRooms',
     clientUrl: 'https://plusrooms.co.uk/',
-    sector: 'Property Intelligence · Data Pipeline',
+    sector: 'Property',
     title: 'Public-data extraction & planning-alert dashboard',
     body: 'PlusRooms needed daily coverage of planning applications across England — previously a full working day of manual council-website trawling. We built Planscope: an automated scraping pipeline covering 97% of London boroughs and a live dashboard with alerts. Nobody has to check a council website anymore.',
     results: [
-      ['Borough coverage', '97%'],
-      ['Daily manual hours replaced', 'Full working day'],
-      ['Data freshness', '24-hour cycle'],
-      ['Dashboard & alerts', 'Live'],
+      ['Manual work replaced', 'A full working day, every day'],
+      ['Annual saving', '[£ OUTCOME — awaiting client sign-off]'],
+      ['Council websites checked by hand', 'None'],
+      ['London borough coverage', '97%'],
     ],
     tags: ['Web data extraction', 'Playwright', 'Scheduled scraping', 'Dashboard', 'Alerts'],
   },
@@ -686,32 +686,26 @@ export default function HomePage() {
                     {title}
                   </h3>
 
-                  <div className="flex flex-wrap gap-1.5 mb-5">
-                    {tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="text-[0.7rem] px-2.5 py-1 bg-lime/20 text-ink rounded-full font-semibold"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-
                   <p className="text-[0.875rem] text-muted-cream leading-[1.75] mb-7">{body}</p>
 
+                  {/* Outcomes lead. The first row is always something a buyer
+                      can put a price on — see audit report §3.2. */}
                   <div className="bg-cream rounded-xl p-5 flex flex-col gap-2.5 mt-auto">
                     {results.map(([label, value]) => (
-                      <div key={label} className="flex justify-between text-[0.82rem]">
+                      <div key={label} className="flex justify-between gap-4 text-[0.82rem]">
                         <span className="text-muted-cream">{label}</span>
-                        <span className="font-semibold text-ink">{value}</span>
+                        <span className="font-semibold text-ink text-right">{value}</span>
                       </div>
                     ))}
                   </div>
 
+                  {/* Tooling, demoted: one quiet row at the foot of the card. */}
+                  <p className="text-[0.72rem] text-muted-cream/70 leading-relaxed mt-4 pt-4 border-t border-[rgba(19,18,16,0.1)]">
+                    {tags.join(' · ')}
+                  </p>
+
                   {note && (
-                    <p className="text-[0.75rem] text-muted-cream italic mt-4 pt-4 border-t border-[rgba(19,18,16,0.1)]">
-                      {note}
-                    </p>
+                    <p className="text-[0.75rem] text-muted-cream italic mt-3">{note}</p>
                   )}
                 </div>
               </RevealWrapper>
