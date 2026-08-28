@@ -18,49 +18,49 @@ export const metadata: Metadata = {
 
 const services = [
   {
-    title: 'n8n, Make & Zapier automation',
+    title: 'Stop re-typing the same data into three systems',
     body: 'Connect the apps you already pay for — your CRM, forms, sheets, inbox, Slack and Airtable — so the admin in between just happens.',
     from: '£350',
     slug: '/zapier-make-automation',
   },
   {
-    title: 'AI agents & Claude/OpenAI workflows',
+    title: 'Let something else read the inbox and sort it',
     body: 'AI that reads, sorts, drafts and updates records for you, with a check-before-send step wherever a mistake would cost you.',
     from: '£750',
     slug: '/ai-automation-agency',
   },
   {
-    title: 'WhatsApp & website chatbots',
+    title: 'Answer customers at 9pm without being awake',
     body: 'Answer FAQs, capture leads and book jobs over WhatsApp, your website, Telegram or SMS — handed to a human when it matters.',
     from: '£750',
     slug: '/whatsapp-chatbot',
   },
   {
-    title: 'CRM, Google Sheets & Airtable automation',
+    title: 'Leads that never slip through the cracks',
     body: 'Stop copying data between systems. We wire your forms, sheets, CRM, calendar and notifications into one flow that holds together.',
     from: '£350',
     slug: '/crm-automation',
   },
   {
-    title: 'Data pipelines & web data extraction',
+    title: 'The morning check nobody has to do any more',
     body: 'Scheduled collection, cleaning and delivery of data — public sources, APIs, emails or documents — into a dashboard, database or sheet.',
     from: '£1,500',
     slug: '/internal-tools-dashboard',
   },
   {
-    title: 'Custom web apps & internal tools',
+    title: 'Replace the spreadsheet your business secretly runs on',
     body: 'When no-code runs out of road: Next.js and Supabase dashboards, portals and admin panels built to fit how you actually work.',
     from: '£1,500',
     slug: '/internal-tools-dashboard',
   },
   {
-    title: 'Email deliverability & sending setup',
+    title: 'Get your email out of the spam folder',
     body: 'SPF, DKIM, DMARC and domain authentication sorted, so the emails you send at scale actually land in the inbox.',
     from: '£350',
     slug: '/email-deliverability',
   },
   {
-    title: 'Stripe, payments & subscription automation',
+    title: 'Payments that update everything else on their own',
     body: 'Checkout, subscriptions, webhooks and receipts wired to your CRM, so payments update everything without you touching it.',
     from: '£750',
     slug: '/stripe-payment-integration',
