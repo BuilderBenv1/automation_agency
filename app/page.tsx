@@ -117,7 +117,7 @@ const caseStudies = [
     body: 'Punthub needed daily horse-racing data from 6 live sources, run through 7 ML prediction models, results reconciled overnight, and insights surfaced through a custom-plugin front-end. Python scripts feed Google Sheets each evening; Supabase syncs overnight; the Next.js site renders prediction cards via bespoke plugins. Runs unattended every night.',
     results: [
       ['Staff time to run it each night', 'None — it runs unattended'],
-      ['Overnight work replaced', '≈ £15,000/yr equivalent'],
+      ['Annual saving', '£13,000+/yr in operating costs eliminated'],
       ['Data kept current without anyone touching it', '6 sources, daily'],
       ['Figures reconciled by hand', 'None'],
     ],
@@ -714,7 +714,7 @@ export default function HomePage() {
           </div>
 
           <p className="mt-8 text-[0.78rem] text-muted-cream/70 leading-relaxed">
-            Savings stated as salary-equivalents of the manual work each system replaced.
+            Figures are actual costs eliminated or salary-equivalents of manual work replaced.
           </p>
         </div>
       </section>
