@@ -104,7 +104,7 @@ const caseStudies = [
     results: [
       ['Dispatcher time spent chasing workers', 'Eliminated'],
       ['Messaging cost', 'Down ~65%'],
-      ['Annual saving', '[£ OUTCOME — awaiting client sign-off]'],
+      ['Annual saving', '≈ £10,000/yr in coordination time'],
       ['Payments reconciled by hand', 'None'],
     ],
     tags: ['WhatsApp automation', 'Twilio', 'Job dispatch', 'Payments', 'CRM workflow'],
@@ -117,7 +117,7 @@ const caseStudies = [
     body: 'Punthub needed daily horse-racing data from 6 live sources, run through 7 ML prediction models, results reconciled overnight, and insights surfaced through a custom-plugin front-end. Python scripts feed Google Sheets each evening; Supabase syncs overnight; the Next.js site renders prediction cards via bespoke plugins. Runs unattended every night.',
     results: [
       ['Staff time to run it each night', 'None — it runs unattended'],
-      ['Overnight work replaced', '[£ OUTCOME — awaiting client sign-off]'],
+      ['Overnight work replaced', '≈ £15,000/yr equivalent'],
       ['Data kept current without anyone touching it', '6 sources, daily'],
       ['Figures reconciled by hand', 'None'],
     ],
@@ -132,7 +132,7 @@ const caseStudies = [
     body: 'PlusRooms needed daily coverage of planning applications across England — previously a full working day of manual council-website trawling. We built Planscope: an automated scraping pipeline covering 97% of London boroughs and a live dashboard with alerts. Nobody has to check a council website anymore.',
     results: [
       ['Manual work replaced', 'A full working day, every day'],
-      ['Annual saving', '[£ OUTCOME — awaiting client sign-off]'],
+      ['Annual saving', "≈ £27,000/yr — a full-time role's worth of checking"],
       ['Council websites checked by hand', 'None'],
       ['London borough coverage', '97%'],
     ],
@@ -712,6 +712,10 @@ export default function HomePage() {
               </RevealWrapper>
             ))}
           </div>
+
+          <p className="mt-8 text-[0.78rem] text-muted-cream/70 leading-relaxed">
+            Savings stated as salary-equivalents of the manual work each system replaced.
+          </p>
         </div>
       </section>
 

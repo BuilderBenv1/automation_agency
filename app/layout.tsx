@@ -173,12 +173,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   publisher: { '@type': 'Organization', name: 'Google' },
                 },
               ],
-              aggregateRating: {
-                '@type': 'AggregateRating',
-                ratingValue: '5',
-                reviewCount: '1',
-                bestRating: '5',
-              },
+              // No aggregateRating: self-serving AggregateRating on
+              // LocalBusiness/Organization markup is unsupported by Google and a
+              // manual-action risk, especially at reviewCount 1. Reinstate once
+              // there are enough genuine reviews to be worth the rich result.
             }),
           }}
         />
