@@ -7,7 +7,7 @@ import type { ServiceData } from '@/data/servicePages'
 
 export default function ServicePage({ data }: { data: ServiceData }) {
   const canonical = `https://www.automation-agency.co.uk/${data.slug}`
-  const serviceName = data.metaTitle.split('|')[0].trim()
+  const serviceName = data.serviceName
 
   const serviceLd = {
     '@context': 'https://schema.org',

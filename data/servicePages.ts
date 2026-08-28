@@ -4,6 +4,7 @@ export type ServiceRelated = { slug: string; label: string }
 
 export type ServiceData = {
   slug: string
+  serviceName: string  // schema + breadcrumb label; titles are prose, not parseable
   metaTitle: string
   metaDescription: string
   kicker: string
@@ -22,15 +23,16 @@ export type ServiceData = {
 export const servicePages: Record<string, ServiceData> = {
   'n8n-automation-agency': {
     slug: 'n8n-automation-agency',
-    metaTitle: 'n8n Automation Agency UK | Custom Workflows Built Properly',
+    serviceName: 'n8n Automation',
+    metaTitle: 'Stop Re-Typing Data Between Systems — n8n Automation UK',
     metaDescription:
-      'UK n8n automation agency. We design, build and host n8n workflows that connect your CRM, forms, sheets, inbox and APIs. Fixed prices from £350.',
-    kicker: 'n8n automation · UK',
-    h1Lead: 'n8n workflows,',
-    h1Accent: 'built properly.',
-    h1Outline: 'Hosted, monitored, yours.',
+      'The admin between your CRM, inbox, forms and spreadsheets stops being somebody\'s job. We design, build and host the workflows that do it instead. Fixed prices from £350, quoted before we start.',
+    kicker: 'Workflow automation · UK',
+    h1Lead: 'Stop re-typing the same data',
+    h1Accent: 'into three systems.',
+    h1Outline: 'We automate the bit in between.',
     intro:
-      'We are a UK automation agency that designs, builds and hosts n8n workflows for growing businesses. n8n is an open, self-hostable automation tool — so you get Zapier-style convenience without the per-task bill or the vendor lock-in.',
+      'If someone on your team spends their morning copying information from one system into another, that job exists only because the two systems do not talk to each other. We build the workflows that connect them — usually with n8n, an open automation platform we can host for you or hand over on your own infrastructure — so the data moves on its own and nobody has to remember to do it. Fixed price, agreed before we start, and you own the workflows outright.',
     problem:
       "Most teams have three or four tools that don't talk to each other, so someone spends their morning copy-pasting between them. n8n connects those tools into one workflow that runs on its own — and because it is self-hosted, it does not get more expensive every time you use it.",
     workflows: [
@@ -63,15 +65,16 @@ export const servicePages: Record<string, ServiceData> = {
 
   'zapier-make-automation': {
     slug: 'zapier-make-automation',
-    metaTitle: 'Zapier & Make Automation UK | Workflows Built & Fixed Properly',
+    serviceName: 'Zapier & Make Automation',
+    metaTitle: 'Fix the Automation That Keeps Breaking — Zapier & Make UK',
     metaDescription:
-      'UK Zapier and Make automation agency. We build, fix and connect your Zapier and Make workflows so the manual copy-paste stops for good. Fixed prices from £350.',
-    kicker: 'Zapier & Make automation · UK',
-    h1Lead: 'Zapier and Make,',
-    h1Accent: 'set up properly.',
-    h1Outline: 'Or fixed when it breaks.',
+      'Most of what we get asked to fix stopped working weeks ago and nobody noticed until a customer complained. We build automations that hold, and repair the ones that do not. Fixed prices from £350.',
+    kicker: 'Workflow automation & repair · UK',
+    h1Lead: 'The automation nobody noticed',
+    h1Accent: 'had stopped working.',
+    h1Outline: 'Rebuilt so it holds.',
     intro:
-      "We're a UK automation agency that builds and repairs Zapier and Make workflows for growing businesses. Zapier and Make are no-code automation platforms that connect the apps you already use — your CRM, inbox, forms and spreadsheets — so data moves between them without anyone touching it. We set them up properly the first time, or fix the ones somebody else left held together with tape.",
+      'No-code automation is brilliant right up until a workflow gets slightly complicated — a step needs real logic, a filter fails silently, or the task bill jumps. We build Zapier and Make workflows properly the first time, with error handling and alerts so you hear about a problem before your customers do. We also take on the ones somebody else left held together with tape, and will tell you honestly whether it is worth repairing or rebuilding.',
     problem:
       'Zapier and Make are brilliant right up until a workflow gets even slightly complicated — a step needs custom logic, a filter breaks silently, or your task count creeps past the plan limit and the bill jumps. Most of what we get asked to fix is a Zap or scenario built in a rush that quietly stopped working weeks ago, with nobody any wiser until a customer complained.',
     workflows: [
@@ -121,15 +124,16 @@ export const servicePages: Record<string, ServiceData> = {
 
   'ai-chatbot-development': {
     slug: 'ai-chatbot-development',
-    metaTitle: 'AI Chatbot Development UK | Custom Chatbots Built Properly',
+    serviceName: 'AI Chatbot Development',
+    metaTitle: 'Answer Customer Questions Without Being There — AI Chatbots UK',
     metaDescription:
-      'UK AI chatbot development agency. We build website and WhatsApp chatbots trained on your real information, with human handover built in. Fixed prices from £750.',
-    kicker: 'AI chatbot development · UK',
-    h1Lead: 'AI chatbots,',
-    h1Accent: 'that actually answer.',
-    h1Outline: 'Human handover built in.',
+      'Customers ask the same questions at all hours. A chatbot trained on your real prices and policies answers them, captures the lead, and hands anything it is unsure about to a person. Fixed prices from £750.',
+    kicker: 'Customer questions, answered · UK',
+    h1Lead: 'Answer customers at 9pm',
+    h1Accent: 'without being awake.',
+    h1Outline: 'And never invent an answer.',
     intro:
-      "We design and build AI chatbots for UK businesses — on your website, WhatsApp or both — trained on your own information so they answer real questions instead of generic ones. An AI chatbot uses a language model to hold a conversation, look things up in your documents or systems, and either resolve the query or pass it to a person with the full context attached.",
+      'Most chatbots people have tried are either a rigid decision tree that gives up after two questions, or a generic AI wrapper that confidently makes things up. We build AI chatbots for UK businesses — on your website, WhatsApp or both — trained only on your own information, so they answer from your actual prices, policies and documents. When the bot is not confident, it says so and passes the conversation to a person with the full history attached, rather than guessing.',
     problem:
       "Most chatbots people have tried are either a rigid decision tree that gives up after two questions, or a generic AI wrapper that confidently makes things up. Customers can tell the difference immediately, and a bot that gets your prices or opening hours wrong costs you more trust than having no bot at all. We build ours to only answer from what you have actually told it, and to say 'let me get someone' rather than guess.",
     workflows: [
@@ -179,15 +183,16 @@ export const servicePages: Record<string, ServiceData> = {
 
   'whatsapp-chatbot': {
     slug: 'whatsapp-chatbot',
-    metaTitle: 'WhatsApp Chatbot Development UK | Business API Bots Built Properly',
+    serviceName: 'WhatsApp Chatbot Development',
+    metaTitle: 'Take Bookings and Questions on WhatsApp — WhatsApp Chatbots UK',
     metaDescription:
-      'UK WhatsApp chatbot agency. We build WhatsApp Business API chatbots on Twilio for bookings, support and lead capture, connected to your CRM. Fixed prices from £750.',
-    kicker: 'WhatsApp chatbot · UK',
-    h1Lead: 'WhatsApp chatbots,',
-    h1Accent: 'built on the real API.',
-    h1Outline: 'Not a script that gets banned.',
+      'Customers already live in WhatsApp. Answer them, book them in and capture the lead without anyone sat watching a phone — on the official Business API, so your number does not get banned. From £750.',
+    kicker: 'Bookings & enquiries on WhatsApp · UK',
+    h1Lead: 'Customers message you the way',
+    h1Accent: 'they message their friends.',
+    h1Outline: 'Something answers, day or night.',
     intro:
-      "We build WhatsApp chatbots for UK businesses on the official WhatsApp Business API, connected through Twilio, so you can answer questions, take bookings and capture leads without anyone sat watching their phone. A WhatsApp chatbot lets customers message you the way they already message their friends, while the automation behind it looks up answers, updates your CRM and only pulls in a human when the conversation genuinely needs one.",
+      'A lot of WhatsApp automation runs through an unofficial API or a personal number with a script bolted on, which is exactly how businesses get their number banned overnight, mid-conversation with customers. We build on the official WhatsApp Business API through Twilio, properly verified, so the messaging keeps working. Behind it, the automation looks up answers, takes bookings, updates your CRM and pulls in a human only when the conversation genuinely needs one.',
     problem:
       "A lot of 'WhatsApp automation' out there runs through an unofficial API or a personal number with a script bolted on, which is exactly how businesses get their WhatsApp number banned overnight, mid-conversation with customers. We build on the official WhatsApp Business API through Twilio, properly verified, so the messaging keeps working and the conversation history stays yours.",
     workflows: [
@@ -237,15 +242,16 @@ export const servicePages: Record<string, ServiceData> = {
 
   'ai-automation-agency': {
     slug: 'ai-automation-agency',
-    metaTitle: 'AI Automation Agency UK | AI Agents & Workflows Built Properly',
+    serviceName: 'AI Automation',
+    metaTitle: 'One System That Fits Together — AI Automation Agency UK',
     metaDescription:
-      'UK AI automation agency building AI agents, chatbots, workflows and data pipelines that actually work, with a human in the loop where it matters. Fixed prices from £750.',
-    kicker: 'AI automation agency · UK',
-    h1Lead: 'AI automation,',
-    h1Accent: 'end to end.',
-    h1Outline: 'Agents, workflows, data — one team.',
+      'Three freelancers usually means three half-finished systems and nobody accountable when they stop talking. We design and build the whole thing as one, and it usually costs less. Fixed prices from £750.',
+    kicker: 'Whole-system automation · UK',
+    h1Lead: 'Three freelancers, three',
+    h1Accent: 'half-finished systems.',
+    h1Outline: 'Or one that fits together.',
     intro:
-      "We're a UK AI automation agency that builds AI agents, automated workflows and connected data pipelines for growing businesses — not one at a time, but as one system that talks to your CRM, your inbox, your spreadsheets and your customers. An \"AI automation agency\" should mean more than a chatbot bolted onto a website; it means using AI where it actually saves time, and plain, deterministic automation everywhere else, so nothing is held together by hope.",
+      'Most businesses end up hiring separately for the chatbot, the CRM integration and the reporting dashboard, then discover nobody is accountable once the three stop talking to each other. We build the whole stack ourselves — workflows, AI agents, integrations and the plain code in between — so one team understands how it fits together. We use AI where it genuinely earns its place, reading and deciding on messy information, and ordinary deterministic automation everywhere else, because it is cheaper and more predictable.',
     problem:
       "Most businesses end up hiring separately for the chatbot, the CRM integration and the reporting dashboard — three different freelancers, three half-finished systems that don't talk to each other, and nobody who understands the whole picture once something breaks. On top of that, \"AI\" gets bolted onto every sales pitch going right now, and a lot of what is sold as an AI agent turns out to be a chatbot wrapper with no real engineering behind it. We build the whole stack ourselves — workflows, agents, integrations and the plain code in between — so there is one team who understands how it all fits together.",
     workflows: [
@@ -295,15 +301,16 @@ export const servicePages: Record<string, ServiceData> = {
 
   'crm-automation': {
     slug: 'crm-automation',
-    metaTitle: 'CRM Automation UK | HubSpot, Pipedrive & Airtable Workflows',
+    serviceName: 'CRM Automation',
+    metaTitle: 'Leads That Never Slip Through the Cracks — CRM Automation UK',
     metaDescription:
-      'UK CRM automation agency. We connect HubSpot, Pipedrive, Airtable and other CRMs to your forms, inbox and invoicing so records update themselves. Fixed prices from £350.',
-    kicker: 'CRM automation · UK',
-    h1Lead: 'Your CRM,',
-    h1Accent: 'finally up to date.',
-    h1Outline: 'Automatically, not by hand.',
+      'Enquiries logged the moment they arrive, deal stages that move themselves, quotes chased without anyone remembering. Works with the CRM you already have. Fixed prices from £350.',
+    kicker: 'Leads, quotes & pipeline · UK',
+    h1Lead: 'Every lead logged,',
+    h1Accent: 'every quote chased.',
+    h1Outline: 'Without anyone remembering to.',
     intro:
-      "We build CRM automation for UK businesses using HubSpot, Pipedrive, Airtable and similar tools — connecting your CRM to your forms, inbox, WhatsApp and invoicing so records update themselves the moment something happens. CRM automation just means the lead, deal or customer record gets created, updated and moved along the pipeline without someone doing it by hand.",
+      'A CRM is only useful if it is actually kept up to date, and in most businesses it is not — leads sit in an inbox for two days, deal stages get forgotten, and half the team works from memory instead of the record. That is not really a CRM problem, it is a data-entry problem. We connect the CRM you already use — HubSpot, Pipedrive, Airtable or almost anything with an API — to your forms, inbox, messaging and invoicing, so the record updates the moment something happens.',
     problem:
       "A CRM is only useful if it's actually kept up to date, and in most businesses it isn't — leads sit in an inbox for two days before anyone adds them, deal stages get forgotten, and half the team works from memory instead of the record. That isn't really a CRM problem, it's a data-entry problem, and it's exactly what automation removes: the record updates the moment the trigger happens, not whenever someone remembers to open the tab.",
     workflows: [
@@ -353,15 +360,16 @@ export const servicePages: Record<string, ServiceData> = {
 
   'google-sheets-automation': {
     slug: 'google-sheets-automation',
-    metaTitle: 'Google Sheets Automation UK | Scheduled, Connected Spreadsheets',
+    serviceName: 'Google Sheets Automation',
+    metaTitle: 'Spreadsheets That Update Themselves — Google Sheets Automation UK',
     metaDescription:
-      'UK Google Sheets automation agency. We connect your spreadsheets to forms, APIs and other systems on a schedule, so the sheet updates itself. Fixed prices from £350.',
-    kicker: 'Google Sheets automation · UK',
-    h1Lead: 'Google Sheets,',
-    h1Accent: 'that update themselves.',
+      'Keep the spreadsheet your business runs on. Just stop updating it by hand: data pulled in on a schedule, rows written automatically, alerts when a number crosses a line. From £350.',
+    kicker: 'Spreadsheets, kept current · UK',
+    h1Lead: 'The spreadsheet updates itself',
+    h1Accent: 'before you open it.',
     h1Outline: 'No copy-paste, no missed rows.',
     intro:
-      'We build Google Sheets automation for UK businesses that want to keep using spreadsheets, just without updating them by hand. That means pulling data in from your forms, inbox, CRM or an external API on a schedule, writing it into the right sheet and tab automatically, and triggering whatever needs to happen next once it lands.',
+      'Spreadsheets are genuinely good tools — the problem is almost never the sheet, it is the person copying numbers into it every morning, or forgetting to on the one day it mattered. We automate the sheet rather than replacing it: pulling data in from your forms, inbox, CRM or an external system on a schedule, writing it into the right tab, and triggering whatever needs to happen next. It gets most businesses the benefits of a database without a migration project.',
     problem:
       'Spreadsheets are genuinely good tools — the problem is almost never the sheet, it\'s the person copying numbers into it every morning, or forgetting to on the one day it mattered. That manual step is where the mistakes creep in: a row skipped, a formula overwritten, an out-of-date version emailed around. Automating the sheet itself, rather than replacing it, usually gets a business most of the way to "having a database" without a migration project.',
     workflows: [
@@ -411,15 +419,16 @@ export const servicePages: Record<string, ServiceData> = {
 
   'email-deliverability': {
     slug: 'email-deliverability',
-    metaTitle: 'Email Deliverability UK | SPF, DKIM & DMARC Fixed Properly',
+    serviceName: 'Email Deliverability',
+    metaTitle: 'Get Your Email Out of the Spam Folder — SPF, DKIM & DMARC UK',
     metaDescription:
-      'UK email deliverability agency. We set up SPF, DKIM and DMARC correctly and warm up your sending domain so campaigns and transactional email land in the inbox, not spam. Fixed prices from £350.',
-    kicker: 'Email deliverability · UK',
-    h1Lead: 'Emails that,',
-    h1Accent: 'actually land.',
-    h1Outline: 'SPF, DKIM & DMARC, done properly.',
+      'If your invoices, booking confirmations or campaigns are landing in spam, it is nearly always a DNS record that was never finished. We find the actual cause and fix it properly. From £350.',
+    kicker: 'Email that reaches the inbox · UK',
+    h1Lead: 'Your email is going',
+    h1Accent: 'to the spam folder.',
+    h1Outline: 'Here is why, and the fix.',
     intro:
-      "We set up email deliverability for UK businesses — SPF, DKIM and DMARC configured correctly, plus the domain warm-up that goes with them, so the email you send actually reaches the inbox instead of spam or nowhere at all. Deliverability is really just proof: three DNS records that tell Gmail, Outlook and everyone else that a message genuinely came from you and hasn't been tampered with on the way.",
+      'Most deliverability problems are not a broken email service, they are a missing or half-finished DNS record. We audit and correct the three that matter — SPF, DKIM and DMARC — which together prove to Gmail, Outlook and the rest that a message genuinely came from you and was not tampered with. Where you are sending from a new domain we also handle the warm-up, so volume alone does not trip the spam filter while the reputation is still being built.',
     problem:
       "Most deliverability problems aren't a broken email service, they're a missing or half-finished DNS record — an SPF record that doesn't cover every tool sending on your behalf, a DKIM key that was never switched on, or a DMARC policy left on 'do nothing' because nobody wanted to risk emails bouncing. Add a brand-new domain sending a few hundred emails on day one with no sending history behind it, and providers treat you as a stranger — however careful the setup, the volume alone trips the spam filter.",
     workflows: [
@@ -466,15 +475,16 @@ export const servicePages: Record<string, ServiceData> = {
 
   'stripe-payment-integration': {
     slug: 'stripe-payment-integration',
-    metaTitle: 'Stripe Payment Integration UK | Subscriptions, Webhooks & Refunds',
+    serviceName: 'Stripe Payment Integration',
+    metaTitle: 'Payments That Update Everything Else — Stripe Integration UK',
     metaDescription:
-      'UK Stripe payment integration agency. We connect Stripe to your site or app for subscriptions, one-off payments, webhooks and refunds, wired into your CRM. Fixed prices from £750.',
-    kicker: 'Stripe payment integration · UK',
-    h1Lead: 'Stripe, wired in,',
-    h1Accent: 'properly.',
-    h1Outline: 'Subscriptions, webhooks, refunds — handled.',
+      'The checkout is the easy part. We wire up what happens after: records updated, receipts sent, access granted or revoked, failed payments chased — without anyone reconciling a spreadsheet. From £750.',
+    kicker: 'Payments & subscriptions · UK',
+    h1Lead: 'Money arrives.',
+    h1Accent: 'Everything else updates itself.',
+    h1Outline: 'Receipts, records, access.',
     intro:
-      "We build Stripe payment integrations for UK businesses — subscriptions, one-off payments, invoicing and the webhooks that keep everything else in sync, connected straight into your CRM or database. A proper Stripe integration means the payment, the receipt, the subscription status and your own records all update together the moment money moves, rather than someone reconciling a spreadsheet against the Stripe dashboard at the end of the month.",
+      'The checkout page is the easy part; what usually goes wrong is everything downstream of it — a subscription that renews but never updates your records, a refund nobody tells the customer about, a failed payment spotted days late. We build Stripe integrations for UK businesses where the payment, the receipt, the subscription status and your own systems all move together the moment money does, including the unhappy paths: declines, disputes, retries and cancellations.',
     problem:
       "The Stripe checkout page is the easy part; what usually goes wrong is everything downstream of it — a webhook that isn't verified properly and can be spoofed, a subscription that renews in Stripe but never updates your CRM, or a refund that's issued but nobody tells the customer or adjusts their access. We've seen plenty of 'basic' Stripe integrations that only handle the happy path and quietly fall over the first time a card gets declined or a customer disputes a charge.",
     workflows: [
@@ -528,15 +538,16 @@ export const servicePages: Record<string, ServiceData> = {
 
   'internal-tools-dashboard': {
     slug: 'internal-tools-dashboard',
-    metaTitle: 'Internal Tools & Dashboards UK | Built on Supabase & Next.js',
+    serviceName: 'Internal Tools & Dashboards',
+    metaTitle: 'Replace the Spreadsheet Your Business Runs On — Custom Dashboards UK',
     metaDescription:
-      'UK agency building internal tools and dashboards — live data, scraping pipelines and alerts on Supabase and Next.js, replacing manual checking for good. Fixed prices from £1,500.',
-    kicker: 'Internal tools & dashboards · UK',
-    h1Lead: 'Internal tools,',
-    h1Accent: 'built for how you work.',
-    h1Outline: 'Not off-the-shelf software.',
+      'When one person\'s daily routine is the only record anyone has, that is a risk. We turn it into a tool that runs itself and shows everyone the same live picture. Fixed prices from £1,500.',
+    kicker: 'Internal tools & live dashboards · UK',
+    h1Lead: 'Replace the spreadsheet',
+    h1Accent: 'your business secretly runs on.',
+    h1Outline: 'One place to look.',
     intro:
-      'We build internal tools and dashboards for UK businesses — live views of your data, scraping pipelines that watch public or partner sites, and internal apps that replace the spreadsheet or manual check somebody does every day. Usually built on Supabase and Next.js, an internal tool just needs to show the right people the right information, updated automatically, without anyone opening ten browser tabs to piece it together.',
+      'A lot of businesses are one person\'s daily routine away from a proper system — someone opens the same six websites every morning and copies what changed into a spreadsheet, and that spreadsheet is the only record anyone has. It works until they are on holiday, or the business outgrows what one person checking by hand can keep up with. We take that routine, run it automatically, and put the result in one live view your team can trust — built on a standard database and web stack you are not locked into.',
     problem:
       "A lot of businesses are one person's daily routine away from a proper system — someone opens the same six websites every morning and copies what's changed into a spreadsheet, and that spreadsheet is the only record anyone has. It works until that person is on holiday, or a site changes its layout, or the business grows past what one person checking by hand can keep up with. An internal tool takes that routine and runs it automatically, then shows you the result in one place instead of a shared spreadsheet nobody fully trusts.",
     workflows: [
