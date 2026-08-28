@@ -7,9 +7,9 @@ import RevealWrapper from '@/components/RevealWrapper'
 import Marquee from '@/components/Marquee'
 
 export const metadata: Metadata = {
-  title: 'Automation Agency UK | n8n, Zapier, AI Agents & Chatbots',
+  title: { absolute: 'Business Process Automation for UK SMEs — The Automation Agency' },
   description:
-    'UK automation agency building n8n, Zapier and Make workflows, AI agents, WhatsApp chatbots, CRM automation, dashboards and custom integrations for growing businesses. Fixed prices.',
+    'We find the admin your team does by hand and build the systems that do it instead — typically hours back every week. Fixed prices agreed before we start, free 30-minute discovery call, written Process Audit from £1,500. Chesterfield-based, working UK-wide.',
   alternates: { canonical: 'https://www.automation-agency.co.uk' },
 }
 
