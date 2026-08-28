@@ -76,7 +76,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               '@type': 'ProfessionalService',
               name: 'The Automation Agency',
               description:
-                'n8n, Zapier & Make automation, AI agents, WhatsApp & website chatbots, CRM automation and internal tools for UK businesses. Based in Derbyshire.',
+                'Business process automation for UK SMEs. We map where a team’s time is going, then build the systems that give it back — fixed price, agreed before work starts. Based in Chesterfield, Derbyshire, working nationally.',
               url: 'https://www.automation-agency.co.uk',
               email: 'hello@automation-agency.co.uk',
               telephone: '+441246923041',
@@ -101,7 +101,57 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               ],
               // TODO: add Google Business / LinkedIn / client profile URLs when available
               sameAs: [],
-              priceRange: '£££',
+              priceRange: '££',
+              hasOfferCatalog: {
+                '@type': 'OfferCatalog',
+                name: 'Automation engagements',
+                itemListElement: [
+                  {
+                    '@type': 'Offer',
+                    name: 'Process Audit',
+                    description:
+                      'Fixed-fee 1–2 week diagnostic: workflow mapping, prioritised opportunities, ROI estimates and fixed-price build quotes. Credited in full against a build within 60 days.',
+                    url: 'https://www.automation-agency.co.uk/audit',
+                    availability: 'https://schema.org/InStock',
+                    priceSpecification: {
+                      '@type': 'PriceSpecification',
+                      price: '1500',
+                      priceCurrency: 'GBP',
+                      valueAddedTaxIncluded: true,
+                    },
+                  },
+                  {
+                    '@type': 'Offer',
+                    name: 'Automation build',
+                    description:
+                      'Fixed-price build of the systems scoped in the audit, delivered in 2–6 weeks with testing, deployment, staff walkthrough and 30 days of post-launch support.',
+                    url: 'https://www.automation-agency.co.uk/#pricing',
+                    availability: 'https://schema.org/InStock',
+                    priceSpecification: {
+                      '@type': 'PriceSpecification',
+                      minPrice: '3000',
+                      priceCurrency: 'GBP',
+                      valueAddedTaxIncluded: true,
+                    },
+                  },
+                  {
+                    '@type': 'Offer',
+                    name: 'Monthly retainer',
+                    description:
+                      'Ongoing automation partner: monitoring, fixes, new workflows and a monthly strategy call. Monthly rolling, cancel anytime.',
+                    url: 'https://www.automation-agency.co.uk/#pricing',
+                    availability: 'https://schema.org/InStock',
+                    priceSpecification: {
+                      '@type': 'UnitPriceSpecification',
+                      minPrice: '1500',
+                      priceCurrency: 'GBP',
+                      unitCode: 'MON',
+                      billingIncrement: 1,
+                      valueAddedTaxIncluded: true,
+                    },
+                  },
+                ],
+              },
               founder: {
                 '@type': 'Person',
                 name: 'Ben Horne',

@@ -85,9 +85,64 @@ const faqs = [
 ]
 
 export default function AuditPage() {
+  const faqLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map(({ q, a }) => ({
+      '@type': 'Question',
+      name: q,
+      acceptedAnswer: { '@type': 'Answer', text: a },
+    })),
+  }
+
+  // The audit is a fixed-price product with a published number; make it
+  // machine-readable rather than leaving it as prose only.
+  const offerLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: 'Process Audit',
+    serviceType: 'Business process automation audit',
+    description:
+      'A 1–2 week engagement that maps your workflows, identifies your highest-ROI automation opportunities, and delivers a written report with fixed-price build quotes. Credited in full against a build within 60 days.',
+    url: 'https://www.automation-agency.co.uk/audit',
+    provider: {
+      '@type': 'ProfessionalService',
+      name: 'The Automation Agency',
+      url: 'https://www.automation-agency.co.uk',
+      telephone: '+441246923041',
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Chesterfield',
+        addressRegion: 'Derbyshire',
+        addressCountry: 'GB',
+      },
+    },
+    areaServed: { '@type': 'Country', name: 'United Kingdom' },
+    offers: {
+      '@type': 'Offer',
+      name: 'Process Audit',
+      availability: 'https://schema.org/InStock',
+      priceSpecification: {
+        '@type': 'PriceSpecification',
+        price: '1500',
+        priceCurrency: 'GBP',
+        valueAddedTaxIncluded: true,
+      },
+    },
+  }
+
   return (
     <>
       <Nav />
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(offerLd) }}
+      />
 
       {/* HERO */}
       <div className="bg-ink text-cream">
