@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import ContactForm from '@/components/ContactForm'
@@ -828,7 +829,7 @@ export default function HomePage() {
               <RevealWrapper>
                 <div className="bg-cream-2 rounded-2xl p-8 md:p-9">
                   <div className="flex items-center gap-5 mb-5 pb-5 border-b border-[rgba(19,18,16,0.1)]">
-                    <img
+                    <Image
                       src="/founder.jpg"
                       alt="Ben Horne, founder of The Automation Agency"
                       width={92}

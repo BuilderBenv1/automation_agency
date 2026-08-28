@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import RevealWrapper from '@/components/RevealWrapper'
 import CalendlyEmbed from '@/components/CalendlyEmbed'
@@ -117,7 +118,7 @@ export default function LandingPage({ data }: { data: LandingData }) {
           <RevealWrapper>
             <div className="bg-ink-2 rounded-2xl p-8 border border-[rgba(244,237,224,0.14)]">
               <div className="flex items-center gap-4 mb-6 pb-6 border-b border-[rgba(244,237,224,0.14)]">
-                <img
+                <Image
                   src="/founder.jpg"
                   alt="Ben Horne, founder of The Automation Agency"
                   width={72}
