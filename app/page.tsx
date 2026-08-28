@@ -198,6 +198,20 @@ const pricingTiers = [
   },
 ]
 
+// Plain-English outcomes for the hero strip. Every line is already published
+// elsewhere on the site — city page intros (48-hour scoping, in-person
+// kickoff), the pricing grid (fixed prices, 2–6 weeks) and the city page
+// industry sections (sectors served). Nothing here is a new claim.
+const heroOutcomes: [string, string][] = [
+  ['Fixed price, agreed upfront', 'Builds from £3,000. You know the number before we start.'],
+  ['Scoped within 48 hours', 'One call, then a written scope — not three weeks of meetings.'],
+  ['Live in 2–6 weeks', 'Built, tested and handed over with your team trained on it.'],
+  [
+    'Manufacturing to professional services',
+    'Engineering, logistics, property, hospitality, recruitment, finance.',
+  ],
+]
+
 const heroStats: [string, string][] = [
   ['10+ yrs', 'shipping production systems'],
   ['6', 'live data sources automated (Punthub)'],
@@ -312,12 +326,12 @@ export default function HomePage() {
           </h1>
 
           <p className="text-muted-dark leading-[1.7] max-w-[36em] mb-10 text-[1.05rem]">
-            We build the automations your team keeps doing by hand —{' '}
             <b className="text-cream">
-              n8n and Zapier workflows, WhatsApp chatbots, CRM and spreadsheet sync, AI agents and custom
-              integrations
+              If you&apos;ve grown faster than your processes, automation is the cheapest way to scale
+              without adding headcount.
             </b>{' '}
-            — with senior engineering behind them. Fixed scope, clear handover, no vague AI promises.
+            We map where your team&apos;s time actually goes, then build the systems that give it back.
+            Fixed price agreed before we start, clear handover, no vague AI promises.
           </p>
 
           <div className="flex flex-wrap gap-4 mb-14">
@@ -344,7 +358,16 @@ export default function HomePage() {
             ))}
           </div>
 
-          <Marquee />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-7 border-t border-[rgba(244,237,224,0.14)] pt-10">
+            {heroOutcomes.map(([headline, detail]) => (
+              <div key={headline}>
+                <p className="font-display font-bold text-[0.98rem] text-cream leading-snug mb-1.5">
+                  {headline}
+                </p>
+                <p className="text-[0.82rem] text-muted-dark leading-[1.6]">{detail}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -961,6 +984,18 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* TOOLING — deliberately quiet, and deliberately last. Buyers do not
+          choose a consultancy by its stack; this is here for the minority who
+          ask, not as a headline. */}
+      <div className="bg-ink text-cream border-t border-[rgba(244,237,224,0.14)]">
+        <div className="max-w-[1180px] mx-auto px-8 md:px-14 pt-10 pb-2">
+          <p className="text-[0.7rem] font-bold tracking-[0.12em] uppercase text-muted-dark mb-4">
+            Some of the tools we build with
+          </p>
+          <Marquee compact />
+        </div>
+      </div>
 
       <Footer />
     </>
