@@ -300,6 +300,29 @@ export default function TooMuchAdminPage() {
         </div>
       </section>
 
+      {/* READ NEXT */}
+      <section className="bg-cream text-ink border-b border-[rgba(19,18,16,0.12)]">
+        <div className="max-w-[1180px] mx-auto px-8 md:px-14 py-16">
+          <div className="kicker-cream mb-5">Read next</div>
+          <div className="flex flex-wrap gap-4">
+            {[
+              ['/automation-cost-guide-uk', 'What automation costs in 2026'],
+              ['/audit', 'What the £1,500 audit covers'],
+              ['/business-automation-east-midlands', 'Automation in the East Midlands'],
+              ['/automation-for-recruitment-agencies', 'Automation for recruitment agencies'],
+            ].map(([href, label]) => (
+              <Link
+                key={href}
+                href={href}
+                className="inline-flex items-center gap-2 bg-cream-2 hover:bg-lime/40 text-ink font-display font-bold text-[0.85rem] px-5 py-3 rounded-full no-underline transition-colors"
+              >
+                {label} <span aria-hidden="true">→</span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* CONTACT */}
       <section id="talk" className="bg-cream text-ink">
         <div className="max-w-[1180px] mx-auto px-8 md:px-14 py-20 md:py-28">

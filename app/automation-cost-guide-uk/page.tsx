@@ -421,8 +421,9 @@ export default function AutomationCostGuidePage() {
           <div className="flex flex-wrap gap-4">
             {[
               ['/audit', 'What the £1,500 audit covers'],
-              ['/quick-audit', 'Free automation opportunity audit'],
-              ['/ai-automation-derbyshire', 'Automation in Derbyshire'],
+              ['/too-much-admin', 'What your admin is costing you'],
+              ['/business-automation-east-midlands', 'Automation in the East Midlands'],
+              ['/automation-for-recruitment-agencies', 'Automation for recruitment agencies'],
             ].map(([href, label]) => (
               <Link
                 key={href}

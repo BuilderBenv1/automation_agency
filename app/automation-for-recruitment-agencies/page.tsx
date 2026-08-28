@@ -274,6 +274,8 @@ export default function RecruitmentPage() {
               ['/crm-automation', 'CRM and pipeline automation'],
               ['/audit', 'What the £1,500 audit covers'],
               ['/automation-cost-guide-uk', 'What automation costs in 2026'],
+              ['/too-much-admin', 'What your admin is costing you'],
+              ['/business-automation-east-midlands', 'Automation in the East Midlands'],
             ].map(([href, label]) => (
               <Link
                 key={href}

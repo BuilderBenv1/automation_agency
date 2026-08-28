@@ -297,6 +297,8 @@ export default function EastMidlandsPage() {
             {[
               ['/audit', 'What the £1,500 audit covers'],
               ['/automation-cost-guide-uk', 'What automation costs in 2026'],
+              ['/too-much-admin', 'What your admin is costing you'],
+              ['/automation-for-recruitment-agencies', 'Automation for recruitment agencies'],
             ].map(([href, label]) => (
               <Link
                 key={href}
