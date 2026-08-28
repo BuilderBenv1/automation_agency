@@ -263,7 +263,7 @@ export default function CityPage({ data }: { data: CityData }) {
         </div>
       </section>
 
-      {/* BOOKING — Calendly + contact form, no phone */}
+      {/* BOOKING — phone, Calendly + contact form */}
       <section id="book" className="bg-cream text-ink border-t border-[rgba(19,18,16,0.12)]">
         <div className="max-w-[1180px] mx-auto px-8 md:px-14 py-20 md:py-28">
           <RevealWrapper>
@@ -299,6 +299,15 @@ export default function CityPage({ data }: { data: CityData }) {
                   Walk us through what your {data.city} team is doing manually. We&apos;ll reply
                   within 24 hours.
                 </p>
+                <p className="text-[0.7rem] font-bold tracking-[0.1em] uppercase text-muted-cream mb-1.5">
+                  Prefer to talk? Call us
+                </p>
+                <a
+                  href="tel:+441246923041"
+                  className="block font-display font-bold text-[1.35rem] text-ink hover:text-muted-cream transition-colors no-underline mb-4"
+                >
+                  01246 923041
+                </a>
                 <a
                   href="mailto:hello@automation-agency.co.uk"
                   className="font-display font-bold text-[1.05rem] text-ink hover:text-muted-cream transition-colors no-underline break-all"

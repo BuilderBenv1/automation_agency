@@ -79,6 +79,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 'n8n, Zapier & Make automation, AI agents, WhatsApp & website chatbots, CRM automation and internal tools for UK businesses. Based in Derbyshire.',
               url: 'https://www.automation-agency.co.uk',
               email: 'hello@automation-agency.co.uk',
+              telephone: '+441246923041',
               address: {
                 '@type': 'PostalAddress',
                 addressLocality: 'Chesterfield',

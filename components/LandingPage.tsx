@@ -55,15 +55,23 @@ export default function LandingPage({ data }: { data: LandingData }) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceLd) }}
       />
 
-      {/* MINIMAL HEADER — single conversion path, no phone */}
+      {/* MINIMAL HEADER — call or book */}
       <header className="fixed top-0 inset-x-0 z-50 bg-ink/95 backdrop-blur border-b border-[rgba(244,237,224,0.14)]">
         <div className="max-w-[1180px] mx-auto px-8 md:px-14 py-4 flex items-center justify-between">
           <Link href="/" className="font-display font-bold text-[1.05rem] text-cream no-underline">
             The Automation Agency
           </Link>
-          <a href="#book" className="btn-lime">
-            Book a call
-          </a>
+          <div className="flex items-center gap-5">
+            <a
+              href="tel:+441246923041"
+              className="hidden sm:block text-[0.9rem] font-display font-bold text-cream hover:text-lime no-underline transition-colors"
+            >
+              01246 923041
+            </a>
+            <a href="#book" className="btn-lime">
+              Book a call
+            </a>
+          </div>
         </div>
       </header>
 
@@ -174,7 +182,7 @@ export default function LandingPage({ data }: { data: LandingData }) {
         </div>
       </div>
 
-      {/* BOOKING — Calendly + contact form, no phone */}
+      {/* BOOKING — phone, Calendly + contact form */}
       <section id="book" className="bg-cream text-ink border-t border-[rgba(19,18,16,0.12)]">
         <div className="max-w-[1180px] mx-auto px-8 md:px-14 py-20 md:py-28">
           <RevealWrapper>
@@ -210,6 +218,15 @@ export default function LandingPage({ data }: { data: LandingData }) {
                   Walk us through what your team is doing manually. We&apos;ll reply within 24
                   hours with an honest read on whether it&apos;s a fit and what it would cost.
                 </p>
+                <p className="text-[0.7rem] font-bold tracking-[0.1em] uppercase text-muted-cream mb-1.5">
+                  Prefer to talk? Call us
+                </p>
+                <a
+                  href="tel:+441246923041"
+                  className="block font-display font-bold text-[1.35rem] text-ink hover:text-muted-cream transition-colors no-underline mb-6"
+                >
+                  01246 923041
+                </a>
               </div>
               <ContactForm />
             </div>
@@ -224,6 +241,12 @@ export default function LandingPage({ data }: { data: LandingData }) {
             © 2026 The Automation Agency · Chesterfield, Derbyshire, UK
           </p>
           <div className="flex gap-6 text-[0.8rem]">
+            <a
+              href="tel:+441246923041"
+              className="font-display font-bold text-cream hover:text-lime no-underline transition-colors"
+            >
+              01246 923041
+            </a>
             <Link
               href="/"
               className="font-display font-bold text-cream hover:text-lime no-underline transition-colors"

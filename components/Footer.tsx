@@ -47,8 +47,14 @@ export default function Footer() {
               AI &amp; process automation for UK businesses. Based in Chesterfield, Derbyshire.
             </p>
             <a
+              href="tel:+441246923041"
+              className="block text-[1rem] font-display font-bold text-cream hover:text-lime transition-colors no-underline"
+            >
+              01246 923041
+            </a>
+            <a
               href="mailto:hello@automation-agency.co.uk"
-              className="block text-[0.9rem] font-semibold text-cream hover:text-lime transition-colors no-underline"
+              className="block text-[0.9rem] font-semibold text-cream hover:text-lime transition-colors no-underline mt-1.5"
             >
               hello@automation-agency.co.uk
             </a>

@@ -913,17 +913,33 @@ export default function HomePage() {
                 Pick a slot below — 30 minutes, free, no commitment. We&apos;ll talk through your business
                 and tell you honestly what&apos;s automatable. Prefer email? Use the form.
               </p>
-              <div className="pb-8 border-b border-[rgba(19,18,16,0.12)]">
-                <p className="text-[0.7rem] font-bold tracking-[0.1em] uppercase text-muted-cream mb-1.5">
-                  Email
-                </p>
-                <a
-                  href="mailto:hello@automation-agency.co.uk"
-                  className="font-display font-bold text-[1.15rem] text-ink hover:text-muted-cream transition-colors no-underline break-all"
-                >
-                  hello@automation-agency.co.uk
-                </a>
-                <p className="text-[0.78rem] text-muted-cream mt-1">Reply within 24 hours</p>
+              <div className="pb-8 border-b border-[rgba(19,18,16,0.12)] grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div>
+                  <p className="text-[0.7rem] font-bold tracking-[0.1em] uppercase text-muted-cream mb-1.5">
+                    Prefer to talk? Call us
+                  </p>
+                  <a
+                    href="tel:+441246923041"
+                    className="font-display font-bold text-[1.35rem] text-ink hover:text-muted-cream transition-colors no-underline"
+                  >
+                    01246 923041
+                  </a>
+                  <p className="text-[0.78rem] text-muted-cream mt-1">
+                    Mon–Fri, 9am–5.30pm. You&apos;ll get Ben, not a call centre.
+                  </p>
+                </div>
+                <div>
+                  <p className="text-[0.7rem] font-bold tracking-[0.1em] uppercase text-muted-cream mb-1.5">
+                    Email
+                  </p>
+                  <a
+                    href="mailto:hello@automation-agency.co.uk"
+                    className="font-display font-bold text-[1.15rem] text-ink hover:text-muted-cream transition-colors no-underline break-all"
+                  >
+                    hello@automation-agency.co.uk
+                  </a>
+                  <p className="text-[0.78rem] text-muted-cream mt-1">Reply within 24 hours</p>
+                </div>
               </div>
             </div>
           </RevealWrapper>
