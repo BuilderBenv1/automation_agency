@@ -808,24 +808,20 @@ export default function HomePage() {
               </p>
               <p className="text-[0.95rem] text-muted-cream leading-[1.8] mb-[18px]">
                 Not a consultant who reads about AI. Someone who writes the code, ships it to production,
-                and keeps it running. Ask what stack we&apos;d use for your project and you&apos;ll get a direct
-                answer — usually with a system already built with it that you can look at.
+                and keeps it running. Tell us what your admin is costing you — the hours, the salary, the
+                jobs that slip — and you&apos;ll get a straight answer with a number attached, including
+                when the honest answer is that it isn&apos;t worth automating.
               </p>
               <p className="text-[0.95rem] text-muted-cream leading-[1.8] mb-7">
                 Based in Chesterfield, Derbyshire, working with clients across the UK.
               </p>
-              <div className="flex flex-wrap gap-1.5">
-                {['Python', 'Next.js', 'React', 'Supabase', 'PostgreSQL', 'Playwright', 'OpenAI API', 'Claude API', 'Twilio', 'Telegram Bots', 'scikit-learn', 'n8n', 'Vercel', 'Docker'].map(
-                  (skill) => (
-                    <span
-                      key={skill}
-                      className="text-[0.775rem] px-2.5 py-1 border border-[rgba(19,18,16,0.16)] text-muted-cream rounded-full"
-                    >
-                      {skill}
-                    </span>
-                  )
-                )}
-              </div>
+              <p className="text-[0.85rem] text-muted-cream/80 leading-[1.75]">
+                Capability areas, if it matters to you: workflow automation, AI agents and chatbots,
+                data pipelines and web data extraction, CRM and payment integration, email
+                deliverability, and custom dashboards and internal tools. Which tools we reach for
+                depends entirely on your problem, and we&apos;ll explain the choice in plain English
+                before you pay for anything.
+              </p>
             </RevealWrapper>
 
             <div className="flex flex-col gap-5">
@@ -843,7 +839,7 @@ export default function HomePage() {
                       <h3 className="font-display font-bold text-[1.2rem] text-ink leading-tight">
                         Ben Horne
                       </h3>
-                      <p className="text-[0.82rem] text-muted-cream mt-1.5">Founder · Senior Developer</p>
+                      <p className="text-[0.82rem] text-muted-cream mt-1.5">Founder</p>
                     </div>
                   </div>
                   <p className="text-[0.7rem] font-bold tracking-[0.1em] uppercase text-muted-cream mb-3">
