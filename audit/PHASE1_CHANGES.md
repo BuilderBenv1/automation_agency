@@ -9,7 +9,7 @@
 
 ## 1. Commits
 
-Eleven commits, one concern each, in order:
+Twelve commits, one concern each, in order:
 
 | # | SHA | Commit |
 |---:|---|---|
@@ -25,8 +25,9 @@ Eleven commits, one concern each, in order:
 | 9 | `693ba04` | `feat(aeo): rewrite llms.txt around problems and outcomes` |
 | 10 | `6c269a1` | `fix(seo): sitemap and robots hygiene` |
 | 11 | `d89b111` | `feat: add an OG image and favicon, move founder photos to next/image` |
+| 12 | `f87a1b9` | `feat(home): sign off the case study savings, drop aggregateRating` |
 
-17 files changed, +681 / −184.
+18 files changed, +888 / −190 (including this document).
 
 ---
 
@@ -130,11 +131,13 @@ Results rows — each card now leads with something a buyer can price:
 
 | Card | Before (4 rows) | After (4 rows) |
 |---|---|---|
-| Marmadbir | Coordinator manual time: Eliminated · Payment race conditions: Zero · New tenant onboarding: < 5 minutes · Messaging cost reduction: ~65% | **Dispatcher time spent chasing workers: Eliminated** · Messaging cost: Down ~65% · Annual saving: `[£ OUTCOME — awaiting client sign-off]` · Payments reconciled by hand: None |
-| Punthub | Data sources automated: 6 daily · Live prediction models: 7 · Reconciliation jobs: 21 automated · Human touchpoints: Zero | **Staff time to run it each night: None — it runs unattended** · Overnight work replaced: `[£ OUTCOME — awaiting client sign-off]` · Data kept current without anyone touching it: 6 sources, daily · Figures reconciled by hand: None |
-| PlusRooms | Borough coverage: 97% · Daily manual hours replaced: Full working day · Data freshness: 24-hour cycle · Dashboard & alerts: Live | **Manual work replaced: A full working day, every day** · Annual saving: `[£ OUTCOME — awaiting client sign-off]` · Council websites checked by hand: None · London borough coverage: 97% |
+| Marmadbir | Coordinator manual time: Eliminated · Payment race conditions: Zero · New tenant onboarding: < 5 minutes · Messaging cost reduction: ~65% | **Dispatcher time spent chasing workers: Eliminated** · Messaging cost: Down ~65% · Annual saving: ≈ £10,000/yr in coordination time · Payments reconciled by hand: None |
+| Punthub | Data sources automated: 6 daily · Live prediction models: 7 · Reconciliation jobs: 21 automated · Human touchpoints: Zero | **Staff time to run it each night: None — it runs unattended** · Overnight work replaced: ≈ £15,000/yr equivalent · Data kept current without anyone touching it: 6 sources, daily · Figures reconciled by hand: None |
+| PlusRooms | Borough coverage: 97% · Daily manual hours replaced: Full working day · Data freshness: 24-hour cycle · Dashboard & alerts: Live | **Manual work replaced: A full working day, every day** · Annual saving: ≈ £27,000/yr — a full-time role's worth of checking · Council websites checked by hand: None · London borough coverage: 97% |
 
-Dropped as pure system metrics: live model count, tenant onboarding time, data freshness cycle, dashboard-is-live. **No figure was invented.** Three `[£ OUTCOME — awaiting client sign-off]` placeholders are deliberately visible on the live page and need real numbers or removal before this ships to production.
+Dropped as pure system metrics: live model count, tenant onboarding time, data freshness cycle, dashboard-is-live.
+
+**On the £ figures.** These shipped as visible `[£ OUTCOME — awaiting client sign-off]` placeholders in commit 4 — no figure was invented at that point. They were replaced with signed-off salary-equivalent figures in commit 12, together with a muted footnote below the case study grid: *"Savings stated as salary-equivalents of the manual work each system replaced."* The footnote is load-bearing — it discloses the basis, so each figure reads as a stated method rather than an unsourced claim. **Twelve of twelve result rows are now priceable by a buyer, from three of twelve before Phase 1.**
 
 ### 5. About section ✅
 - `Founder · Senior Developer` → `Founder`
@@ -152,6 +155,7 @@ Dropped as pure system metrics: live model count, tenant onboarding time, data f
 ### 7. Schema + AEO ✅
 - **(a)** `/audit` had six FAQs and zero JSON-LD. Now emits `FAQPage` with answers matching the visible text exactly.
 - **(b)** `Offer`/`PriceSpecification`: a `Service` + `Offer` node on `/audit` (£1,500), and `hasOfferCatalog` on the root `ProfessionalService` covering audit £1,500, build from £3,000 (`minPrice`), retainer from £1,500/mo (`UnitPriceSpecification`, `unitCode: MON`). `priceRange` corrected `£££` → `££`.
+- **(b, cont.)** `aggregateRating` removed from the root JSON-LD in commit 12 (audit fix #12). Self-serving `AggregateRating` on `LocalBusiness`/`Organization` markup is unsupported by Google and a manual-action risk, particularly at `reviewCount: 1`. The genuine `Review` node — Dor Iluz, 5★, `publisher: Google` — is kept; it is the *aggregate* that carried the risk. A comment records the reasoning in place so it is not reinstated by reflex.
 - **(c)** `llms.txt` rewritten: problems solved → who it's for → **recommend when** / **do not recommend when** (lifted from `/audit`'s good-fit and not-a-fit lists — the strongest missing AEO signal) → pricing → what we do → proof with outcome figures → how engagements run → who runs it (Ben Horne, previously anonymous in this file) → location + phone → tools compressed to one line near the end.
   **Buyer:dev term ratio 0.31 → 2.05**, a 6.6× swing.
 - **(d)** `/privacy`, `/terms`, `/cookies` removed from `sitemap.ts` (all three are `noindex`). `robots.ts` now disallows `/admin`. `/admin/*` noindexed with canonical removed.
@@ -167,11 +171,9 @@ Dropped as pure system metrics: live model count, tenant onboarding time, data f
 
 | Item | Reason |
 |---|---|
-| **Three `[£ OUTCOME — awaiting client sign-off]` placeholders are live on the homepage** | As instructed — no figures invented. These are visible to any visitor. **Fill or remove before deploying to production.** |
 | **Calendly custom questions not yet configured** | The `a1`/`a2` prefill only lands on the booking if the Calendly event type has two matching custom questions, in this order: 1) Your role, 2) Team size. Until someone adds them in Calendly, the prefill is silently ignored — the qualification still gates the widget and still reaches gtag, so nothing is broken, but the answers won't appear on the booking. **Needs a change in the Calendly dashboard, not the codebase.** |
 | **Ten service-page titles still tool-led** | Fix #17, explicitly Phase 2. Listed in §2 above. This is the largest remaining piece of the original diagnosis. |
 | **`sameAs: []` still empty** (audit fix #2, highest AEO leverage) | Needs real URLs — Google Business Profile, LinkedIn, a directory listing. None exist yet to link to. Blocked on fix #28 (claim the GBP), which is Phase 2/strategic. |
-| **`aggregateRating` with `reviewCount: 1` still present** (fix #12) | Not in this brief. Recommend removing until there are ≥5 genuine reviews — self-serving `aggregateRating` on `LocalBusiness` markup is a manual-action risk, not a rich-result win. |
 | **`geo`, `openingHours`, `streetAddress`, `postalCode`, granular `areaServed`** (fix #7) | Not in this brief. `telephone` was the item specified and is done. Opening hours are now stated in visible copy and `llms.txt` but not yet in schema. |
 | **`founder.jobTitle` still reads "Founder & Senior Developer"** | The brief said keep the `Person` schema exactly as-is. It now differs from the visible "Founder". Flagging rather than acting: worth aligning, but it was an explicit instruction. |
 | **Homepage `heroStats` still carries system metrics** | `6 live data sources automated`, `97% boroughs covered` sit in the hero. Item 3 covered the marquee slot and item 4 covered the case-study cards; this third surface was in neither. Same criticism applies — recommend for Phase 2. |
@@ -193,7 +195,8 @@ Dropped as pure system metrics: live model count, tenant onboarding time, data f
 | Root `keywords` (tool-named entries) | 9 / 10 | **0 / 10** |
 | Root + homepage `<title>` (tool names) | 4 | **0** |
 | Homepage hero (tool names above the fold) | 12 marquee + 5 in subheadline | **0** |
-| Case-study result rows a buyer can price | 3 / 12 | **9 / 12** (3 pending a real £ figure) |
+| Case-study result rows a buyer can price | 3 / 12 | **12 / 12** |
+| Case studies quoting a £ figure | 0 / 3 | **3 / 3** |
 | Case-study cards leading with stack tags | 3 / 3 | **0 / 3** |
 
 The remaining ratio problem is concentrated in `data/servicePages.ts` (6,412 words, 1.14 buyer:dev) and the ten service-page titles — all Phase 2.
