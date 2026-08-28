@@ -213,11 +213,13 @@ const heroOutcomes: [string, string][] = [
   ],
 ]
 
+// Buyer-priced only. No tool names, no system metrics — the £ figures are the
+// signed-off case-study outcomes, footnoted in the work section.
 const heroStats: [string, string][] = [
-  ['10+ yrs', 'shipping production systems'],
-  ['6', 'live data sources automated (Punthub)'],
-  ['97%', 'boroughs covered (PlusRooms)'],
-  ['5/5', 'on Google'],
+  ['£27k/yr', 'saved for one client — a full-time role of manual checking'],
+  ['£3,000', 'fixed price to start a build. Agreed before we begin'],
+  ['A day a week', 'the kind of time clients get back'],
+  ['Free', '30-minute call to find out what yours is worth'],
 ]
 
 const popularAutomations = [
