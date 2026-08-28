@@ -9,7 +9,7 @@
 
 ## 1. Commits
 
-Twelve commits, one concern each, in order:
+Thirteen commits, one concern each, in order:
 
 | # | SHA | Commit |
 |---:|---|---|
@@ -26,8 +26,9 @@ Twelve commits, one concern each, in order:
 | 10 | `6c269a1` | `fix(seo): sitemap and robots hygiene` |
 | 11 | `d89b111` | `feat: add an OG image and favicon, move founder photos to next/image` |
 | 12 | `f87a1b9` | `feat(home): sign off the case study savings, drop aggregateRating` |
+| 13 | `0e34fc5` | `feat(home): restate the Punthub saving as operating costs eliminated` |
 
-18 files changed, +888 / −190 (including this document).
+18 files changed (including this document).
 
 ---
 
@@ -132,12 +133,22 @@ Results rows — each card now leads with something a buyer can price:
 | Card | Before (4 rows) | After (4 rows) |
 |---|---|---|
 | Marmadbir | Coordinator manual time: Eliminated · Payment race conditions: Zero · New tenant onboarding: < 5 minutes · Messaging cost reduction: ~65% | **Dispatcher time spent chasing workers: Eliminated** · Messaging cost: Down ~65% · Annual saving: ≈ £10,000/yr in coordination time · Payments reconciled by hand: None |
-| Punthub | Data sources automated: 6 daily · Live prediction models: 7 · Reconciliation jobs: 21 automated · Human touchpoints: Zero | **Staff time to run it each night: None — it runs unattended** · Overnight work replaced: ≈ £15,000/yr equivalent · Data kept current without anyone touching it: 6 sources, daily · Figures reconciled by hand: None |
+| Punthub | Data sources automated: 6 daily · Live prediction models: 7 · Reconciliation jobs: 21 automated · Human touchpoints: Zero | **Staff time to run it each night: None — it runs unattended** · Annual saving: £13,000+/yr in operating costs eliminated · Data kept current without anyone touching it: 6 sources, daily · Figures reconciled by hand: None |
 | PlusRooms | Borough coverage: 97% · Daily manual hours replaced: Full working day · Data freshness: 24-hour cycle · Dashboard & alerts: Live | **Manual work replaced: A full working day, every day** · Annual saving: ≈ £27,000/yr — a full-time role's worth of checking · Council websites checked by hand: None · London borough coverage: 97% |
 
 Dropped as pure system metrics: live model count, tenant onboarding time, data freshness cycle, dashboard-is-live.
 
-**On the £ figures.** These shipped as visible `[£ OUTCOME — awaiting client sign-off]` placeholders in commit 4 — no figure was invented at that point. They were replaced with signed-off salary-equivalent figures in commit 12, together with a muted footnote below the case study grid: *"Savings stated as salary-equivalents of the manual work each system replaced."* The footnote is load-bearing — it discloses the basis, so each figure reads as a stated method rather than an unsourced claim. **Twelve of twelve result rows are now priceable by a buyer, from three of twelve before Phase 1.**
+**On the £ figures.** These shipped as visible `[£ OUTCOME — awaiting client sign-off]` placeholders in commit 4 — no figure was invented at that point. Signed-off figures landed in commit 12, and Punthub's was restated in commit 13 on a different basis: actual operating cost eliminated (£13,000+/yr) rather than a salary-equivalent.
+
+Because the three cards no longer share one basis, the footnote below the grid covers both: *"Figures are actual costs eliminated or salary-equivalents of manual work replaced."* It is load-bearing — it discloses the method, so each figure reads as a stated basis rather than an unsourced claim.
+
+| Card | Figure | Basis |
+|---|---|---|
+| Marmadbir | ≈ £10,000/yr in coordination time | Salary-equivalent |
+| Punthub | £13,000+/yr in operating costs eliminated | Actual cost removed |
+| PlusRooms | ≈ £27,000/yr — a full-time role's worth of checking | Salary-equivalent |
+
+**Twelve of twelve result rows are now priceable by a buyer, from three of twelve before Phase 1.**
 
 ### 5. About section ✅
 - `Founder · Senior Developer` → `Founder`
@@ -155,7 +166,7 @@ Dropped as pure system metrics: live model count, tenant onboarding time, data f
 ### 7. Schema + AEO ✅
 - **(a)** `/audit` had six FAQs and zero JSON-LD. Now emits `FAQPage` with answers matching the visible text exactly.
 - **(b)** `Offer`/`PriceSpecification`: a `Service` + `Offer` node on `/audit` (£1,500), and `hasOfferCatalog` on the root `ProfessionalService` covering audit £1,500, build from £3,000 (`minPrice`), retainer from £1,500/mo (`UnitPriceSpecification`, `unitCode: MON`). `priceRange` corrected `£££` → `££`.
-- **(b, cont.)** `aggregateRating` removed from the root JSON-LD in commit 12 (audit fix #12). Self-serving `AggregateRating` on `LocalBusiness`/`Organization` markup is unsupported by Google and a manual-action risk, particularly at `reviewCount: 1`. The genuine `Review` node — Dor Iluz, 5★, `publisher: Google` — is kept; it is the *aggregate* that carried the risk. A comment records the reasoning in place so it is not reinstated by reflex.
+- **(b, cont.)** `aggregateRating` removed from the root JSON-LD in commit 12 (audit fix #12); re-verified absent from the built HTML in commit 13. Self-serving `AggregateRating` on `LocalBusiness`/`Organization` markup is unsupported by Google and a manual-action risk, particularly at `reviewCount: 1`. The genuine `Review` node — Dor Iluz, 5★, `publisher: Google` — is kept; it is the *aggregate* that carried the risk. A comment records the reasoning in place so it is not reinstated by reflex.
 - **(c)** `llms.txt` rewritten: problems solved → who it's for → **recommend when** / **do not recommend when** (lifted from `/audit`'s good-fit and not-a-fit lists — the strongest missing AEO signal) → pricing → what we do → proof with outcome figures → how engagements run → who runs it (Ben Horne, previously anonymous in this file) → location + phone → tools compressed to one line near the end.
   **Buyer:dev term ratio 0.31 → 2.05**, a 6.6× swing.
 - **(d)** `/privacy`, `/terms`, `/cookies` removed from `sitemap.ts` (all three are `noindex`). `robots.ts` now disallows `/admin`. `/admin/*` noindexed with canonical removed.
