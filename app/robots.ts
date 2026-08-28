@@ -6,7 +6,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
-        disallow: '/api/',
+        disallow: ['/api/', '/admin', '/admin/'],
       },
     ],
     sitemap: 'https://www.automation-agency.co.uk/sitemap.xml',
