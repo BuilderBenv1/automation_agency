@@ -82,11 +82,37 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               telephone: '+441246923041',
               address: {
                 '@type': 'PostalAddress',
+                // TODO: add streetAddress and postalCode. Deliberately omitted —
+                // no real address exists in the repo or env and inventing one
+                // would poison the NAP consistency a Google Business Profile
+                // is later verified against.
                 addressLocality: 'Chesterfield',
                 addressRegion: 'Derbyshire',
                 addressCountry: 'GB',
               },
-              areaServed: { '@type': 'Country', name: 'United Kingdom' },
+              geo: {
+                '@type': 'GeoCoordinates',
+                latitude: 53.235,
+                longitude: -1.421,
+              },
+              openingHoursSpecification: [
+                {
+                  '@type': 'OpeningHoursSpecification',
+                  dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+                  opens: '09:00',
+                  closes: '17:30',
+                },
+              ],
+              // Mirrors the pages that actually exist: four locality pages plus
+              // the regional hub, under national coverage.
+              areaServed: [
+                { '@type': 'Country', name: 'United Kingdom' },
+                { '@type': 'AdministrativeArea', name: 'East Midlands' },
+                { '@type': 'AdministrativeArea', name: 'Derbyshire' },
+                { '@type': 'City', name: 'Chesterfield' },
+                { '@type': 'City', name: 'Sheffield' },
+                { '@type': 'City', name: 'Nottingham' },
+              ],
               serviceType: [
                 'n8n, Zapier & Make automation',
                 'AI agents & Claude/OpenAI workflows',
@@ -99,7 +125,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 'Internal tools & dashboards',
                 'Process audit',
               ],
-              // TODO: add Google Business / LinkedIn / client profile URLs when available
+              // TODO: still empty. Exactly two URLs belong here and neither was
+              // supplied:
+              //   1. the Google Business Profile URL (blocked on claiming/verifying
+              //      the GBP — audit fix #28)
+              //   2. the LinkedIn *company page* URL (distinct from the founder's
+              //      personal profile, which is on the founder node below)
+              // This is the highest-leverage field on the page for answer engines
+              // deciding whether the business is corroborated elsewhere.
               sameAs: [],
               priceRange: '££',
               hasOfferCatalog: {
@@ -155,8 +188,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               founder: {
                 '@type': 'Person',
                 name: 'Ben Horne',
-                jobTitle: 'Founder & Senior Developer',
+                jobTitle: 'Founder',
                 image: 'https://www.automation-agency.co.uk/founder.jpg',
+                sameAs: ['https://www.linkedin.com/in/benjamin-horne-8413b03a9/'],
                 worksFor: { '@type': 'Organization', name: 'The Automation Agency' },
               },
               review: [
