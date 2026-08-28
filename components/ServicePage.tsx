@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Footer from '@/components/Footer'
 import RevealWrapper from '@/components/RevealWrapper'
 import CalendlyEmbed from '@/components/CalendlyEmbed'
 import ContactForm from '@/components/ContactForm'
@@ -287,28 +288,10 @@ export default function ServicePage({ data }: { data: ServiceData }) {
         </div>
       </section>
 
-      {/* MINIMAL FOOTER */}
-      <footer className="bg-ink text-cream py-10 px-8 md:px-14">
-        <div className="max-w-[1180px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-[0.8rem] text-muted-dark">
-            © 2026 The Automation Agency · Chesterfield, Derbyshire, UK
-          </p>
-          <div className="flex items-center gap-6">
-            <a
-              href="tel:+441246923041"
-              className="text-[0.85rem] font-display font-bold text-cream hover:text-lime no-underline transition-colors"
-            >
-              01246 923041
-            </a>
-            <Link
-              href="/"
-              className="text-[0.85rem] font-display font-bold text-cream hover:text-lime no-underline transition-colors"
-            >
-              ← Back to main site
-            </Link>
-          </div>
-        </div>
-      </footer>
+      {/* Full sitewide footer — these are the pages most likely to be landed on
+          from search, so they must not dead-end. Links out to the city pages,
+          /audit, /quick-audit and every sibling service. */}
+      <Footer />
     </>
   )
 }
