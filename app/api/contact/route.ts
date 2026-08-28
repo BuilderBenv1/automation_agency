@@ -17,11 +17,25 @@ export async function POST(req: NextRequest) {
     const anthropic = new Anthropic({ apiKey })
     const resend = new Resend(resendKey)
 
-    const { name, email, company, message, intent } = await req.json()
+    const { name, email, company, message, intent, role } = await req.json()
 
-    if (!name || !email || !message) {
+    if (!name || !email || !message || !role) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
     }
+
+    const ROLE_LABELS: Record<string, string> = {
+      owner_director: 'Owner / Director',
+      ops_office_manager: 'Operations or Office Manager',
+      developer: 'Developer',
+      other: 'Other',
+    }
+    const roleLabel = ROLE_LABELS[role as string]
+    if (!roleLabel) {
+      return NextResponse.json({ error: 'Invalid role' }, { status: 400 })
+    }
+    // Buyer roles are the ones we are trying to attract; flag everything else
+    // so the wrong-audience problem is visible in the inbox, not inferred.
+    const isBuyerRole = role === 'owner_director' || role === 'ops_office_manager'
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     if (!emailRegex.test(email)) {
@@ -49,6 +63,7 @@ Write a brief, warm, professional acknowledgement email (3 short paragraphs, pla
 Enquiry:
 Name: ${name}
 Company: ${company || 'not provided'}
+Role: ${roleLabel}
 Intent: ${intent || 'not specified'}
 Message: ${message}`,
         },
@@ -61,14 +76,20 @@ Message: ${message}`,
     await resend.emails.send({
       from: 'noreply@automation-agency.co.uk',
       to: OWNER_EMAIL,
-      subject: `New enquiry: ${name}${company ? ` — ${company}` : ''}`,
+      subject: `New enquiry [${roleLabel}]: ${name}${company ? ` — ${company}` : ''}`,
       html: `
         <div style="font-family:sans-serif;max-width:600px;margin:0 auto;">
-          <h2 style="color:#0f1b2d;margin-bottom:24px;">New Enquiry</h2>
+          <h2 style="color:#0f1b2d;margin-bottom:16px;">New Enquiry</h2>
+          <p style="margin:0 0 24px;padding:12px 16px;border-radius:4px;font-weight:700;font-size:15px;background:${
+            isBuyerRole ? '#c8f04a' : '#f3f1ed'
+          };color:#141210;">
+            Role: ${roleLabel}${isBuyerRole ? '' : ' — not a target buyer role'}
+          </p>
           <table style="width:100%;border-collapse:collapse;margin-bottom:24px;">
             <tr><td style="padding:8px 0;color:#767b82;width:100px;">Name</td><td style="padding:8px 0;font-weight:600;">${name}</td></tr>
             <tr><td style="padding:8px 0;color:#767b82;">Email</td><td style="padding:8px 0;"><a href="mailto:${email}">${email}</a></td></tr>
             <tr><td style="padding:8px 0;color:#767b82;">Company</td><td style="padding:8px 0;">${company || '—'}</td></tr>
+            <tr><td style="padding:8px 0;color:#767b82;">Role</td><td style="padding:8px 0;font-weight:600;">${roleLabel}</td></tr>
             <tr><td style="padding:8px 0;color:#767b82;">Intent</td><td style="padding:8px 0;">${intent || '—'}</td></tr>
           </table>
           <div style="background:#f3f1ed;padding:20px;border-radius:4px;margin-bottom:24px;">

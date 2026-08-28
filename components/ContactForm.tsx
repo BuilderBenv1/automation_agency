@@ -10,6 +10,7 @@ export default function ContactForm() {
     name: '',
     email: '',
     company: '',
+    role: '',
     message: '',
     intent: '',
   })
@@ -22,7 +23,7 @@ export default function ContactForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!form.name || !form.email || !form.message) return
+    if (!form.name || !form.email || !form.message || !form.role) return
     setStatus('loading')
     try {
       const res = await fetch('/api/contact', {
@@ -40,6 +41,7 @@ export default function ContactForm() {
         window.gtag('event', 'generate_lead', {
           method: 'contact_form',
           intent: form.intent || 'unspecified',
+          role: form.role || 'unspecified',
         })
       }
     } catch {
@@ -86,6 +88,17 @@ export default function ContactForm() {
       <div>
         <label htmlFor="company" className={labelClass}>Company</label>
         <input id="company" name="company" type="text" placeholder="Company name or website" value={form.company} onChange={handleChange} className={inputClass} />
+      </div>
+
+      <div>
+        <label htmlFor="role" className={labelClass}>Your role</label>
+        <select id="role" name="role" required value={form.role} onChange={handleChange} className={inputClass}>
+          <option value="">Select...</option>
+          <option value="owner_director">Owner / Director</option>
+          <option value="ops_office_manager">Operations or Office Manager</option>
+          <option value="developer">Developer</option>
+          <option value="other">Other</option>
+        </select>
       </div>
 
       <div>
