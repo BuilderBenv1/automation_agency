@@ -125,15 +125,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 'Internal tools & dashboards',
                 'Process audit',
               ],
-              // TODO: still empty. Exactly two URLs belong here and neither was
-              // supplied:
-              //   1. the Google Business Profile URL (blocked on claiming/verifying
-              //      the GBP — audit fix #28)
-              //   2. the LinkedIn *company page* URL (distinct from the founder's
-              //      personal profile, which is on the founder node below)
-              // This is the highest-leverage field on the page for answer engines
-              // deciding whether the business is corroborated elsewhere.
-              sameAs: [],
+              // The business trades as a sole trader (see /terms), and there is no
+              // LinkedIn company page — the founder's profile is the business's
+              // real external identity, so it stands as the entity's corroborating
+              // link here as well as on the founder node below.
+              // TODO: add the Google Business Profile URL once the GBP is claimed
+              // and verified (audit fix #28). That is the one link that would most
+              // improve how confidently an answer engine can vouch for this
+              // business, and the only material gap left in this node.
+              sameAs: ['https://www.linkedin.com/in/benjamin-horne-8413b03a9/'],
               priceRange: '££',
               hasOfferCatalog: {
                 '@type': 'OfferCatalog',
