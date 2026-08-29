@@ -70,16 +70,29 @@ export default function QuickAuditPage() {
       <section className="bg-cream text-ink">
         <div className="max-w-[1180px] mx-auto px-8 md:px-14 py-20 md:py-24">
           <RevealWrapper>
-            <div className="max-w-[760px] mx-auto text-center">
-              <div className="flex justify-center gap-1 mb-6 text-[1.05rem] text-ink" aria-label="5 out of 5 stars">
-                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-              </div>
-              <blockquote className="font-display font-medium text-[clamp(1.15rem,2vw,1.6rem)] text-ink leading-[1.45] mb-6">
-                &ldquo;Hard working, fast responding, and very dedicated agency. Highly recommend.&rdquo;
-              </blockquote>
-              <p className="text-[0.85rem] text-muted-cream">
-                Dor Iluz · Marmadbir · Verified Google review
-              </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-[900px] mx-auto">
+              {[
+                {
+                  quote:
+                    'His communication has been clear and quick, his work has been fast and accurate\u2026 highly recommended.',
+                  who: 'Nezmaster games \u00b7 A Story To Tell \u00b7 Verified Google review',
+                },
+                {
+                  quote:
+                    'Hard working, fast responding, and very dedicated agency. Highly recommend.',
+                  who: 'Dor Iluz \u00b7 Marmadbir \u00b7 Verified Google review',
+                },
+              ].map(({ quote, who }) => (
+                <figure key={who} className="text-center">
+                  <div className="flex justify-center gap-1 mb-5 text-[1rem] text-ink" aria-label="5 out of 5 stars">
+                    <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                  </div>
+                  <blockquote className="font-display font-medium text-[clamp(1.05rem,1.6vw,1.3rem)] text-ink leading-[1.5] mb-5">
+                    &ldquo;{quote}&rdquo;
+                  </blockquote>
+                  <figcaption className="text-[0.85rem] text-muted-cream">{who}</figcaption>
+                </figure>
+              ))}
             </div>
           </RevealWrapper>
         </div>

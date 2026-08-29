@@ -206,6 +206,26 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     'I work with them for a while now, they are nothing less than hard working, fast responding, and very dedicated agency. Highly recommend.',
                   publisher: { '@type': 'Organization', name: 'Google' },
                 },
+                {
+                  '@type': 'Review',
+                  reviewRating: {
+                    '@type': 'Rating',
+                    ratingValue: '5',
+                    bestRating: '5',
+                  },
+                  author: { '@type': 'Person', name: 'Nezmaster games' },
+                  datePublished: '2026-08-28',
+                  // Verbatim, including the reviewer's own typo ("real car"). The
+                  // displayed excerpts on the site trim around it rather than
+                  // silently editing someone's words.
+                  reviewBody:
+                    "Working with my developer Ben has been an outstanding experience from start to finish. He took the time to understand A Story To Tell, fixed long standing issues, cleaned up the subscription system, resolved errors very quickly, improved stability, created new contents from scratch, polished website pages and made the platform feel genuinely ready for launch. His communication has been clear and quick, his work has been fast and accurate, and he's shown real car for the project. I'm extremely grateful for everything Ben has done, highly recommended.",
+                  publisher: { '@type': 'Organization', name: 'Google' },
+                  itemReviewed: {
+                    '@type': 'Service',
+                    name: 'Platform stabilisation and launch readiness for A Story To Tell',
+                  },
+                },
               ],
               // No aggregateRating: self-serving AggregateRating on
               // LocalBusiness/Organization markup is unsupported by Google and a

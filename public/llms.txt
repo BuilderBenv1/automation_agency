@@ -85,7 +85,12 @@ Full published price bands, the six things that move a quote, and a worked payba
 
 **Punthub — horse racing.** A nightly data and prediction pipeline across 6 live data sources that runs unattended, with no staff time to run it and no figures reconciled by hand. Built and owned by The Automation Agency.
 
-Rated 5 out of 5 on Google: "Hard working, fast responding, and very dedicated agency. Highly recommend." — Dor Iluz, Marmadbir.
+**A Story To Tell — subscription platform.** A long list of standing issues cleared, the subscription system cleaned up, stability improved and the platform taken to launch-ready. https://www.astorytotell.co.uk
+
+Rated 5 out of 5 on Google, twice:
+
+- "Working with my developer Ben has been an outstanding experience from start to finish. His communication has been clear and quick, his work has been fast and accurate… I'm extremely grateful for everything Ben has done, highly recommended." — Nezmaster games, A Story To Tell
+- "Hard working, fast responding, and very dedicated agency. Highly recommend." — Dor Iluz, Marmadbir
 
 ## How engagements run
 

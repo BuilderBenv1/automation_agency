@@ -235,8 +235,29 @@ const popularAutomations = [
 
 const trustedClients = [
   { name: 'Marmadbir', url: 'https://www.marmadbir.com/' },
+  { name: 'A Story To Tell', url: 'https://www.astorytotell.co.uk/' },
   { name: 'Punthub', url: 'https://punthub.co.uk/' },
   { name: 'PlusRooms', url: 'https://plusrooms.co.uk/' },
+]
+
+// Displayed excerpts. Both are verbatim; the ellipsis in the second marks the
+// sentence trimmed around the reviewer's typo. Full text lives in the Review
+// schema in app/layout.tsx.
+const testimonials = [
+  {
+    initials: 'NG',
+    quote:
+      'Working with my developer Ben has been an outstanding experience from start to finish. His communication has been clear and quick, his work has been fast and accurate\u2026 I\u2019m extremely grateful for everything Ben has done, highly recommended.',
+    name: 'Nezmaster games',
+    meta: 'A Story To Tell \u00b7 Verified Google review',
+  },
+  {
+    initials: 'DI',
+    quote:
+      'I work with them for a while now, they are nothing less than hard working, fast responding, and very dedicated agency. Highly recommend.',
+    name: 'Dor Iluz',
+    meta: 'Marmadbir \u00b7 Verified Google review \u00b7 Local Guide, 27 reviews',
+  },
 ]
 
 const starterBuilds = [
@@ -422,29 +443,37 @@ export default function HomePage() {
       {/* TESTIMONIAL */}
       <section className="bg-ink text-cream">
         <div className="max-w-[1180px] mx-auto px-8 md:px-14 py-20 md:py-28">
+          <div className="kicker mb-5">What clients say</div>
+          <h2 className="font-display font-black text-h2-band uppercase text-cream mb-12 max-w-[18ch]">
+            Five out of five, <span className="text-lime">twice.</span>
+          </h2>
           <RevealWrapper>
-            <div className="max-w-[820px] mx-auto text-center">
-              <div
-                className="flex justify-center gap-1 mb-7 text-[1.1rem] text-lime"
-                aria-label="5 out of 5 stars"
-              >
-                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-              </div>
-              <blockquote className="font-display font-medium text-[clamp(1.25rem,2.2vw,1.9rem)] text-cream leading-[1.4] tracking-[-0.01em] mb-9">
-                &ldquo;I work with them for a while now, they are nothing less than hard working,
-                fast responding, and very dedicated agency. Highly recommend.&rdquo;
-              </blockquote>
-              <div className="flex items-center justify-center gap-4 pt-6 border-t border-[rgba(244,237,224,0.14)] max-w-[440px] mx-auto">
-                <div className="w-12 h-12 rounded-full bg-lime text-ink flex items-center justify-center font-display font-bold text-[1.05rem] flex-shrink-0">
-                  DI
-                </div>
-                <div className="text-left">
-                  <p className="text-[0.95rem] font-semibold text-cream">Dor Iluz</p>
-                  <p className="text-[0.78rem] text-muted-dark">
-                    Marmadbir · Verified Google review · Local Guide, 27 reviews
-                  </p>
-                </div>
-              </div>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+              {testimonials.map(({ initials, quote, name, meta }) => (
+                <figure
+                  key={name}
+                  className="bg-ink-2 border border-[rgba(244,237,224,0.1)] rounded-2xl p-8 md:p-10 flex flex-col"
+                >
+                  <div
+                    className="flex gap-1 mb-6 text-[1.05rem] text-lime"
+                    aria-label="5 out of 5 stars"
+                  >
+                    <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                  </div>
+                  <blockquote className="font-display font-medium text-[clamp(1.05rem,1.5vw,1.3rem)] text-cream leading-[1.5] tracking-[-0.01em] mb-8 flex-1">
+                    &ldquo;{quote}&rdquo;
+                  </blockquote>
+                  <figcaption className="flex items-center gap-4 pt-6 border-t border-[rgba(244,237,224,0.14)]">
+                    <div className="w-12 h-12 rounded-full bg-lime text-ink flex items-center justify-center font-display font-bold text-[1.05rem] flex-shrink-0">
+                      {initials}
+                    </div>
+                    <div className="text-left">
+                      <p className="text-[0.95rem] font-semibold text-cream">{name}</p>
+                      <p className="text-[0.78rem] text-muted-dark">{meta}</p>
+                    </div>
+                  </figcaption>
+                </figure>
+              ))}
             </div>
           </RevealWrapper>
         </div>
