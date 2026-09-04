@@ -96,6 +96,20 @@ const processSteps = [
 
 const caseStudies = [
   {
+    client: 'A Story To Tell',
+    clientUrl: 'https://www.astorytotell.co.uk/',
+    sector: 'Digital Keepsakes',
+    title: 'A stalled subscription platform, taken to launch in a week',
+    body: "A Story To Tell lets people build memory books, family trees, memorials and keepsakes online, on a freemium subscription. The product was sound; progress on it had effectively stopped \u2014 eight months without a shipped change, two to three weeks to swap a single image, three to four weeks for a handover. We cleared the long-standing issues, cleaned up the subscription system, stabilised the platform, built the missing content and pages, and handed it back launch-ready inside a week. Search, AI-search visibility and security hardening were done on top, none of it scoped.",
+    results: [
+      ['Launch-ready platform delivered in', 'Under a week'],
+      ['Previously: any update or change', '8 months'],
+      ['Previously: swapping a single image', '2\u20133 weeks'],
+      ['Included, unscoped', 'SEO, AI search, security hardening'],
+    ],
+    tags: ['Subscription platform', 'Stability', 'Content build', 'SEO & AI search', 'Security hardening'],
+  },
+  {
     client: 'Marmadbir',
     clientUrl: 'https://www.marmadbir.com/',
     sector: 'Field Services',
@@ -692,7 +706,7 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {caseStudies.map(({ client, clientUrl, sector, title, body, results, tags, note }) => (
               <RevealWrapper key={title}>
                 <div className="bg-cream-2 rounded-2xl p-8 flex flex-col h-full transition-shadow hover:shadow-[0_14px_36px_rgba(19,18,16,0.1)]">

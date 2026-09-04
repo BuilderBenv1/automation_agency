@@ -85,7 +85,7 @@ Full published price bands, the six things that move a quote, and a worked payba
 
 **Punthub — horse racing.** A nightly data and prediction pipeline across 6 live data sources that runs unattended, with no staff time to run it and no figures reconciled by hand. Built and owned by The Automation Agency.
 
-**A Story To Tell — subscription platform.** A long list of standing issues cleared, the subscription system cleaned up, stability improved and the platform taken to launch-ready. https://www.astorytotell.co.uk
+**A Story To Tell — digital keepsakes, freemium subscription.** Progress on the platform had stalled: eight months without a shipped change, two to three weeks to swap a single image. Long-standing issues cleared, subscription system cleaned up, platform stabilised, missing content and pages built, handed back launch-ready inside a week. Search, AI-search visibility and security hardening included unscoped. https://www.astorytotell.co.uk
 
 Rated 5 out of 5 on Google, twice:
 
